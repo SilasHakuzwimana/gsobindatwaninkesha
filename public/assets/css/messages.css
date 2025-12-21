@@ -1,0 +1,286 @@
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  background: #f5f5f5;
+  padding: 20px;
+  height: 100vh;
+  margin-bottom: 20rem;
+}
+
+.container {
+  max-width: 900px;
+  width: 100%;
+  margin: auto;
+  background: white;
+  padding: 20px;
+  border-radius: 12px;
+  box-sizing: border-box;
+}
+
+.msg-card {
+  background: #fafafa;
+  border-left: 5px solid #3498db;
+  margin-bottom: 15px;
+  padding: 15px;
+  border-radius: 8px;
+}
+
+.msg-card .header {
+  display: flex;
+  justify-content: space-between;
+}
+
+.tag {
+  padding: 3px 8px;
+  border-radius: 4px;
+  color: white;
+  font-size: 12px;
+}
+
+.tag.messages {
+  background: #3498db;
+}
+
+.tag.contact {
+  background: #2ecc71;
+}
+
+.attach {
+  color: #e74c3c;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+/* =========================
+   messages.css
+========================= */
+
+/* Container */
+#messages-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+/* Search input */
+#searchMessage {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 1rem;
+  border: 1px solid #ccc;
+  border-radius: 0.25rem;
+  margin-bottom: 1rem;
+  font-size: 1rem;
+  transition: border-color 0.2s ease-in-out, box-shadow 0.2s ease-in-out;
+}
+
+/* Focus effect */
+#searchMessage:focus {
+  border-color: #007bff;
+  outline: none;
+  box-shadow: 0 0 5px rgba(0, 123, 255, 0.5);
+}
+
+/* Message Card */
+.msg-card {
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  border-left: 5px solid #3498db;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+}
+
+.msg-card .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.5rem;
+}
+
+.msg-card .header strong {
+  font-size: 1.1rem;
+  color: #333;
+}
+
+.msg-card .header .tag {
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 0.25rem;
+  color: #fff;
+  text-transform: uppercase;
+}
+
+.msg-card .tag.messages {
+  background-color: #007bff;
+}
+
+.msg-card .tag.contact {
+  background-color: #28a745;
+}
+
+.msg-card h3 {
+  margin: 0.5rem 0;
+  font-size: 1rem;
+  color: #222;
+}
+
+.msg-card p {
+  margin: 0.5rem 0;
+  color: #555;
+  font-size: 0.95rem;
+}
+
+.msg-card .attach {
+  display: inline-block;
+  margin-top: 0.5rem;
+  color: #007bff;
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.msg-card .attach:hover {
+  text-decoration: underline;
+}
+
+/* =========================
+   Messages Pagination
+========================= */
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 0.25rem;
+}
+
+#pagination {
+  margin-top: 3rem;
+  margin-bottom: 8rem;
+}
+
+.pagination button {
+  padding: 0.35rem 0.75rem;
+  border: 1px solid #007bff;
+  border-radius: 0.25rem;
+  background-color: #fff;
+  color: #007bff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  transition: all 0.2s ease-in-out;
+}
+
+.pagination button:hover:not(.disabled) {
+  background-color: #007bff;
+  color: #fff;
+}
+
+.pagination button.disabled {
+  cursor: not-allowed;
+  opacity: 0.6;
+}
+
+.pagination button.active {
+  background-color: #007bff;
+  color: #fff;
+  border-color: #007bff;
+}
+
+/* ====================
+   RESPONSIVE FIXES
+==================== */
+
+/* Tablet & Mobile */
+@media (max-width: 768px) {
+
+  .container {
+    padding: 15px;
+  }
+
+  .msg-card .header strong {
+    font-size: 1rem;
+  }
+
+  .msg-card {
+    padding: 0.8rem;
+  }
+
+  #searchMessage {
+    max-width: 100%;
+  }
+}
+
+/* Small Phones */
+@media (max-width: 480px) {
+
+  body {
+    padding: 10px;
+  }
+
+  .container {
+    padding: 12px;
+  }
+
+  .msg-card .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .pagination button {
+    padding: 0.35rem 0.5rem;
+    font-size: 0.8rem;
+  }
+}
+
+/* Ultra small devices (Apple Watch / very small screens) */
+@media (max-width: 300px) {
+
+  body {
+    padding: 5px;
+    font-size: 0.7rem;
+  }
+
+  .container {
+    padding: 5px;
+    border-radius: 6px;
+  }
+
+  #searchMessage {
+    font-size: 0.7rem;
+    padding: 0.3rem 0.5rem;
+  }
+
+  .msg-card {
+    padding: 0.5rem;
+    border-radius: 6px;
+    font-size: 0.7rem;
+  }
+
+  .msg-card .header {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .msg-card .header strong {
+    font-size: 0.8rem;
+  }
+
+  .tag {
+    font-size: 0.6rem;
+    padding: 2px 4px;
+  }
+
+  .msg-card p {
+    font-size: 0.65rem;
+  }
+
+  .msg-card .attach {
+    font-size: 0.65rem;
+  }
+
+  .pagination button {
+    font-size: 0.6rem;
+    padding: 0.2rem 0.35rem;
+  }
+}

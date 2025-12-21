@@ -1,0 +1,13 @@
+# =================================
+# Ignore backend dependencies
+# =================================
+backend/vendor/
+
+# Ignore documents
+*.pdf
+*.txt
+
+# =================================
+# Ignore Python virtual environment
+# =================================
+venv-filter/

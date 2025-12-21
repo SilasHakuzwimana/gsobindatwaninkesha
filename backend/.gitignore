@@ -1,0 +1,23 @@
+#=============================
+# IGNORE CONFIGURATION FOLDER
+#=============================
+
+Config/
+
+#====================================
+# IGNORE DEPENDENCIES FILES & FOLDER
+#====================================
+
+vendor/
+
+#====================================
+# IGNORE BUILD & ENVIRONMENT FILES
+#====================================
+
+composer.lock
+.env
+env-config.php
+
+# Optional: Ignore common system files
+.DS_Store
+Thumbs.db

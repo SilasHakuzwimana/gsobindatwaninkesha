@@ -1,0 +1,160 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/index.css">
+    <link rel="shortcut icon" href="../media/fts logo.jpeg" type="image/x-icon">
+    <title>FTS, Home</title>
+</head>
+<body>
+    <section class="content">
+        <video src="../media/vecteezy_matrix-video-web-programming-coding_13323101.mp4" autoplay muted loop></video>
+    </section>
+    <div class="home_container">
+        <div class="header">
+            <div class="logo">
+                <img src="../media/fts_logo-removebg-preview.png" alt="" srcset="">
+            </div>
+            <div class="title">
+                <h1>
+                    <span>F</span>T<span>S</span> Cha<span>ll</span>enge Season <span>2</span>
+                </h1>
+            </div>
+            <div class="user">
+                <h1><span id="username"></span> <span id="UserID"></span></h1>
+            </div>
+            <button id="logout">Logout</button>
+        </div>
+        <hr class="line2">
+        <div class="content_container">
+            <div id="submittion_form" class="submittion_form">
+                <div class="heading_submittion_form">
+                    <button id="closeSubmit">&times;</button>
+                    <h2>
+                        <span>F</span>ind
+                        <span>T</span>est
+                        <span>S</span>ecure
+                    </h2>
+                </div>
+                <h3 id="error" ></h3>
+                <div class="text">
+                    <p>
+                        <span>Congratulations</span>, hacker! You’ve reached the
+                        <span>final stage</span>. Ensure your decrypted flag file is
+                        accurate before submitting it’s your moment to claim
+                        <span>victory</span> and end the <span>challenge</span>.
+                        <span>But remember</span>, precision is everything.
+                        <span>Double-check</span> your work, hit submit and secure
+                        your place at the top. <span>Good luck!</span>
+                    </p>
+                </div>
+                <form id="fileUploadForm" enctype="multipart/form-data">
+                    <div class="error-text"></div>
+                    <div class="container_file">
+                        <div class="custom-file-input-wrapper">
+                            <span class="custom-file-input-text">Choose File</span>
+                            <span class="custom-file-input-button">Browse</span>
+                             <input type="file" class="file-input" id="actual-file-input" name="flagFile" required>
+                        </div>
+        
+                    </div>
+                   
+                    <div class="field button">
+                        <button type="submit" id="FileSubmit" name="FileSubmit">Submit</button>
+                    </div>
+                </form>
+            </div>
+            <div class="container">
+                <div class="rotatable-div">
+                    <div class="side front">
+                        <h2>
+                            <span>F</span>ind
+                            <span>T</span>est
+                            <span>S</span>ecure
+                        </h2>
+                        <p>
+                            Step into the ultimate <span>challenge</span> :
+                            Unleash your <span>hacking</span> skills, solve thrilling
+                            <span>cybersecurity</span> puzzles,and become the
+                            <span>defender</span> of tomorrow—join now and transform
+                            your <span>passion</span> into <span>power</span>!
+                        </p>
+                        <h3>Time Remaining</h3>
+                        <div id="timer">
+                            <span><span id="days">00</span><small>Days</small></span>
+                            <span><span id="hours">00</span><small>Hours</small></span>
+                            <span><span id="minutes">00</span><small>Minutes</small></span>
+                            <span><span id="seconds">00</span><small>Seconds</small></span>
+                        </div>
+                    </div>
+                    <div class="side back">
+                        <h2><span>F</span>T<span>S</span> Cha<span>ll</span>enge</h2>
+                        <p>
+                           <!--  <span>Your mission:</span> Infiltrate the website's
+                            security layers to locate the elusive flag file hidden
+                            within the admin account. Once retrieved, decrypt the
+                            file using your skills and submit it for confirmation
+                            to complete the challenge. <span>Note:</span> The
+                            challenge ends immediately upon successful
+                            confirmation of the decrypted file by any participant,
+                            or if the allocated time runs out, the challenge will
+                            be closed. <span>Precision </span> and
+                            <span>stealth</span> are key—are you ready to prove
+                            your expertise? -->
+                            
+                        <span>Listen up:</span> Your objective is to breach the website's defenses and snag the 
+                        <span>flag file</span> stashed deep within the <span>admin's digital vault</span>. Once you've got it
+                        , crack the <span>encryption</span>  and submit the <span>decrypted</span> payload for verification to
+                        claim victory. <span>Heads up</span>: The game ends the instant anyone successfully submits
+                        the correct <span>decryption</span>, or when the <span>clock runs out</span> – game over. 
+                        Tread carefully and move like a shadow.
+                         <span>Ready</span> to show them what you're made of?
+                        </p>
+                        <button id="toggleSubmit">Submit here</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../javascript/index.js"></script>
+    <script src="../javascript/server.js"></script>
+    <script src="../javascript/guest.js"></script>
+    <script>
+        getSessionData();
+        //<![CDATA[
+        fetchEndDate();
+        var closeformBtn = document.getElementById('closeSubmit');
+        var showformBtn = document.getElementById('toggleSubmit');
+        var submitForm = document.getElementById('submittion_form');
+        const actualFileInput = document.getElementById('actual-file-input');
+        const fileInputText = document.querySelector('.custom-file-input-text');
+        const fileNameDisplay = document.getElementById('file-name');
+
+        closeformBtn.addEventListener('click', () => {
+            console.log('sdhhsdh')
+            submitForm.style.animation = 'fade_out 2s ease-in-out 0.2s 1  ';
+            submitForm.addEventListener('animationend', () => {
+                submitForm.style.display = 'none';
+            }, { once: true });
+        });
+
+        showformBtn.addEventListener('click', () => {
+            submitForm.style.animation = 'fade_in 2s ease-in-out 0s 1  ';
+            submitForm.style.display = 'block';
+        });
+
+        actualFileInput.addEventListener('change', function () {
+            if (this.files && this.files.length > 0) {
+                fileInputText.textContent = this.files[0].name;
+                fileNameDisplay.textContent = `Selected File: ${this.files[0].name}`;
+            } else {
+                fileInputText.textContent = 'Choose File';
+                fileNameDisplay.textContent = '';
+            }
+        });
+        //]]>
+    </script>
+</body>
+</html>

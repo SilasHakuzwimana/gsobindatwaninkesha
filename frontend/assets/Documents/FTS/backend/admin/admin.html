@@ -1,0 +1,64 @@
+SignUp<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../../css/index.css">
+    <link rel="shortcut icon" href="../../media/fts logo.jpeg" type="image/x-icon">
+    <title>FTS, Dashboard</title>
+</head>
+<body>
+    <section class="content">
+        <video src="../../media/vecteezy_matrix-video-web-programming-coding_13323101.mp4" autoplay muted loop></video>
+    </section>
+    <div class="home_container">
+        <div class="header">
+            <div class="logo">
+                <img src="../../media/fts_logo-removebg-preview.png" alt="" srcset="">
+            </div>
+            <div class="title">
+                <h1>
+                    <span>F</span>T<span>S</span> Cha<span>ll</span>enge Season <span>2</span>
+                </h1>
+            </div>
+            <div class="user">
+                <h1><span id="username"></span> <span id="user_id"></span></h1>
+            </div>
+            <button id="logout">Logout</button>
+        </div>
+        <hr class="line2">
+        <div class="content_container">
+            <div class="users_list">
+                <h1>Participants</h1>
+                <div id="user_contain">
+                </div>   
+            </div>
+            <div class="myvault">
+                <h2>My vault <button id="vault">Open</button></h2>
+                <div class="vault_file" id="vault_file">
+                   <li><a href="flag file.txt" download>Flag file</a></li>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="../../javascript/index.js"></script>
+    <script src="../../javascript/admin.js"></script>
+    <script>
+        getSessionData();
+        const vaultkey=document.getElementById('vault');
+        const vault=document.getElementById('vault_file');
+
+        vaultkey.addEventListener('click',()=>{
+       if(vaultkey.innerText == 'Open'){
+          vaultkey.innerText='Close';
+          vault.style.display='block';
+        }else{
+            vaultkey.innerText ='Open';  
+            vault.style.display='none';
+          }
+      });
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,197 @@
+/* ===============================
+   Global Body
+   =============================== */
+body {
+  background-color: #f4f6f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  line-height: 1.6;
+}
+
+/* ===============================
+   Subscribers Header
+   =============================== */
+.d-flex.justify-content-between.align-items-center.mb-3 h3 {
+  font-weight: 700;
+  color: #1f2d3d;
+  font-size: 1.5rem;
+}
+
+#subscriberCount {
+  background-color: #6c757d;
+  color: #fff;
+  font-weight: 600;
+  padding: 0.4rem 0.8rem;
+  border-radius: 12px;
+  font-size: 1rem;
+  vertical-align: middle;
+}
+
+/* Button styling */
+#sendEmailBtn {
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  padding: 0.45rem 1rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.1);
+  transition: all 0.2s ease;
+}
+
+#sendEmailBtn:hover {
+  background-color: #0069d9;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+/* Search input styling */
+#searchSubscriber {
+  border-radius: 8px;
+  border: 1px solid #d1d3e0;
+  padding: 0.5rem 0.75rem;
+  transition: all 0.2s ease;
+}
+
+#searchSubscriber:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+  outline: none;
+}
+
+/* ===============================
+   Table styling
+   =============================== */
+table.table {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+table.table thead {
+  background-color: #1f2d3d;
+  color: #fff;
+  text-transform: uppercase;
+  font-size: 0.85rem;
+  letter-spacing: 0.5px;
+}
+
+table.table tbody tr:hover {
+  background-color: #f1f3f6;
+  transition: background-color 0.2s ease;
+}
+
+table.table tbody td {
+  vertical-align: middle;
+  padding: 0.65rem 0.75rem;
+}
+
+table.table th,
+table.table td {
+  text-align: left;
+}
+
+/* ===============================
+   Pagination
+   =============================== */
+#subscribersPagination {
+  font-weight: 600;
+  margin-top: 1rem;
+}
+
+#subscribersPagination .page-item .page-link {
+  border-radius: 6px;
+  padding: 0.45rem 0.85rem;
+  transition: all 0.2s ease;
+}
+
+#subscribersPagination .page-item.active .page-link {
+  background-color: #007bff;
+  border-color: #007bff;
+  color: #fff;
+}
+
+/* ===============================
+   Modal styling
+   =============================== */
+#emailModal .modal-content {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.1);
+}
+
+#emailModal .modal-header {
+  background-color: #1f2d3d;
+  color: #fff;
+  font-weight: 700;
+  border-bottom: none;
+}
+
+#emailModal .form-control,
+#emailModal textarea {
+  border-radius: 8px;
+  border: 1px solid #d1d3e0;
+  transition: all 0.2s ease;
+}
+
+#emailModal .form-control:focus,
+#emailModal textarea:focus {
+  border-color: #007bff;
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.15);
+  outline: none;
+}
+
+/* ===============================
+   Progress bar styling
+   =============================== */
+#emailProgressContainer {
+  margin-top: 1rem;
+}
+
+#emailProgressBar {
+  border-radius: 8px;
+  background-color: #007bff;
+  transition: width 0.3s ease;
+}
+
+#emailProgressText {
+  font-size: 0.85rem;
+  margin-top: 0.25rem;
+  color: #555;
+}
+
+/* ===============================
+   Responsive improvements
+   =============================== */
+@media (max-width: 576px) {
+  .d-flex.justify-content-between.align-items-center.mb-3 {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  #sendEmailBtn {
+    margin-top: 0.5rem;
+    width: 100%;
+  }
+}
+
+/* ===============================
+   Additional polish
+   =============================== */
+.card,
+table.table {
+  background-color: #fff;
+  transition: all 0.2s ease;
+}
+
+.card:hover,
+table.table tbody tr:hover {
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.08);
+}
+
+#subscribersTableBody td {
+  font-size: 0.9rem;
+  color: #555;
+}
+
+#subscribersTableBody tr:nth-child(even) {
+  background-color: #f8f9fa;
+}

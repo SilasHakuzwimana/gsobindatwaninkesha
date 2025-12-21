@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/index.css">
+    <link rel="shortcut icon" href="media/fts logo.jpeg" type="image/x-icon">
+    <title>FTS,Join Us</title>
+</head>
+<body>
+    <section class="content">
+        <video src="media/vecteezy_matrix-video-web-programming-coding_13323101.mp4" autoplay muted loop></video>
+    </section>
+    <div class="forms_container">
+
+        <div class="login_Form" id="signin">
+            <form action="" method="post">
+                <div class="title">
+                    <div class="logo">
+                        <img src="media/fts_logo-removebg-preview.png" alt="" srcset="">
+                    </div>
+                    <div class="heading"> <h1>Login to Your account</h1></div>
+                </div>
+                <hr class="line" ></hr>
+                <div class="error-text"></div>
+                <div class="field input">
+                     <label>Username</label>
+                     <input type="text" name="username" placeholder="Enter your Username" required>
+                </div>
+                <div class="field input">
+                     <div class="password-field">
+                          <label>Password</label>
+                          <input type="password" name="password" id="password" placeholder="Enter new password" required>
+                          <i id="toggler" class="fas fa-eye"></i>
+                     </div>
+                 </div>
+                <div class="field button">
+                   <button type="submit" name="LogIn" >Log in</button>
+                </div>
+            </form>
+            <div class="link">Don't you have account? <a  id="toggleSign">Create account</a></div>
+        </div>
+        <div class="login_Form" id="signup">
+            <form action="" method="post">
+                <div class="title">
+                    <div class="logo">
+                        <img src="media/fts_logo-removebg-preview.png" alt="" srcset="">
+                    </div>
+                    <div class="heading"> <h1>Create Your account</h1></div>
+                </div>
+                <hr class="line" ></hr>
+                <div class="error-text"></div>
+                <div class="field input">
+                     <label>Username</label>
+                     <input type="text" name="username" placeholder="Enter your Username" required>
+                </div>
+                <div class="field input">
+                    <label>Class</label>
+                    <input type="text" name="class" placeholder="Enter your Class" required>
+               </div>
+                <div class="field input">
+                     <div class="password-field">
+                          <label>Password</label>
+                          <input type="password" name="password" id="password" placeholder="Enter new password" required>
+                          <i id="toggler" class="fas fa-eye"></i>
+                     </div>
+                 </div>
+                 <div class="field input">
+                    <div class="password-field">
+                         <label>Confirm Password</label>
+                         <input type="password" name="confirm_password" id="password" placeholder="Confirm new password" required>
+                         <i id="toggler" class="fas fa-eye"></i>
+                     </div>
+                </div>
+                <div class="field button">
+                   <button type="submit" name="SignUp" >Log in</button>
+                </div>
+            </form>
+            <div class="link">Don't you have account? <a  id="toggleLogin" >Create account</a></div>
+        </div>
+
+    </div>
+    <a href="backend/admin/admin.html"></a>
+    <script src="javascript/index.js"></script>
+    <script src="javascript/server.js"></script>
+</body>
+</html>

@@ -1,0 +1,504 @@
+@import url('main.css');
+body{
+    background-color:black;
+    overflow: hidden;
+    color:var(--accentColor);
+}
+.content{
+   width:120%;
+   max-width:100%;
+   background-color: var(--mainColor);
+   height: 100vh;
+   margin:-1% 0%;
+   overflow: hidden;
+}
+.content video{
+    width:100%;
+    position: absolute;
+    z-index: 0;
+}
+.forms_container{
+    width:35%;
+    z-index:2;
+    vertical-align: middle ;
+    margin:0% 32.5%;
+    top: 15%;
+    position: fixed;
+    justify-content: center;
+    display: flex;
+}
+.forms_container .login_Form{
+    background-color:var(--glassColor);
+    backdrop-filter: blur(10px);
+    min-height:70vh;
+    width:100%;
+    box-shadow: 0 0 10px var(--secondaryColor);
+    padding: 2%;
+    vertical-align: middle;
+    border-radius: 20px;
+    position: absolute;
+    /* animation:  slide_down_up 2s infinite forwards ; */
+}
+.forms_container  #signin form{
+    display: inline;
+    vertical-align: middle;
+}
+.forms_container  #signup{
+    display: none;
+    transform: translateY(-200%);
+}
+.forms_container .title{
+    display: flex;
+    height: 20%;
+    justify-content: center;
+}
+.forms_container .title .logo{
+    width:14%;
+    height:10vh;
+}
+.forms_container .title .logo img{
+    width: 100%;
+    height:100%;
+}
+.forms_container .title .heading{
+    color:var(--secondaryColor);
+    text-align: center;
+    width:80%;
+    margin: 0%;
+    transition: transform 0.2s ease-in-out;
+}
+.forms_container .title h1{
+    vertical-align: middle;
+    margin: 3.3%;
+}
+.forms_container .title h1:hover{
+    transform:scale(1.05);
+}
+form .field {
+    font-size:1.2em;
+    width:95%;  
+    margin: 2% auto;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+}
+form .field label,form .field .password label{
+    margin:1% 0%;
+}
+ .line{
+    width: 100%;
+    height: 2px;
+    background:var(--border_color);
+    border: none;
+}
+.error-text{
+    background-color: var(--glassColor);
+    color:var(--accentColor);
+    justify-content: center;
+    display: flex;
+    font-size: 1.3em;
+    text-align: center;
+    padding: 2%;
+    display: none;
+}
+.success{
+    color:var(--secondaryColor);
+    box-shadow: 0 0 5px var(--secondaryColor);
+    display: block;
+}
+.error{
+    color:red;
+    box-shadow: 0 0 5px red;
+    display: block;
+}
+form .field input{
+    height: 40px;
+    width: 90%;
+    font-size: 16px;
+    padding: 0 5%;
+    border-radius: 5px;
+    color:var(--secondaryColor);
+    background-color: transparent;
+    border: 1px solid var(--border_color);
+  }
+  form .field input:hover{
+    border:1px solid var(--secondaryColor); 
+  }
+  form .field input:focus{
+    border:1px solid var(--secondaryColor);
+    outline: none;
+  }
+form .field input::placeholder{
+    color:var(--accentColor);
+}
+form .field  button{
+    height: 40px;
+    margin: 5% 0%;
+    width: 100%;
+    font-size: 16px;
+    color:var(--accentColor);
+    border: 1px solid var(--secondaryColor);
+    background-color: var(--secondaryColor);
+    transition: transform 0.2s ease-in-out;
+}
+form .field  button:hover{
+    transform: scale(1.02);
+    box-shadow:0 0 10px var(--secondaryColor);
+    background-color: var(--secondaryColor_hover);
+}
+.link{
+  margin: 0%;
+  text-align: center;
+}
+.link a{
+    color:var(--secondaryColor);
+    cursor: pointer;
+    transition: transform 1s ease-in-out;
+}
+.link a:hover{
+    color:var(--secondaryColor_hover);
+}
+/* home.html */
+.home_container{
+    background-color:rgba(21, 22, 21, 0.177);
+    backdrop-filter: blur(6px);
+    width:100%;
+    top:0%;
+    position: fixed;
+    height:100%;
+}
+.line2{
+    outline: none;
+    height: 1px;
+    border: none;
+    background-color: var(--secondaryColor);
+}
+.home_container .header{
+    display: flex;
+    /* justify-content: center; */
+}
+.home_container .header .logo{
+    width:70px;
+    height:10vh;
+    padding:0.5% 0% 0% 0%;
+}
+.home_container .header .logo img{
+    width:100%;
+    height: 100%;
+   transition: transfrom 1s ease-in-out;
+}
+.home_container .header .logo img:hover{
+    transform: scale(1.05);
+}
+.home_container .header .title h1{
+    text-align: center;
+    color:var(--secondaryColor);
+    transition: transfrom 1s ease-in-out;
+}
+
+.home_container .header .title h1:hover{
+    transform: scale(1.05);
+}
+.home_container .header .user{
+    width:59%;
+}
+.home_container .header .user h1{ text-align: center;}
+.home_container .header  span{
+    text-align: center;
+    color:var(--accentColor);
+}
+.home_container #logout{
+    top:3%;
+    right:1%;
+    position: fixed;
+    color:var(--accentColor);
+    background-color: var(--secondaryColor);
+    float: right;
+    width:10%;
+    font-size: 1.05em;
+    padding: 1%;
+    transition: transfrom 1s ease-in-out;
+    cursor: pointer;
+}
+.home_container #logout:hover{
+    transform: scale(1.05);
+    box-shadow:0 0 10px var(--secondaryColor);
+    background-color: var(--secondaryColor_hover);
+}
+
+.container {
+    vertical-align: middle;
+    width:40%;
+    margin:3% auto;
+    height:70vh;
+    perspective: 1000px; /* Needed for 3D transform */
+}
+
+.rotatable-div {
+    position: relative;
+    width: 100%;
+    height: 100%;
+    transition: transform 0.8s ease-in-out;
+    transform-style: preserve-3d;
+}
+
+.rotatable-div:hover {
+    transform: rotateY(180deg);
+}
+
+.side {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: var(--glassColor);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backface-visibility: hidden; /* Hide the back side */
+    border-radius: 10px;
+    border: 2px solid var(--secondaryColor);
+    font-size: 24px;
+    box-sizing: border-box; 
+    box-shadow: 0 0 10px var(--secondaryColor);/* Include padding and border in element's total width and height */
+}
+
+.front ,.back{
+     /* Green */
+    display: block;
+    padding: 1%;
+    text-align: center;
+    color: var(--accentColor);
+/* Front side is initially visible */
+}
+.front{
+    transform: rotateY(0deg); 
+}
+span,h3{
+    color: var(--secondaryColor);
+}
+
+.back {
+    /* Blue */
+    color: var(--accentColor);
+    transform: rotateY(180deg); /* Back side is rotated 180 degrees */
+}
+.back button{
+    font-size:1em;
+    width:40%;
+    color: var(--accentColor);
+    padding: 1%;
+    border: 1px solid var(--secondaryColor_hover);
+    background-color: var(--secondaryColor);
+    transition: transform 1s ease-in-out;
+}
+.back button:hover{
+    transform: scale(1.02);
+    box-shadow:0 0 10px var(--secondaryColor);
+    background-color: var(--secondaryColor_hover);
+}
+/* Optional styles for better visual appearance */
+
+
+#timer {
+    font-size: 36px;
+    font-weight: 600;
+    color: var(--secondaryColor_hover);
+    margin-bottom: 24px;
+    letter-spacing: 4px;
+    display: flex;
+    justify-content: center;
+    gap: 10px; /* Space between time units */
+}
+
+#timer span {
+    background-color: var(--mainColor); /* Light background for each unit */
+    padding: 8px;
+    border-radius: 6px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    min-width: 80px; /* Ensure each unit has a minimum width */
+    display: flex;
+    flex-direction: column;
+    align-items: center; /* Center the number and label */
+}
+
+#timer span small {
+    font-size: 14px;
+    color: #7f8c8d;
+    margin-top: 4px; /* Space between number and label */
+}
+.fade_in{
+    animation:fade_in 2s ease-in-out 1s 1  ;
+}
+.submittion_form{
+    position: fixed;
+    width:25%;
+    left:1.5%;
+    padding: 1%;
+    margin: auto;
+    background-color: var(--glassColor);
+    border-radius: 10px;
+    border: 2px solid var(--mainColor);
+    font-size: 18px;
+    box-sizing: border-box; 
+    display: none;
+}
+.submittion_form .heading_submittion_form{
+    display: flex;
+    justify-content: center;
+}
+.submittion_form h2{
+    text-align: center;
+    display:inline-block;
+    width:80%;
+   
+}
+.submittion_form #closeSubmit{
+    width:5%;
+    font-size: 1.5em;
+    background-color: transparent;
+    border: none;
+    color: var(--accentColor);
+    display:inline-block;
+    transform: scale(1.2);
+    transition: transform 1s ease-in-out;
+}
+.submittion_form #closeSubmit:hover{
+    transform: scale(1.5);
+}
+.custom-file-input-wrapper {
+    
+    display: inline-flex; /* Use inline-flex for better alignment */
+    align-items: center;
+    margin:0;
+    background-color: transparent;
+    border: 2px solid var(--secondaryColor); /* Style the border */
+    border-radius: 25px; /* Fully rounded corners */
+    padding: 8px 16px;
+    text-align: center;
+    cursor: pointer;
+    margin:0% 13%;
+    overflow: hidden;
+    transition: background-color 0.3s ease; /* Smooth transition */
+    overflow: hidden;  /* hide the overflowed part of the input */
+}
+
+.custom-file-input-wrapper:hover {
+    background-color: var(--mainColor); /* Slight background change on hover */
+}
+
+
+.custom-file-input-text {
+    margin-right: 12px; /* Space between text and button */
+    color: #555;
+    font-size: 16px;
+    white-space: nowrap;          /* Prevent text wrapping */
+    overflow: hidden;             /* Hide overflowing text */
+    text-overflow: ellipsis;       /* Add ellipsis (...) if text overflows */
+    max-width: 200px;             /* limit the text width */
+}
+
+.custom-file-input-button {
+    background-color: var(--secondaryColor); /* Blue button */
+    color: var(--accentColor);
+    padding: 10px 20px;
+    border-radius: 25px; /* Fully rounded corners */
+    font-size: 16px;
+    white-space: nowrap; /* Prevent text wrapping */
+}
+
+/* Hide the actual file input element */
+.file-input {
+    position: absolute;
+    opacity: 0;
+    cursor: pointer;
+    /* Make it cover the whole wrapper */
+}
+.file-input:focus-within + .custom-file-input-wrapper{
+     border-color: var(--secondaryColor_hover);
+     box-shadow: 0 0 0 2px rgba(52, 152, 219, 0.25); /* Add a shadow */
+}
+.users_list{
+    width:40%;
+    height:80vh;
+    padding:1%;
+    margin: auto;
+    overflow-y:auto;
+    background-color: var(--glassColor);
+    border: 1px solid var(--secondaryColor);
+    justify-content: center;
+}
+.users_list h1{
+    color:var(--secondaryColor);
+    text-align: center;
+}
+.users_list p {
+    align-content: center;
+    font-size:1.2em;
+    width:60%;
+    margin:1% auto;
+    background-color: var(--glassColor);
+    padding:1%;
+    border-radius: 5px;
+    border:1px solid var(--secondaryColor);
+    transition: transform 40ms ease-in-out;
+}
+.users_list p:hover{
+    transform: scale(1.2);
+}
+.myvault {
+    top:15%;
+    right:5%;
+    position: absolute;
+    width:20%;
+    background-color: var(--glassColor);
+    padding:1%;
+    border-radius: 5px;
+    border:1px solid var(--secondaryColor)
+}
+#error{
+    text-align: center;
+}
+
+.myvault h2{
+    text-align: center;
+    margin: 1%;
+}
+.myvault button{
+    width:40%;
+    height: 5vh;
+    margin:0% 1%;
+    border-radius: 25px;
+    color:var(--accentColor);
+    border: 1px solid var(--secondaryColor_hover);
+    background-color: var(--secondaryColor);
+    transition: transform 0.2s ease-in-out;
+}
+.myvault button:hover{
+    transform: scale(1.02);
+    box-shadow:0 0 10px var(--secondaryColor);
+    background-color: var(--secondaryColor_hover);
+}
+.myvault .vault_file{
+    padding: 1%;
+    margin:1%;
+    display: none;
+    transition: display 2s ease-in-out  ;
+}
+.myvault .vault_file li{
+    list-style: none;
+    background-color: var(--glassColor);
+    padding:2%;
+    font-size: 1.2em;
+    border-radius: 5px;
+    border:1px solid var(--secondaryColor);
+    transition: transform 40ms ease-in-out;
+}
+.myvault .vault_file li a{
+    color:var(--accentColor);
+    text-decoration: none;
+}
+.winner{
+    background-color: var(--glassColor2);
+    color:var(--accentColor);
+    box-shadow: 0 0 10px var(--accentColor);
+}

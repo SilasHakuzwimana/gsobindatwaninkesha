@@ -1,0 +1,30 @@
+{
+  "name": "hakus/backend",
+  "description": "Backend API for GSOB app with user management, academic pathways, and galleries",
+  "type": "project",
+  "require": {
+    "php": "^8.2",
+    "firebase/php-jwt": "^6.11",
+    "phpmailer/phpmailer": "^6.11",
+    "cloudinary/cloudinary_php": "^3.1"
+  },
+  "license": "MIT",
+  "autoload": {
+    "psr-4": {
+      "Config\\": "Config/",
+      "Controllers\\": "Controllers/",
+      "Models\\": "Models/",
+      "Routes\\": "Routes/",
+      "Services\\": "Services/",
+      "Middleware\\": "Middleware/",
+      "Utils\\": "Utils/"
+    }
+  },
+  "authors": [
+    {
+      "name": "Silas HAKUZWIMANA",
+      "email": "hakusilas@gmail.com"
+    }
+  ],
+  "minimum-stability": "stable"
+}

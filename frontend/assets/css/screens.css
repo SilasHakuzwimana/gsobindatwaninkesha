@@ -1,0 +1,979 @@
+@media screen and (max-width:1203px) {  
+  .about{
+    height:500px;
+  }
+  .about h2,h5{
+    font-size:large;
+  }
+  .about h5{
+    font-size:small;
+  }
+  .gsobabouts h1{
+    color:skyblue;
+  }
+  .history{
+    height:fit-content;
+    width:100%;
+  }
+  .history #row{
+    font-size: medium;
+    line-height:27px;
+    width:98%;
+    text-align:center;
+  }
+  .history h1{
+    color:rgb(1, 1, 74);
+    padding:10px 0;
+    text-align: center;
+  }
+  #mission .first,.second,.third{
+    width:10%;
+    height:40vh;
+  }
+  }
+  @media screen and (max-width:600px){
+    .copyright center{
+      margin:7% 0;
+      font-size:14px;
+    }
+    .copyright a{
+      font-size:15px;
+    }
+  }
+  @media screen and (max-width:500px){
+    .copyright center{
+      margin:4% 0;
+    }
+  }
+    /*--------------------screen responsive of contacts----------------------*/
+  
+    @media screen and (max-width:877px){
+      .modal{
+        width:100%;
+      }
+      .modal-content{
+        width:70%;
+        height:fit-content;
+        padding:10px 0;
+      }
+      .column-last .img{
+        width:18px;
+      }
+      .alumni1 .column10{
+        width:22%;
+      }
+      .alumni1 .column{
+        width:17%;
+        height:fit-content;
+        margin:4% 7%;
+        display:block;
+      }
+      .alumni1 #column10,#column11{
+        float:right;
+        margin-top:-0.03%;
+      }
+      .alumni1 .column h3{
+        font-size: medium;
+      }
+      .alumni1 .column p a{
+        font-size: smaller;
+        line-height:17px;
+        margin: 0;
+      }
+      .alumni1 .column p{
+        font-size: 12px;
+        line-height:20px;
+        
+      }
+      .alumni1 #column-sub{
+        width:50%;
+      }
+      .alumni1 #column-sub h3{
+        font-size: large;
+      }
+      .alumni1 #column-sub h4,h5{
+        font-size: 10px;
+        left:-10%;
+      }
+      .alumni1 #column-sub h5{
+        width:50%;
+      }
+      .alumni1 .column h3{
+        font-size: small;
+      }
+      .alumni1 #column-sub label{
+         display: none;
+      }
+      .alumni1 #column-sub input[type="submit"]{
+        height:4.5vh;
+        width:23%;
+        font-size: small;
+      }
+      .alumni1 #column-sub input[type="text"]{
+        font-size: xx-small;
+        height:4.5vh;
+      }
+    }
+    @media screen and (max-width: 413px){
+      .modal{
+        width:100%;
+      }
+      .modal-content{
+        width:80%;
+        height:70vh;
+      }
+      .modal-content h3{
+        font-size:medium;
+      }
+      .modal-content input[type="text"],input[type="email"]{
+        width:87%;
+        height:4vh;
+      }
+      .modal-content input[type="submit"]{
+        width:50%;
+        height:5vh;
+      }
+      .modal-content textarea{
+        width:87%;
+        height:6vh;
+      }
+      .modal-content p{
+        font-size: small;
+      }
+      .column-last .img{
+        width:5px;
+        margin:0;
+        padding:6px 0;
+      }
+    }
+    /* --------------screen responsive of footer------------------------- */
+    @media screen and (max-width:890px){
+      .alumni1 .column10{
+        width:22%;
+      }
+      .alumni1 .column{
+        width:17%;
+        height:fit-content;
+        margin:4% 7%;
+        display:block;
+      }
+      .tooltip-container button{
+        font-size: small;
+      }
+      .tooltip .row a{
+        font-size: small;
+      }
+      .tooltip{
+        width:130px;
+      }
+      .alumni1 #column10,#column11{
+        float:right;
+        margin-top:-0.03%;
+      }
+      .alumni1 .column p a{
+        font-size: 13px;
+        line-height:17px;
+        margin: 0;
+      }
+      .alumni1 .column p{
+        font-size: 13px;
+        line-height:20px;
+        
+      }
+      
+      .alumni1 #column-sub{
+        width:50%;
+      }
+      .alumni1 #column-sub h4{
+        font-size: 10px;
+        left:-10%;
+      }
+      .alumni1 #column-sub input[type="submit"]{
+        height:4.5vh;
+        width:25%;
+        font-size: x-small;
+      }
+      .alumni1 #column-sub input[type="text"]{
+        font-size: x-small;
+        height:4.5vh;
+      }
+    }
+    @media screen and (max-width: 413px){
+      .modal{
+        width:100%;
+      }
+      .modal-content{
+        width:80%;
+        height:100vh;
+      }
+      .modal-content h3{
+        font-size:small;
+      }
+      .modal-content input[type="text"],input[type="email"]{
+        width:87%;
+        height:4vh;
+      }
+      .modal-content input[type="submit"]{
+        width:50%;
+        height:5vh;
+      }
+      .modal-content textarea{
+        width:87%;
+        height:6vh;
+      }
+      .modal-content p{
+        font-size: small;
+      }
+      .column-last .img{
+        width:5px;
+        margin:0;
+        padding:6px 0;
+      }
+    }
+    /* ------------about us page css----------------- */
+    @media screen and (max-width:830px){
+      .about{
+        height:fit-content;
+        padding: auto;
+      }
+      .about h2{
+        font-size: 12px;
+      }
+      .about h5{
+        font-size: 10px;
+        padding:0;
+        margin:0;
+      }
+      .history{
+        padding:10% 0;
+        width:100%;
+        height:50vh;
+      }
+      .history .content{
+        width:85%;
+        margin:0;
+        text-align: center;
+        line-height: 25px;
+        font-size: smaller;
+      }
+    }
+    /* ------------gallery css of responsive ------------ */
+    @media screen and (max-width: 688px) {
+      .lightbox .wrapper {
+        padding: 12px;
+        max-width: calc(100% - 26px);
+      }
+      .wrapper .preview-img {
+        margin-top: 15px;
+      }
+      .gallery .images {
+        max-width: 100%;
+        padding: 0 13px;
+        margin-top: 20px;
+      }
+    }
+
+    /* -----------------responsive css of gallery-------------------- */
+
+    @media (max-width: 1024px) {
+      .gallery_1 .responsive-container-block.imgContainer {
+        height: 600px;
+      }
+    
+      .gallery_1 .text-blk.subHeading {
+        font-size: 18px;
+        line-height: 27px;
+      }
+    }
+    
+    @media (max-width: 768px) {
+      .gallery_1 .project.project5 {
+        top: 520px;
+        width: 100%;
+        left: 0px;
+        right: auto;
+        bottom: auto;
+        height: 200px;
+      }
+    
+      .gallery_1 .responsive-container-block.imgContainer {
+        height: 930px;
+      }
+    
+      .gallery_1 .project.project1 {
+        width: 64%;
+        height: 300px;
+      }
+    
+      .gallery_1 .project.project3 {
+        left: auto;
+        width: 35%;
+        height: 145px;
+        right: 0px;
+      }
+    
+      .gallery_1 .project.project4 {
+        left: auto;
+        width: 35%;
+        height: 145px;
+        top: 155px;
+        right: 0px;
+      }
+    
+      .gallery_1 .project.project6 {
+        height: 200px;
+        width: 100%;
+      }
+    
+      .gallery_1 .project.project2 {
+        width: 100%;
+        top: 310px;
+        height: 200px;
+      }
+    
+      .gallery_1 .project {
+        width: 100%;
+        padding-top: 10px;
+        padding-right: 0px;
+        padding-bottom: 10px;
+        padding-left: 0px;
+      }
+    
+      .gallery_1 .overlay-inner {
+        width: 90%;
+      }
+    
+      .gallery_1 .text-blk.subHeading {
+        line-height: 25px;
+        font-size: 17px;
+        max-width: 600px;
+      }
+    
+      .gallery_1 .text-blk.heading {
+        font-size: 30px;
+        line-height: 40px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 15px;
+        margin-left: 0px;
+      }
+    }
+    
+    @media (max-width: 500px) {
+      .gallery_1 .responsive-container-block.imgContainer {
+        height: 890px;
+      }
+    
+      .gallery_1 .responsive-container-block.bigContainer {
+        padding-top: 10px;
+        padding-right: 20px;
+        padding-bottom: 10px;
+        padding-left: 20px;
+      }
+    
+      .gallery_1 .text-blk.heading {
+        font-size: 30px;
+        line-height: 35px;
+      }
+    
+      .gallery_1 .text-blk.subHeading {
+        font-size: 16px;
+        line-height: 22px;
+        margin-top: 0px;
+        margin-right: 0px;
+        margin-bottom: 30px;
+        margin-left: 0px;
+      }
+    
+      .gallery_1 .project.project1 {
+        height: 250px;
+      }
+    
+      .gallery_1 .project.project3 {
+        height: 123px;
+      }
+    
+      .gallery_1 .project.project4 {
+        height: 123px;
+        top: 127px;
+      }
+    
+      .gallery_1 .project.project2 {
+        top: 260px;
+      }
+    
+      .gallery_1 .project.project5 {
+        top: 470px;
+      }
+    
+      .gallery_1 .project.project6 {
+        top: 680px;
+      }
+    }
+
+    @media screen and (max-width:434px){
+      .history{
+           height:60vh;
+               }
+    }
+     @media screen and (max-width:434px){
+      .history{
+           height:77vh;
+               }
+    }
+
+         /*------alumni-last media screen css-----------------*/
+   
+ @media screen and (max-width:1204px){
+  .gsobabout,.gsobacademics,.gsobhome,.gsobgallery{
+    box-shadow: 0px 10px 6px 0px Gainsboro;
+  }
+  .section{
+    width: 100%;
+    position: fixed;
+    background-color: aliceblue;
+    z-index:1;
+    margin:0;
+    padding:0;
+  }
+  .aboutwrapper{
+    padding-top:16%;
+  }
+  .academicswrapper{
+    padding-top:17%;
+  }
+  .homewrapper{
+    padding-top:17%;
+  }
+  .alumniwrapper{
+    padding-top:17%;
+  }
+  .extracurwrapper{
+    padding-top:18%;
+  }
+  .gallerywrapper{
+    padding-top:8%;
+  }
+  .newspagewrapper{
+    padding-top:15%;
+  }
+.alumin-text{
+  height:fit-content;
+  width:100%;
+  margin:0;
+  padding:0;
+}
+.alumin-text #row{
+  font-size: large;
+  line-height:27px;
+  width:98%;
+  text-align:center;
+}
+.alumin-text h1{
+  color:rgb(1, 1, 74);
+  padding:10px 0;
+  text-align: center;
+}
+#row{
+  height:fit-content;
+}
+#column{
+  width:97%;
+  font-size:smaller;
+  line-height:27px;
+  text-align:center;
+}
+.column1 img{
+  width:850px;
+  height:450px;
+  float:none;
+}
+#column .paragraph{
+ margin:5% 0;
+}
+.alumni{
+  height:400px
+}
+
+}
+@media screen and (max-width:817px){
+  .academicswrapper{
+    padding-top:18%;
+  }
+  .homewrapper{
+    padding-top:18%;
+  }
+  .aboutwrapper{
+    padding-top:17%;
+  }
+  .alumniwrapper{
+    padding-top:18%;
+  }
+  .extracurwrapper{
+    padding-top:17%;
+  }
+  .gallerywrapper{
+    padding-top:10%;
+  }
+}
+@media screen and (max-width:720px){
+  .academicswrapper{
+    padding-top:19%;
+  }
+  .homewrapper{
+    padding-top:20%;
+  }
+  .aboutwrapper{
+    padding-top:20%;
+  }
+  .alumniwrapper{
+    padding-top:19.5%;
+  }
+  .extracurwrapper{
+    padding-top:23%;
+  }
+  .gallerywrapper{
+    padding-top:13%;
+  }
+  .newspagewrapper{
+    padding-top:22%;
+  }
+}
+@media screen and (max-width:677px){
+  .academicswrapper{
+    padding-top:21%;
+  }
+  .homewrapper{
+    padding-top:21%;
+  }
+  .aboutwrapper{
+    padding-top:21%;
+  }
+  .alumniwrapper{
+    padding-top:21%;
+  }
+  .extracurwrapper{
+    padding-top:26%;
+  }
+  .gallerywrapper{
+    padding-top:16%;
+  }
+}
+@media screen and (max-width:618px){
+  .academicswrapper{
+    padding-top:23%;
+  }
+  .homewrapper{
+    padding-top:24%;
+  }
+  .aboutwrapper{
+    padding-top:23%;
+  }
+  .alumniwrapper{
+    padding-top:24%;
+  }
+  .extracurwrapper{
+    padding-top:29%;
+  }
+  .gallerywrapper{
+    padding-top:16%;
+  }
+}
+@media screen and (max-width:560px){
+  .academicswrapper{
+    padding-top:25%;
+  }
+  .homewrapper{
+    padding-top:27%;
+  }
+  .aboutwrapper{
+    padding-top:25%;
+  }
+  .alumniwrapper{
+    padding-top:26%;
+  }
+  .extracurwrapper{
+    padding-top:32%;
+  }
+  .gallerywrapper{
+    padding-top:19%;
+  }
+  .newspagewrapper{
+    padding-top:25%;
+  }
+}
+@media screen and (max-width:515px){
+  .academicswrapper{
+    padding-top:27%;
+  }
+  .homewrapper{
+    padding-top:29%;
+  }
+  .aboutwrapper{
+    padding-top:28%;
+  }
+  .alumniwrapper{
+    padding-top:28%;
+  }
+  .extracurwrapper{
+    padding-top:35%;
+  }
+  .gallerywrapper{
+    padding-top:22%;
+  }
+}
+@media screen and (max-width:485px){
+  .academicswrapper{
+    padding-top:29%;
+  }
+  .homewrapper{
+    padding-top:31%;
+  }
+  .aboutwrapper{
+    padding-top:30%;
+  }
+  .alumniwrapper{
+    padding-top:30%;
+  }
+  .extracurwrapper{
+    padding-top:38%;
+  }
+  .gallerywrapper{
+    padding-top:25%;
+  }
+}
+@media screen and (max-width:445px){
+  .academicswrapper{
+    padding-top:33%;
+  }
+  .homewrapper{
+    padding-top:34%;
+  }
+  .aboutwrapper{
+    padding-top:32%;
+  }
+  .alumniwrapper{
+    padding-top:32%;
+  }
+  .extracurwrapper{
+    padding-top:41%;
+  }
+  .gallerywrapper{
+    padding-top:28%;
+  }
+  .newspagewrapper{
+    padding-top:29%;
+  }
+}
+@media screen and (max-width:405px){
+  .academicswrapper{
+    padding-top:37%;
+  }
+  .homewrapper{
+    padding-top:38%;
+  }
+  .aboutwrapper{
+    padding-top:36%;
+  }
+  .alumniwrapper{
+    padding-top:36%;
+  }
+  .extracurwrapper{
+    padding-top:45%;
+  }
+  .gallerywrapper{
+    padding-top:31%;
+  }
+  .newspagewrapper{
+    padding-top:33%;
+  }
+}
+@media screen and (max-width:1069px){
+.alumni-last{
+   width:96%;
+   height:fit-content;
+}  
+.alumni-last .row{
+ width:97%;
+ display:block;
+} 
+.alumni-last .row .column{
+  margin:20px 0;
+  margin:0;
+   padding:0;
+}
+.alumni-last .row .column img{
+  height:300px;
+}
+.alumni-last h1{
+  font-size:large;
+}
+}
+@media screen and (max-width:895px){
+.column1 img{
+  width:770px;
+  height:400px;
+  float:none;
+}
+}
+@media screen and (max-width:805px){
+.column1 img{
+  width:660px;
+  height:400px;
+  float:none;
+}
+}
+@media screen and (max-width:697px){
+  .column1 img{
+    width:560px;
+    height:400px;
+    float:none;
+  }
+}
+@media screen and (max-width:585px){
+  .column1 img{
+    width:460px;
+    height:400px;
+    float:none;
+  }
+  }
+  @media screen and (max-width:488px){
+    .column1 img{
+      width:360px;
+      height:370px;
+      float:none;
+    }
+    }
+    @media screen and (max-width:383px){
+      .column1 img{
+        width:330px;
+        height:350px;
+        float:none;
+      }
+      }
+
+      /* ------------css of responsive of alumni-home section-------------------- */
+
+      @media screen and (max-width:800px){
+        .alumni-home{
+          padding: 23% 0;
+          display: none;
+        }
+        .alumni-home h2{
+          font-size:medium;
+        }
+        .alumin-text .textpar p{
+         font-size:medium;
+         font-weight: 100;
+        }
+      }
+      @media screen and (max-width:625px){
+        .alumni{
+          height:340px;
+        }
+      }
+      @media screen and (max-width:480px){
+        .alumni{
+          height:280px;
+          padding:0;
+          margin:0;
+        }
+        .alumin-text h1{
+          font-size:large;
+        }
+      }
+      @media screen and (max-width:400px){
+        .alumni-home h2{
+          font-size:small;
+        }
+        .alumin-text .textpar p{
+          font-size:small;
+          font-weight: 100;
+         }
+         .alumin-text .paragraph{
+          font-size:small;
+          font-weight: 100;
+         }
+      }
+
+      /* -------------other about us css------------------- */
+      @media screen and (max-width:590px){
+       .missionhead{
+        margin:7% 0;
+       }
+       
+      }
+      @media screen and (max-width:500px){
+        .missionhead{
+         margin:15% 0;
+         font-size: small;
+        }
+        
+       }
+       @media screen and (max-width:489px){
+        .missionhead{
+         margin:15% 0;
+        }
+        
+       }
+       @media screen and (max-width:476px){
+        .missionhead{
+         margin:25% 0;
+        }
+        
+       }
+      @media screen and (max-width:400px){
+        .missionhead{
+         margin:25% 0;
+         font-size:smaller;
+        }
+        
+       }
+       @media screen and (max-width:1000px){
+        #slider{
+          height:60vh;
+        }
+        .slides{
+          height:670vh;
+        }
+        .slider{
+          height:60vh;
+        }
+        .slide img{
+          height:60vh;
+        }
+        .image{
+          height:60vh;
+        }
+        .image img{
+          height:60vh;
+        }
+        .content-txt{
+          top:65%;
+        }
+        .content-txt h2{
+          font-size:large;
+        }
+       .legend{
+          border:290px solid transparent;
+          border-left:420px solid rgba(54, 108, 158, 0.7);
+          border-bottom:0;
+          position:absolute;
+          bottom:0;
+        }
+      }
+      @media screen and (max-width:745px){
+        #slider{
+          height:45vh;
+        }
+        .slides{
+          height:55vh;
+        }
+        .slider{
+          height:45vh;
+        }
+        .slide img{
+          height:45vh;
+        }
+        .image{
+          height:45vh;
+        }
+        .image img{
+          height:45vh;
+        }
+        .content-txt{
+          top:57%;
+        }
+        .content-txt h2{
+          font-size:medium;
+        }
+        .legend{
+          border:190px solid transparent;
+          border-left:350px solid rgba(54, 108, 158, 0.7);
+          border-bottom:0;
+          position:absolute;
+          bottom:0;
+        }
+        
+      }
+     @media screen and (max-width:545px){
+        #slider{
+          height:45vh;
+        }
+        .slides{
+          height:55vh;
+        }
+        .slider{
+          height:45vh;
+        }
+        .slide img{
+          height:55vh;
+        }
+        .image{
+          height:45vh;
+        }
+        .image img{
+          height:45vh;
+        }
+        .content-txt{
+          top:59%;
+        }
+        .content-txt h2{
+          font-size:medium;
+        }
+        .legend{
+          border:230px solid transparent;
+          border-left:360px solid rgba(54, 108, 158, 0.7);
+          border-bottom:0;
+          position:absolute;
+          bottom:0;
+        }
+       .history{
+             height:60vh;
+             }
+        
+      }
+      @media screen and (max-width:380px){
+        #slider{
+          height:35vh;
+        }
+        .slides{
+          height:45vh;
+        }
+        .slider{
+          height:35vh;
+        }
+        .slide img{
+          height:35vh;
+        }
+        .image{
+          height:35vh;
+        }
+        .image img{
+          height:35vh;
+        }
+        .content-txt{
+          top:54%;
+        }
+        .content-txt h2{
+          font-size:12px;
+        }
+        .legend{
+          border:160px solid transparent;
+          border-left:250px solid rgba(54, 108, 158, 0.7);
+          border-bottom:0;
+          position:absolute;
+          bottom:0;
+        }
+        
+      }
+      @media screen and (max-width:689px){
+        .alumni-last{
+          text-align: center;
+          justify-content: center;
+          margin:0;
+          padding:0;
+        }
+      }
+  
+      

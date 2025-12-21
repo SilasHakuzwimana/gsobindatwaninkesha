@@ -1,0 +1,452 @@
+ * {
+   margin: 0;
+   padding: 0;
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+ }
+
+ P {
+   color: rgb(101, 98, 98);
+ }
+
+ h1 {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   margin-top: 25px;
+   padding: 20px 20px;
+   font-size: 25px;
+   color: rgb(9, 2, 63);
+   text-transform: uppercase;
+
+ }
+
+ .sportswrapper {
+   display: flex;
+   height: fit-content;
+   width: 100%;
+   padding: 5px 5px;
+ }
+
+ .sports {
+   height: fit-content;
+   width: 100%;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+   padding-top: 10px;
+
+ }
+
+ .sportspic {
+   width: 48%;
+   height: fit-content;
+ }
+
+ .sports .sportspic img {
+   margin-top: 10px;
+
+   max-width: 100%;
+
+
+ }
+
+ .sports .sportswords {
+   margin-top: 10px;
+   margin-left: 38px;
+   height: fit-content;
+   width: 47%;
+   float: right;
+   padding-right: 45px;
+   line-height: 40px;
+   font-size: 18px;
+   color: rgb(101, 98, 98);
+
+ }
+
+ .differ {
+   margin-top: 10px;
+   height: fit-content;
+   width: auto;
+   display: flex;
+   flex-wrap: wrap;
+
+ }
+
+ .sports .differ h1 {
+   padding: 20px 10px;
+ }
+
+ .sports .differ p {
+   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+   font-size: 15px;
+   font-weight: lighter;
+   line-height: 25px;
+
+ }
+
+ .sports .differ {
+   height: fit-content;
+   width: auto;
+   display: flex;
+   margin-top: 10px;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+ }
+
+ .sports .differ .example {
+   height: 320px;
+   width: 200px;
+   margin-top: 10px;
+   margin-right: 50px;
+   padding: 10px 10px;
+ }
+
+ .examplewrapper {
+   height: fit-content;
+   display: flex;
+   flex-wrap: wrap;
+   align-items: center;
+   justify-content: center;
+   flex-direction: row;
+
+ }
+
+ .sports .differ .example p {
+   font-size: 14px;
+ }
+
+ @keyframes moveup {
+   from {
+     opacity: 0;
+     margin-top: 40px;
+   }
+
+   to {
+     opacity: 1;
+     margin-top: 0px;
+   }
+ }
+
+ .example img {
+   margin-top: 10px;
+   border-image: 50%;
+
+ }
+
+ .example .backdrop {
+   height: 120px;
+   width: 80px;
+   border-radius: 50%;
+   background-color: rgb(187, 215, 243);
+ }
+
+ .example center h4 {
+   color: rgb(77, 155, 232);
+   line-height: 30px;
+
+ }
+
+ .movements {
+   height: 300px;
+   width: auto;
+   margin-top: 0px;
+
+ }
+
+ .movemex {
+   height: fit-content;
+   width: 170px;
+   margin: 0px 5px;
+
+ }
+
+ .movemwrapper {
+   height: 250px;
+   width: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+ }
+
+ .movemex p {
+   color: rgb(101, 98, 98);
+   margin-top: 10px;
+   font-size: 17px;
+ }
+
+ .clubs {
+   height: 400px;
+   width: auto;
+   margin-top: 40px;
+   color: rgb(101, 98, 98);
+
+ }
+
+ .clubs p {
+   line-height: 23px;
+   font-size: 15px;
+   margin: 10px 4%;
+ }
+
+ .clubswrapper {
+   margin-top: 20px;
+   height: 250px;
+   width: auto;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+
+ }
+
+ .clubsex {
+   height: fit-content;
+   width: 300px;
+   margin: 5px 10px;
+   box-shadow: 0 26px 58px 0 rgba(0, 0, 0, 0.22),
+     0 5px 14px 0 rgba(0, 0, 0, 0.18);
+   transition: 0.5s ease, transform 0.5s ease;
+   border-radius: 3px;
+
+ }
+
+ .clubsex ul {
+   padding: 20px 60px;
+   color: rgb(101, 98, 98);
+   font-size: 17px;
+   line-height: 35px;
+   font-weight: bold;
+   list-style-image: url('tick1.png');
+ }
+
+ .rel {
+   height: 400px;
+   width: 100%;
+
+ }
+
+ .rel p {
+   margin: 10px 130px;
+   line-height: 20px;
+   font-size: 15px;
+ }
+
+ .relwrapper {
+   height: 250px;
+   width: 98%;
+   display: flex;
+   justify-content: center;
+   align-items: center;
+   position: inherit;
+   margin-left: -1%;
+
+ }
+
+ .relwrapper img {
+   margin: 10px 40px;
+ }
+
+ .reveal {
+   position: relative;
+   transform: translateY(90px);
+   opacity: 0;
+   transition: 1s all ease;
+ }
+
+ .reveal.active {
+   transform: translateY(0);
+   opacity: 1;
+ }
+
+ .dropdown-item {
+   color: steelblue;
+ }
+
+ /* Make dropdown menus visible and operable on large screens (>= 992px) */
+ @media (min-width: 992px) {
+
+   /* Keep dropdown open on hover */
+   .dropdown:hover>.dropdown-menu {
+     display: block !important;
+     opacity: 1;
+     visibility: visible;
+     position: absolute;
+     top: 100%;
+     left: 0;
+     margin-top: 0.5rem;
+     z-index: 1050;
+     /* Ensure on top */
+   }
+
+   /* Remove any conflicting display rule */
+   .dropdown-menu {
+     display: none;
+   }
+
+   /* Show on hover */
+   .dropdown:hover>.dropdown-menu {
+     display: block !important;
+   }
+ }
+
+ /* Style your links with a pale blue for a professional look */
+ .navbar-nav .nav-link,
+ .dropdown-toggle {
+   color: steelblue;
+   /* Pale blue */
+   transition: color 0.3s ease;
+ }
+
+ .navbar-nav .nav-link:hover,
+ .dropdown-toggle:hover,
+ .navbar-nav .nav-link:focus,
+ .dropdown-toggle:focus {
+   color: steelblue;
+   /* Lighter blue on hover/focus */
+ }
+
+ @media screen and (max-width: 900px) {
+   .sports .differ .example {
+
+     margin-top: 10px;
+     margin-right: 1px;
+
+   }
+
+ }
+
+ @media screen and (max-width: 900px) {
+
+   .sportspic,
+   .clubswrapper,
+   .sportswords,
+   .sports {
+     padding: 0;
+     margin: 0;
+     width: 100%;
+   }
+
+   p {
+     font-size: small;
+     word-wrap: normal;
+     position: inherit;
+     margin: 0px 10px;
+   }
+
+   h1 {
+     font-size: 18px;
+   }
+
+   .rel p {
+     margin: 10px 20px;
+     line-height: 20px;
+
+   }
+
+   .sports .sportswords {
+     word-wrap: normall;
+     width: 100%;
+     height: fit-content;
+     margin-top: 1px;
+     margin-left: 3px;
+     line-height: 22px;
+     padding: 3px 4px;
+   }
+
+   .sportswrapper {
+     display: flex;
+     flex-direction: column;
+     align-items: center;
+     justify-content: center;
+     width: 100%;
+     height: fit-content;
+
+   }
+
+   .sportspic img {
+     width: 100%;
+     margin-left: 0;
+   }
+
+   .differ {
+     display: flex;
+     height: fit-content;
+     width: 100%;
+     flex-wrap: wrap;
+
+   }
+
+   .example,
+   .movemwrapper {
+     height: fit-content;
+     display: flex;
+     flex-wrap: wrap;
+     width: 100%;
+     align-items: center;
+     justify-content: center;
+
+   }
+
+   .sports,
+   .rel,
+   .relwrapper,
+   .clubs,
+   .clubswrapper {
+
+     align-items: center;
+     justify-content: center;
+     height: fit-content;
+     display: flex;
+     flex-wrap: wrap;
+   }
+
+   .movemex img,
+   .relwrapper img {
+     height: 120px;
+     width: 120px;
+   }
+
+   .examplewrapper {
+     height: fit-content;
+     display: flex;
+     flex-wrap: wrap;
+     flex-direction: row;
+   }
+
+   .sports .differ .example {
+     width: 160px;
+     height: fit-content;
+   }
+
+   .movemex {
+     height: 120px;
+     width: 120px;
+     margin: 0px 10px;
+     padding: 20px 20px;
+   }
+
+   .clubsex {
+     height: fit-content;
+     width: 300px;
+     margin-top: 5px;
+
+   }
+
+   .clubs {
+     height: fit-content;
+     margin-top: 10px;
+   }
+
+   .clubs p {
+     font-size: small;
+   }
+
+   .movements,
+   .movemwrapper {
+     background-color: azure;
+     height: fit-content;
+     width: 100%;
+   }
+
+ }

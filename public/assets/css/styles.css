@@ -1,0 +1,1077 @@
+/* ===================== Unified CSS for GSOB Website ===================== */
+
+/* Import Google Fonts */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600&display=swap');
+
+/* ====================== Reset & Base Styles ====================== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+html,
+body {
+  width: 100%;
+  height: 100%;
+  background-color: #fff;
+  color: rgb(101, 98, 98);
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  line-height: 1.6;
+}
+
+/* Links */
+a {
+  text-decoration: none;
+  color: inherit;
+}
+
+a:hover {
+  text-decoration: underline;
+}
+
+/* ====================== Loader Styles ====================== */
+.loader-wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100%;
+  background-color: #ddd;
+  position: fixed;
+  z-index: 9999;
+  width: 100%;
+}
+
+.loader {
+  display: block;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-weight: lighter;
+}
+
+.loader p {
+  position: absolute;
+  text-align: center;
+  margin-left: -6%;
+  margin-top: 38vh;
+  font-size: large;
+  color: #183153;
+}
+
+.loader p span {
+  color: dodgerblue;
+}
+
+@media screen and (max-width: 600px) {
+  .loader p {
+    margin-left: -10%;
+  }
+}
+
+.dot-spinner {
+  --uib-size: 2.8rem;
+  --uib-speed: .9s;
+  --uib-color: #183153;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: var(--uib-size);
+  width: var(--uib-size);
+}
+
+.dot-spinner__dot {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  height: 100%;
+  width: 100%;
+}
+
+.dot-spinner__dot::before {
+  content: '';
+  height: 20%;
+  width: 20%;
+  border-radius: 50%;
+  background-color: var(--uib-color);
+  transform: scale(0);
+  opacity: 0.5;
+  animation: pulse0112 calc(var(--uib-speed) * 1.111) ease-in-out infinite;
+  box-shadow: 0 0 20px rgba(18, 31, 53, 0.3);
+}
+
+.dot-spinner__dot:nth-child(2) {
+  transform: rotate(45deg);
+}
+
+.dot-spinner__dot:nth-child(2)::before {
+  animation-delay: calc(var(--uib-speed) * -0.875);
+}
+
+.dot-spinner__dot:nth-child(3) {
+  transform: rotate(90deg);
+}
+
+.dot-spinner__dot:nth-child(3)::before {
+  animation-delay: calc(var(--uib-speed) * -0.75);
+}
+
+.dot-spinner__dot:nth-child(4) {
+  transform: rotate(135deg);
+}
+
+.dot-spinner__dot:nth-child(4)::before {
+  animation-delay: calc(var(--uib-speed) * -0.625);
+}
+
+.dot-spinner__dot:nth-child(5) {
+  transform: rotate(180deg);
+}
+
+.dot-spinner__dot:nth-child(5)::before {
+  animation-delay: calc(var(--uib-speed) * -0.5);
+}
+
+.dot-spinner__dot:nth-child(6) {
+  transform: rotate(225deg);
+}
+
+.dot-spinner__dot:nth-child(6)::before {
+  animation-delay: calc(var(--uib-speed) * -0.375);
+}
+
+.dot-spinner__dot:nth-child(7) {
+  transform: rotate(270deg);
+}
+
+.dot-spinner__dot:nth-child(7)::before {
+  animation-delay: calc(var(--uib-speed) * -0.25);
+}
+
+.dot-spinner__dot:nth-child(8) {
+  transform: rotate(315deg);
+}
+
+.dot-spinner__dot:nth-child(8)::before {
+  animation-delay: calc(var(--uib-speed) * -0.125);
+}
+
+@keyframes pulse0112 {
+
+  0%,
+  100% {
+    transform: scale(0);
+    opacity: 0.5;
+  }
+
+  50% {
+    transform: scale(1);
+    opacity: 1;
+  }
+}
+
+/* ====================== Slider Show ====================== */
+.slideshow-container {
+  max-width: 99%;
+  margin-left: 0.3%;
+  position: relative;
+}
+
+.slideshow-container img {
+  height: 80vh;
+}
+
+.dot {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbb;
+  border-radius: 50%;
+  display: inline-block;
+  transition: background-color 0.6s ease;
+}
+
+.activated {
+  background-color: #717171;
+}
+
+.fade {
+  animation-name: fade;
+  animation-duration: 1.9s;
+}
+
+@keyframes fade {
+  from {
+    opacity: .2
+  }
+
+  to {
+    opacity: 1
+  }
+}
+
+/* ====================== About Us Styles ====================== */
+.about {
+  margin: 1% 0;
+  overflow: hidden;
+  height: 80vh;
+  background-color: rgba(6, 6, 68, 0.7);
+  background-image: url("../images/about2.JPG");
+  background-size: cover;
+  background-blend-mode: multiply;
+}
+
+.about-us {
+  text-align: center;
+  width: 95%;
+  margin: 15% 0;
+}
+
+.about-us h5 {
+  color: whitesmoke;
+}
+
+.history {
+  height: fit-content;
+}
+
+.history #row {
+  font-size: medium;
+  line-height: 27px;
+  width: 98%;
+  margin: 0.5% 1%;
+}
+
+.history h1 {
+  color: rgb(1, 1, 74);
+  padding: 10px 0;
+  font-size: 27px;
+  text-align: center;
+}
+
+/* ====================== Missions & Circles ====================== */
+.missions {
+  height: fit-content;
+  padding: 3% 0;
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.cirwrap {
+  width: 60%;
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: center;
+}
+
+.cir {
+  height: 250px;
+  width: 250px;
+  border-radius: 50%;
+  background-color: rgb(197, 198, 198);
+  padding: 40px;
+  margin: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.cir p {
+  line-height: 22px;
+  font-weight: lighter;
+  text-align: center;
+}
+
+.cir h2 {
+  text-align: center;
+  font-weight: 600;
+  font-size: 1.2rem;
+  margin-top: 10px;
+}
+
+.cir:nth-child(1) {
+  background-color: rgb(9, 2, 63);
+  color: rgb(211, 205, 205);
+}
+
+.cir:nth-child(2) {
+  background-color: rgb(197, 198, 198);
+  color: rgb(9, 2, 63);
+}
+
+.cir:nth-child(3) {
+  background-color: rgb(9, 2, 63);
+  color: rgb(211, 205, 205);
+}
+
+.cir:nth-child(4) {
+  background-color: rgb(9, 2, 63);
+  color: rgb(211, 205, 205);
+}
+
+/* Media queries for Circles */
+@media screen and (max-width: 1000px) {
+  .cir {
+    width: 300px;
+    height: 200px;
+  }
+
+  .cir:nth-child(3),
+  .cir:nth-child(4) {
+    margin-top: 25px;
+  }
+}
+
+/* ====================== Sections with background colors ====================== */
+#vision,
+#goals {
+  background-color: rgb(1, 1, 74);
+  color: whitesmoke;
+}
+
+#values {
+  background-color: dodgerblue;
+  color: rgb(1, 1, 74);
+}
+
+/* ====================== Footer Styles ====================== */
+.footer {
+  width: 100%;
+  height: 5vh;
+  border-top: 1px solid rgb(1, 1, 74);
+}
+
+footer {
+  background-color: #f8f9fa;
+  padding: 20px;
+  margin-top: 40px;
+  border-top: 1px solid #ddd;
+  font-size: 0.9rem;
+  color: #555;
+}
+
+footer h5 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+footer a {
+  color: #333;
+  transition: color 0.2s;
+}
+
+footer a:hover {
+  color: #0d6efd;
+}
+
+/* ====================== Alumni Page Styles ====================== */
+.alumni {
+  background-image: url('../img/as.JPG');
+  background-size: cover;
+  background-blend-mode: multiply;
+  background-color: rgba(15, 15, 170, 0.6);
+  width: 100%;
+  min-height: 90vh;
+  text-align: center;
+  margin: 1% 0;
+}
+
+.gsobalumni {
+  box-shadow: 0px 15px 10px gainsboro;
+}
+
+/* Alumni Home (hidden by default) */
+.alumni-home {
+  color: whitesmoke;
+  padding: 20% 0;
+  display: none;
+}
+
+.alumni-home h2 {
+  color: whitesmoke;
+  font-size: 25px;
+}
+
+/* Alumni Content Wrapper */
+.wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 15px 0;
+}
+
+.wrapper .big {
+  height: 460px;
+  width: 50%;
+  background-image: url(../img/alumni1.JPG);
+  background-size: cover;
+  margin-top: 1.4%;
+  padding: 18px 3px;
+}
+
+.wrapper .rightbig {
+  height: 58vh;
+  width: 40%;
+  float: right;
+  margin: 0 1%;
+}
+
+.wrapper .small {
+  height: 43vh;
+  width: 500px;
+  margin: 2px 0;
+}
+
+.wrapper .small img {
+  height: 43vh;
+  width: 500px;
+}
+
+.first-alumnis hr {
+  width: 18%;
+  margin-left: 41%;
+  border: 1.5px solid rgb(1, 1, 74);
+}
+
+/* Alumni Texts */
+.alumin-text {
+  height: fit-content;
+}
+
+.alumin-text #row {
+  font-size: large;
+  line-height: 27px;
+  width: 98%;
+  margin: -2% 1%;
+}
+
+#column {
+  width: 45%;
+  display: inline-block;
+  height: 65vh;
+  padding: 5px 5px;
+  font-size: smaller;
+  line-height: 27px;
+}
+
+.paragraph {
+  line-height: 27px;
+}
+
+.alumin-text h1 {
+  color: rgb(1, 1, 74);
+  padding: 10px 0;
+  text-align: center;
+  cursor: pointer;
+}
+
+.column1 img {
+  float: right;
+  height: 60vh;
+  margin-top: 12%;
+}
+
+/* Alumni Footer */
+.alumni1 {
+  width: 100%;
+  min-height: 430px;
+  background-color: #0b0b48;
+  position: relative;
+}
+
+.alumni1 .row {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.alumni1 .column {
+  width: 15%;
+  margin: 1%;
+  padding: 10px;
+}
+
+.alumni1 .column h3 {
+  color: whitesmoke;
+  padding: 8px 0;
+  transition: 0.3s;
+}
+
+.alumni1 .column h4 {
+  padding: 10px;
+  font-size: 14px;
+}
+
+.alumni1 .column p {
+  color: darkgray;
+  display: block;
+  line-height: 33px;
+  margin: 0;
+}
+
+.alumni1 .column a {
+  color: darkgray;
+}
+
+.alumni1 input[type="text"] {
+  width: 60%;
+  height: 6vh;
+  border: none;
+  border-radius: 3px;
+  margin: 0 5px;
+}
+
+.alumni1 label {
+  color: whitesmoke;
+  font-size: 18px;
+}
+
+.alumni1 input[type="submit"] {
+  width: 15%;
+  height: 5.5vh;
+  cursor: pointer;
+  border: none;
+  border-radius: 3px;
+  background-color: dodgerblue;
+  font-size: medium;
+  transition: 0.5s;
+}
+
+.alumni1 input[type="submit"]:hover {
+  background-color: #f9f9f9;
+  color: black;
+}
+
+/* Tooltip Styles */
+.tooltip-container {
+  position: relative;
+  display: inline-block;
+  cursor: pointer;
+}
+
+.tooltip {
+  visibility: hidden;
+  width: 150px;
+  background-color: dodgerblue;
+  color: #fff;
+  text-align: center;
+  border-radius: 6px;
+  padding: 5px 5px;
+  position: absolute;
+  z-index: 1;
+  bottom: 120%;
+  left: 50%;
+  margin-left: -75px;
+  opacity: 0;
+  transition: opacity 0.3s;
+}
+
+.tooltip-container:hover .tooltip {
+  visibility: visible;
+  opacity: 1;
+}
+
+/* Alumni Last Section */
+.alumni-last {
+  margin: 1% 0;
+  padding: 30px 0;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.alumni-last .row {
+  width: 85%;
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+}
+
+.alumni-last .column {
+  margin: 0 2%;
+  width: 330px;
+  border: 2px solid dodgerblue;
+  border-bottom-left-radius: 7px;
+  border-bottom-right-radius: 7px;
+  border-top: none;
+  border-left: none;
+  border-right: none;
+  overflow: hidden;
+  background-color: #fff;
+  transition: box-shadow 0.3s;
+}
+
+.alumni-last .column:hover {
+  box-shadow: 0px 3px 15px rgb(163, 151, 151);
+}
+
+.alumni-last .column img {
+  width: 100%;
+  height: 55vh;
+  object-fit: cover;
+}
+
+.alumni-last .column h3 {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  font-size: 19px;
+  margin: 2% 0;
+  color: dodgerblue;
+  padding: 0 10px;
+}
+
+.alumni-last h1 {
+  width: 40%;
+  color: rgb(1, 1, 74);
+}
+
+@media(max-width: 1200px) {
+  .alumni-last {
+    width: 96%;
+  }
+
+  .alumni-last .row {
+    width: 97%;
+    flex-direction: column;
+  }
+
+  .alumni-last h1 {
+    font-size: large;
+  }
+
+  .alumni-last .column {
+    width: 90%;
+  }
+}
+
+/* ====================== Dialog & Modal Styles ====================== */
+.modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.4);
+  justify-content: center;
+  align-items: center;
+}
+
+.modal-content {
+  background-color: #fff;
+  margin: auto;
+  padding: 30px;
+  border-radius: 7px;
+  width: 50%;
+  max-height: 87vh;
+  overflow-y: auto;
+  position: relative;
+}
+
+.close {
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #aaa;
+}
+
+.close:hover {
+  color: rgb(1, 1, 74);
+}
+
+/* ====================== Responsive Media Queries ====================== */
+@media(max-width: 1024px) {
+
+  /* Adjust slider height */
+  #slider {
+    height: 60vh;
+  }
+
+  /* Adjust slider images */
+  .slides {
+    height: auto;
+  }
+}
+
+@media(max-width: 768px) {
+
+  /* Slider images */
+  .slide img,
+  .image img {
+    height: 45vh;
+  }
+
+  /* About us section */
+  .about {
+    height: auto;
+  }
+}
+
+@media(max-width: 600px) {
+
+  /* Adjust footer */
+  footer {
+    padding: 10px;
+  }
+
+  /* Responsive text sizes */
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  /* Alumni section images */
+  .column1 img {
+    width: 100%;
+    height: auto;
+  }
+}
+
+/* ========== GLOBAL BASE STYLES ========== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+/* ========== IFRAME SECTION ========== */
+.iframe-wrapper {
+  width: 97%;
+  height: 100vh;
+  position: relative;
+}
+
+.iframe-wrapper iframe {
+  width: 100%;
+  height: 95vh;
+  border: none;
+  border-radius: 8px;
+}
+
+/* ========== POPUP SECTION ========== */
+.popup-section {
+  background-image: url("/assets/images/fts.jpg");
+  background-size: cover;
+  background-position: center;
+  margin: 1% 0;
+  padding: 15px 20px;
+  text-align: center;
+  width: 96%;
+  height: 60vh;
+  color: #fff;
+  border-radius: 7px;
+  cursor: pointer;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+  transition: transform 0.3s ease;
+}
+
+.popup-section:hover {
+  transform: scale(1.02);
+}
+
+.popup-section .popup-content {
+  background-color: rgba(0, 0, 0, 0.55);
+  padding: 25px;
+  margin: 3% 0;
+  border-radius: 8px;
+  display: inline-block;
+  text-align: center;
+  font-size: 17px;
+  line-height: 25px;
+  height: 40vh;
+}
+
+.popup-section .schlmgzn {
+  margin: 7% 0;
+  border: 1px solid #247535;
+  border-radius: 7px;
+  color: #247535;
+  font-size: 23px;
+  font-weight: bold;
+  padding: 10px;
+  transition: all 0.3s ease;
+}
+
+.popup-section .schlmgzn:hover {
+  background-color: #247535;
+  color: #fff;
+}
+
+/* ========== CUSTOM MODAL ========== */
+.custom-modal {
+  display: none;
+  position: fixed;
+  z-index: 9999;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+}
+
+.custom-modal-content {
+  background-color: #fff;
+  margin: 2% auto;
+  padding: 30px;
+  border: 1px solid #ddd;
+  width: 90%;
+  max-width: 950px;
+  border-radius: 10px;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3);
+  position: relative;
+}
+
+.custom-close {
+  color: #999;
+  position: absolute;
+  top: 12px;
+  right: 18px;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: color 0.2s ease;
+}
+
+.custom-close:hover {
+  color: #000;
+}
+
+/* ========== NEWSLETTER SECTION ========== */
+.footer-newsletter {
+  max-width: 320px;
+  margin: auto;
+  text-align: center;
+  padding: 1rem;
+  background-color: #f8f9fa;
+  border-radius: 8px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+}
+
+.footer-newsletter input,
+.footer-newsletter button {
+  border-radius: 5px;
+  width: 100%;
+}
+
+.footer-newsletter input[type="checkbox"] {
+  width: 20px;
+  height: 20px;
+}
+
+.footer-newsletter button {
+  transition: background-color 0.3s ease;
+}
+
+.footer-newsletter button:hover {
+  background-color: #0d6efd;
+  color: #fff;
+}
+
+#newsletterMessage {
+  transition: all 0.3s ease;
+  text-align: center;
+  font-weight: 500;
+}
+
+/* Slide up alert */
+.alert-slide-up {
+  animation: slideUp 1s forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+/* ========== FOOTER LINKS ========== */
+footer.alumni1 h5 {
+  font-weight: bold;
+  margin-bottom: 15px;
+}
+
+footer.alumni1 a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+footer.alumni1 a:hover {
+  color: #0d6efd;
+  text-decoration: underline;
+}
+
+/* ========== RESPONSIVE DESIGN ========== */
+
+/* Make sure dropdown menus are visible and functional on large screens */
+.dropdown-item {
+  color: steelblue;
+}
+
+/* Make dropdown menus visible and operable on large screens (>= 992px) */
+@media (min-width: 992px) {
+
+  /* Keep dropdown open on hover */
+  .dropdown:hover>.dropdown-menu {
+    display: block !important;
+    opacity: 1;
+    visibility: visible;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    z-index: 1050;
+    /* Ensure on top */
+  }
+
+  /* Remove any conflicting display rule */
+  .dropdown-menu {
+    display: none;
+  }
+
+  /* Show on hover */
+  .dropdown:hover>.dropdown-menu {
+    display: block !important;
+  }
+}
+
+@media (max-width: 767px) {
+  .iframe-wrapper {
+    height: 80vh;
+  }
+
+  .popup-section {
+    width: 100%;
+    height: 50vh;
+    padding: 10px;
+  }
+
+  .popup-section .popup-content {
+    font-size: 14px;
+    line-height: 20px;
+    height: 35vh;
+    padding: 15px;
+  }
+
+  .popup-section .schlmgzn {
+    font-size: 18px;
+    padding: 8px;
+  }
+
+  .custom-modal-content {
+    width: 95%;
+    margin: 5% auto;
+    padding: 20px;
+  }
+
+  .footer-newsletter {
+    max-width: 100%;
+    margin-top: 20px;
+    padding: 1rem;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1024px) {
+  .iframe-wrapper {
+    width: 98%;
+    height: 90vh;
+  }
+
+  .popup-section {
+    width: 99%;
+    height: 55vh;
+    padding: 10px 15px;
+  }
+
+  .popup-section .popup-content {
+    font-size: 16px;
+    line-height: 22px;
+    height: 38vh;
+    padding: 20px;
+  }
+
+  .popup-section .schlmgzn {
+    font-size: 20px;
+    padding: 9px;
+  }
+
+  .custom-modal-content {
+    width: 92%;
+    max-width: 800px;
+    padding: 25px;
+  }
+}
+
+/* ========== GLOBAL BASE STYLES ========== */
+body {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+/* ========== Link hover effects ========== */
+.navbar .nav-link {
+  color: #333;
+  transition: color 0.2s ease, transform 0.2s ease;
+}
+
+.navbar .nav-link:hover,
+.navbar .nav-link.active {
+  color: #0d6efd;
+  transform: translateY(-1px);
+}
+
+/* ========== Dropdown ========== */
+.dropdown-menu {
+  z-index: 2000 !important;
+  border-radius: 0.5rem;
+  padding: 0.3rem 0;
+}
+
+.dropdown-item:hover {
+  background-color: #f1f5ff;
+  color: #0d6efd;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(-5px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ========== UTILITIES ========== */
+.row {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+
+.column {
+  display: inline-block;
+  padding: 0 1px;
+}

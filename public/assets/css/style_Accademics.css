@@ -1,0 +1,361 @@
+* {
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+header {
+  height: fit-content;
+  width: auto;
+  background-color: aqua;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+* {
+  margin-left: 0;
+  padding: 0;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+
+}
+
+h2 {
+  margin-top: 25px;
+  color: rgb(1, 1, 74);
+  font-size: 23px;
+  padding: 10px 10px;
+  text-transform: uppercase;
+}
+
+.top p {
+  font-size: 17px;
+  font-weight: lighter;
+  line-height: 28px;
+  color: rgb(69, 71, 71);
+  padding: 0px 50px;
+}
+
+.options {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 50px;
+  padding-bottom: 20px;
+}
+
+.options div {
+  height: 200px;
+  width: 400px;
+  background-color: azure;
+  text-align: center;
+  color: dodgerblue;
+  line-height: 30px;
+  box-shadow: 0 26px 58px 0 rgba(0, 0, 0, 0.22),
+    0 5px 14px 0 rgba(0, 0, 0, 0.18);
+  border-radius: 5px;
+  margin: 10px;
+}
+
+.options h4 {
+  text-align: center;
+  font-weight: 100;
+  font-size: 21px;
+  padding: 10px;
+}
+
+.babyeyi-btn {
+  color: rgba(3, 3, 40, 0.95);
+  padding: 10px 30px;
+  background-color: transparent;
+  border-radius: 5px;
+  font-weight: lighter;
+  font-size: 14px;
+  cursor: pointer;
+  position: relative;
+  margin-top: 30px;
+  border: 1.5px solid rgba(3, 3, 40, 0.95);
+
+}
+
+.babyeyi-btn:hover {
+  transform: scale(1.05);
+  transition: 0.4s ease-in-out;
+  color: aliceblue;
+  background-color: rgba(3, 3, 40, 0.95);
+}
+
+.facilities {
+  height: fit-content;
+  width: auto;
+  background-color: rgba(3, 3, 40, 0.7);
+  background-image: url("../images/facilities2.JPG");
+  background-size: cover;
+  background-blend-mode: multiply;
+
+}
+
+.container {
+  margin: 0;
+  height: 100%;
+  width: 100%;
+  position: absolute;
+  display: none;
+  overflow-y: hidden;
+  z-index: 1;
+
+}
+
+@keyframes pop {
+  from {
+    opacity: 0;
+    transform: scale(0);
+  }
+
+  to {
+    opacity: 1;
+  }
+}
+
+.iframe-wrapper {
+  background-color: rgba(0, 0, 0, 0.95);
+  height: 170vh;
+  width: 100%;
+  position: relative;
+  overflow-y: hidden;
+  display: block;
+  animation: pop 0.4s linear;
+  animation-fill-mode: forwards;
+}
+
+.iframe-wrapper iframe {
+  width: 80%;
+  height: fit-content;
+}
+
+.container span .quit {
+  color: aliceblue;
+  font-size: 30px;
+  padding: 10px 20px;
+  border-radius: 50%;
+  float: right;
+  margin: 17px 17px 0px 0px;
+}
+
+.container .quit:hover {
+  background-color: rgb(112, 112, 112);
+  transition: 0.4s ease-in-out;
+  cursor: pointer;
+}
+
+.container iframe {
+  height: 100%;
+  width: 800px;
+  margin: 20px 0px 0px 14%;
+  position: relative;
+  overflow-y: scroll;
+}
+
+.facilities h2 {
+  color: rgb(237, 239, 240);
+  font-weight: bold;
+}
+
+.facilities .top {
+  color: rgb(244, 247, 249);
+  font-weight: bold;
+  line-height: 22px;
+  margin-top: -20px;
+  padding: 5px 200px;
+}
+
+.facilwrap {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+}
+
+.facil {
+  height: 180px;
+  width: 250px;
+  margin: 20px 30px;
+  padding: 10px 10px;
+
+}
+
+.facil .hd {
+  font-size: 25px;
+  color: aqua;
+}
+
+.facil .exp {
+  font-size: 15px;
+  line-height: 26px;
+  color: rgb(194, 201, 207);
+
+}
+
+.reveal {
+  position: relative;
+  transform: translateY(90px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/*----------------------- responsive -----------------------*/
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 17px;
+  }
+
+  .top p,
+  .comb p,
+  .facil .exp,
+  .facilities .top {
+    font-size: small;
+    line-height: 20px;
+    padding: 5px 15px;
+  }
+
+  .facilities {
+    height: fit-content;
+    padding: auto;
+
+  }
+
+  .facil {
+    height: fit-content;
+    padding: 5px 5px;
+    margin: 1px 5px;
+    width: 70%;
+  }
+
+  .options h4 {
+    font-size: 18px;
+    margin-top: -7px;
+  }
+
+  .babyeyi-btn {
+    margin-top: 10px;
+  }
+
+  .quit {
+    float: none;
+    margin-right: 200px;
+
+  }
+
+  .iframe-wrapper {
+    display: inline-flex;
+    position: absolute;
+    width: 100%;
+
+
+  }
+
+  .container iframe {
+    position: relative;
+    min-width: 83%;
+    margin: 70px 0px 0px 0px;
+
+  }
+
+}
+
+/*----------------------- End responsive -----------------------*/
+
+.comb {
+  margin-top: 5px;
+  width: auto;
+  height: fit-content;
+
+}
+
+.cards-wrapper {
+  height: fit-content;
+  padding: 5px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin: 35px 2px 25px 2px;
+}
+
+.card {
+  height: 250px;
+  width: 250px;
+  margin: 5px;
+
+}
+
+.face h1 {
+  font-size: 60px;
+  color: dodgerblue;
+  letter-spacing: 10px;
+}
+
+.face.front figcaption {
+  font-size: 17px;
+  color: dodgerblue;
+}
+
+.face.back figcaption {
+  font-size: 14px;
+  text-align: left;
+  padding: 6px;
+  color: dodgerblue;
+
+}
+
+.card .face {
+  width: 100%;
+  height: 100%;
+  border-radius: 5px;
+  cursor: pointer;
+  position: absolute;
+  transform-style: preserve-3d;
+  position: relative;
+  backface-visibility: hidden;
+  transition: 1s ease-in-out;
+  transform: perspective(1000px) rotateY(0deg);
+  box-shadow: 0 26px 58px 0 rgba(0, 0, 0, 0.22),
+    0 5px 14px 0 rgba(0, 0, 0, 0.18);
+
+}
+
+.card .face.front {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.card .face {
+  background-color: rgba(3, 3, 40, 0.95);
+}
+
+.card .face.back {
+  margin-top: -250px;
+  transform: perspective(1000px) rotateY(180deg);
+
+}
+
+.card:hover .face.front {
+  transform: perspective(1000px) rotateY(180deg);
+}
+
+.card:hover .face.back {
+  transform: perspective(1000px) rotateY(360deg);
+}
+
+.face.back img {
+  width: 100%;
+  position: relative;
+  height: 250px;
+  margin-top: -5px;
+  border-top-right-radius: 5px;
+  border-top-left-radius: 5px;
+
+}

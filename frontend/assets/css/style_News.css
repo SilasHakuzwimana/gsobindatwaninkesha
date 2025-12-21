@@ -1,0 +1,396 @@
+* {
+  padding: 0;
+  font-family: 'Segoe UI', sans-serif;
+}
+
+figcaption {
+  color: rgb(69, 71, 71);
+  font-size: small;
+}
+
+h2 {
+  color: dodgerblue;
+  padding: 20px 20px;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+.newswrapper {
+  box-shadow: 0px 15px 10px 0px Gainsboro;
+}
+
+.wrappernews1 {
+  flex-wrap: wrap;
+  height: fit-content;
+  width: auto;
+  display: flex;
+  padding: 0;
+
+}
+
+.wrappernews1 .row {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-wrap: wrap;
+  width: 100%;
+  height: fit-content;
+  padding: 20px;
+}
+
+.wrappernews1 .row .column {
+  width: 47%;
+  position: relative;
+  height: 98vh;
+  padding: 10px 0;
+  padding: 13px 16px;
+  vertical-align: top;
+
+}
+
+.wrappernews1 .row .column img {
+  width: 100%;
+  height: 450px;
+}
+
+.wrappernews2 {
+  flex-wrap: wrap;
+  height: fit-content;
+  width: auto;
+  display: flex;
+  margin-top: 5%;
+
+
+}
+
+.wrappernews2 h1 {
+  color: rgb(1, 1, 74);
+}
+
+.wrappernews2 .row {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  flex-wrap: wrap;
+
+
+}
+
+.wrappernews2 .row .column {
+  width: 270px;
+  height: 300px;
+  display: flex;
+  display: inline-block;
+  margin: 1% 0.5%;
+  font-size: 15px;
+  font-weight: 100;
+  line-height: 21px;
+}
+
+.wrappernews1 figcaption p {
+
+  line-height: 21px;
+  font-weight: lighter;
+  font-size: medium;
+  margin: 2% 0;
+
+}
+
+.wrappernews1 figcaption button {
+  cursor: pointer;
+  background-color: rgba(30, 144, 255, 0.4);
+  border: none;
+  width: 100px;
+  height: 25px;
+  border-radius: 3px;
+
+}
+
+.wrappernews1 figcaption .popup-content .row {
+  width: 100%;
+  height: 160vh;
+  padding: 10px 0;
+}
+
+.wrappernews1 figcaption .popup-content .row .column {
+  width: 30%;
+  position: relative;
+  height: 350px;
+  padding: 1px 0;
+  margin: 0px 6px;
+  display: inline-block;
+  vertical-align: top;
+  /* bottom:-1%; */
+  cursor: pointer;
+}
+
+.wrappernews1 figcaption .popup-content .row .column img {
+  width: 100%;
+  height: 350px;
+  border-radius: 7px;
+}
+
+.wrappernews2 .row .column img {
+  width: 100%;
+}
+
+.reveal {
+  position: relative;
+  transform: translateY(100px);
+  opacity: 0;
+  transition: 1s all ease;
+}
+
+.reveal.active {
+  transform: translateY(0);
+  opacity: 1;
+}
+
+/* New CSS for spacing and image height */
+.popup-content img {
+  height: 250px;
+  /* Set image height to 250px */
+}
+
+/* New CSS for hover effect */
+.card img {
+  transition: transform 0.3s ease;
+}
+
+.card:hover img {
+  z-index: 1;
+}
+
+.caption {
+  margin: 7% 0;
+}
+
+.caption a {
+  color: blue;
+}
+
+.popup {
+  position: relative;
+  display: none;
+  position: fixed;
+  z-index: 1;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100vh;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.9);
+}
+
+.popup-content {
+  background-color: whitesmoke;
+  margin: 10px auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+  height: 150vh;
+}
+
+.popup-content img {
+  width: 100px;
+  height: 200px;
+}
+
+.close {
+  color: #aaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: black;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+
+
+/* Responsive adjustments for all screen sizes */
+@media screen and (max-width: 1024px) {
+  .wrappernews1 .row .column {
+    width: 48%;
+    height: auto;
+    padding: 10px;
+  }
+
+  .wrappernews1 .row .column img {
+    height: 350px;
+  }
+
+  .wrappernews2 .row .column {
+    width: 45%;
+    height: auto;
+    margin: 1% 1%;
+  }
+
+  .popup-content {
+    width: 85%;
+    height: auto;
+    max-height: 90vh;
+    overflow-y: auto;
+  }
+
+  .wrappernews1 figcaption .popup-content .row .column {
+    width: 45%;
+    height: 300px;
+    margin: 0 4px;
+  }
+
+  .wrappernews1 figcaption .popup-content .row .column img {
+    height: 300px;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  h2 {
+    font-size: 18px;
+    padding: 15px;
+  }
+
+  .wrappernews1 .row .column {
+    width: 100%;
+    height: auto;
+    padding: 8px;
+  }
+
+  .wrappernews1 .row .column img {
+    height: 300px;
+  }
+
+  .wrappernews2 .row .column {
+    width: 100%;
+    height: auto;
+    margin: 2% 0;
+  }
+
+  .wrappernews1 figcaption p {
+    font-size: small;
+    line-height: 18px;
+  }
+
+  .wrappernews1 figcaption button {
+    width: 80px;
+    height: 22px;
+  }
+
+  .popup-content {
+    width: 95%;
+    height: auto;
+    max-height: 85vh;
+    padding: 15px;
+    margin: 10px auto;
+    overflow-y: auto;
+  }
+
+  .popup-content img {
+    width: 80px;
+    height: 160px;
+  }
+
+  .wrappernews1 figcaption .popup-content .row {
+    height: auto;
+    padding: 5px 0;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+  }
+
+  .wrappernews1 figcaption .popup-content .row .column {
+    width: 48%;
+    /* Ensures only two images per row */
+    height: auto;
+    margin: 5px 0;
+    padding: 0 2px;
+    display: inline-block;
+  }
+
+  .wrappernews1 figcaption .popup-content .row .column img {
+    height: 200px;
+    width: 100%;
+    object-fit: cover;
+    border-radius: 7px;
+  }
+
+  .close {
+    font-size: 24px;
+    padding: 5px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  h2 {
+    font-size: 16px;
+    padding: 10px;
+  }
+
+  .wrappernews1 .row {
+    padding: 10px;
+  }
+
+  .wrappernews1 .row .column {
+    padding: 5px;
+  }
+
+  .wrappernews1 .row .column img {
+    height: 250px;
+  }
+
+  .wrappernews2 .row .column {
+    width: 100%;
+    height: auto;
+  }
+
+  .wrappernews2 .row .column img {
+    height: auto;
+  }
+
+  .popup-content {
+    width: 98%;
+    margin: 5px auto;
+    padding: 10px;
+  }
+
+  .popup-content img {
+    width: 60px;
+    height: 120px;
+  }
+
+  .wrappernews1 figcaption .popup-content .row .column {
+    width: 48%;
+    /* Maintains two images per row */
+    height: auto;
+    margin: 3px 0;
+  }
+
+  .wrappernews1 figcaption .popup-content .row .column img {
+    height: 150px;
+  }
+
+  .close {
+    font-size: 20px;
+  }
+
+  .caption {
+    margin: 5% 0;
+  }
+}
+
+/* Ensure popup remains scrollable on smaller screens */
+@media screen and (max-height: 600px) {
+  .popup {
+    align-items: flex-start;
+    padding-top: 10px;
+  }
+
+  .popup-content {
+    max-height: 80vh;
+    overflow-y: auto;
+  }
+}

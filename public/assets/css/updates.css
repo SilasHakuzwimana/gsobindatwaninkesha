@@ -1,0 +1,30 @@
+/* =========================
+   School Updates Gallery
+========================= */
+
+.update-card {
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  padding: 12px;
+  margin-bottom: 20px;
+  background: #fff;
+  transition: transform 0.2s;
+}
+
+.update-card:hover {
+  transform: scale(1.02);
+}
+
+.update-image {
+  max-width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 5px;
+  margin-bottom: 10px;
+}
+
+.btn-group {
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+}

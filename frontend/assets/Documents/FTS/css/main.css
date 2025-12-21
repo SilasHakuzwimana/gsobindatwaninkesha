@@ -1,0 +1,63 @@
+:root{
+    --mainColor:rgb(39, 36, 36);
+    --secondaryColor:rgb(18, 235, 18);
+    --secondaryColor_hover:limegreen;
+    --accentColor:Whitesmoke;
+    --glassColor2:rgba(50, 205, 50, 0.611);
+    --glassColor:rgba(27, 27, 27, 0.6);
+    --border_color:rgb(52, 55, 53);
+}
+@keyframes slide_down {
+    from{
+        transform: translateY(0);
+        opacity: 1;
+    }
+    to{
+        transform: translateY(90%);
+        opacity: 0;
+    }
+    
+}
+@keyframes slide_down_up {
+    from{
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to{
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    
+}
+@keyframes fade_in {
+    from{
+        transform: scale(0.001);
+        filter:blur(100px);
+        opacity: 0;
+    }
+    to{
+        transform: scale(1);
+        filter:blur(0px);
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    
+}
+@keyframes fade_out {
+    from{
+        transform: scale(1);
+        filter:blur(0px);
+        transform: translateY(0%);
+        opacity: 1;
+    }
+    to{
+        transform: scale(0.001);
+        filter:blur(100px);
+        opacity: 0;
+    }
+    
+}
+@keyframes dropdown{
+    from{height: 0;}
+    to{height: 100%;}
+}
