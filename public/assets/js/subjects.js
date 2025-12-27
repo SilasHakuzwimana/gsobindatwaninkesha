@@ -23,6 +23,28 @@ function initSubjectsJs() {
   const pathwaySelect = document.getElementById("subjectPathway");
   const streamSelect = document.getElementById("subjectStream");
 
+
+  //Helper functions
+
+  const refreshView = () => {
+    const term = searchInput?.value?.toLowerCase() || '';
+    filteredSubjects = allSubjects.filter(s =>
+      (s.subject_name || '').toLowerCase().includes(term) ||
+      (s.subject_code || '').toLowerCase().includes(term)
+    );
+    renderTable();
+  };
+
+  const upsertSubject = (subject) => {
+    const index = allSubjects.findIndex(s => s.subject_id === subject.subject_id);
+    if (index !== -1) {
+      allSubjects[index] = subject; // update
+    } else {
+      allSubjects.unshift(subject); // insert at top
+    }
+    refreshView();
+  };
+
   // -------------------------------
   // Fetch Pathways for dropdown
   // -------------------------------
@@ -30,6 +52,7 @@ function initSubjectsJs() {
     try {
       const res = await makeRequest(`${API_BASE}/pathways`);
       allPathways = res?.data || [];
+
       if (pathwaySelect) {
         pathwaySelect.innerHTML = '<option value="">Select Pathway</option>' +
           allPathways.map(p => `<option value="${p.pathway_id}">${p.pathway_name}</option>`).join('');
@@ -48,8 +71,12 @@ function initSubjectsJs() {
         if (streamSelect) streamSelect.innerHTML = '<option value="">Select Stream</option>';
         return;
       }
-      const res = await makeRequest(`${API_BASE}/pathways/${pathwayId}/streams`);
+      const normalizedId = pathwayId.replace(/-/g, '').toUpperCase();
+      const res = await makeRequest(`${API_BASE}/streams/${normalizedId}`);
       allStreams = res?.data || [];
+      //Debug lines
+      //console.log("All Streams: ", allStreams);
+
       if (streamSelect) {
         streamSelect.innerHTML = '<option value="">Select Stream</option>' +
           allStreams.map(s => `<option value="${s.stream_id}">${s.stream_name}</option>`).join('');
@@ -143,6 +170,9 @@ function initSubjectsJs() {
     try {
       const res = await makeRequest(`${API_BASE}/subjects`);
       allSubjects = res?.data || [];
+
+      //console.log("Response: ", allSubjects);
+
       filteredSubjects = [...allSubjects];
       currentPage = 1;
       renderTable();
@@ -184,15 +214,21 @@ function initSubjectsJs() {
     try {
       const res = await makeRequest(`${API_BASE}/subjects/${id}`);
       const s = res?.data || {};
+
       modalTitle.textContent = "Edit Subject";
       currentEditId = s.subject_id;
       document.getElementById("subjectName").value = s.subject_name || '';
       document.getElementById("subjectCode").value = s.subject_code || '';
       document.getElementById("subjectDescription").value = s.description || '';
+
       await fetchPathways();
       pathwaySelect.value = s.pathway_id || '';
+
       await fetchStreams(s.pathway_id);
-      streamSelect.value = s.stream_id || '';
+      //ensure stream exists before setting
+      setTimeout(() => {
+        streamSelect.value = s.stream_id;
+      }, 0);
       subjectModal.show();
     } catch (err) {
       showToast(`Error loading subject: ${err.message}`, 'error');
@@ -212,7 +248,7 @@ function initSubjectsJs() {
     confirmDeleteBtn.addEventListener("click", async () => {
       if (!deleteTargetId) return;
       try {
-        await makeRequest(`${API_BASE}/subjects/${deleteTargetId}`, "DELETE");
+        await makeRequest(`${API_BASE}/stream-subjects/${deleteTargetId}`, "DELETE");
         showToast("Subject deleted successfully", "success");
         deleteModal.hide();
         removeTableRow(deleteTargetId);
@@ -235,16 +271,20 @@ function initSubjectsJs() {
         subject_name: document.getElementById("subjectName").value.trim(),
         subject_code: document.getElementById("subjectCode").value.trim(),
         description: document.getElementById("subjectDescription").value.trim(),
-        pathway_id: pathwaySelect.value,
         stream_id: streamSelect.value
       };
 
       try {
         if (currentEditId) {
-          await makeRequest(`${API_BASE}/subjects/${currentEditId}`, "PUT", payload);
+          await makeRequest(`${API_BASE}/stream-subjects/${currentEditId}`, "PUT", payload);
           showToast("Subject updated successfully", "success");
         } else {
-          await makeRequest(`${API_BASE}/subjects`, "POST", payload);
+          if (!payload.stream_id) {
+            showToast("Please select a stream", "error");
+            return;
+          }
+
+          await makeRequest(`${API_BASE}/stream-subjects`, "POST", payload);
           showToast("Subject created successfully", "success");
         }
         subjectModal.hide();

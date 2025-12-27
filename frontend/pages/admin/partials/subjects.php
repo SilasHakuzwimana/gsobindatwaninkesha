@@ -38,6 +38,8 @@
             <th>Name</th>
             <th>Code</th>
             <th>Description</th>
+            <th>Pathway</th>
+            <th>Stream Name</th>
             <th>Actions</th>
           </tr>
         </thead>
@@ -63,23 +65,24 @@
             <div class="row g-3">
               <div class="col-md-6">
                 <label for="subjectName" class="form-label modal-label">Subject Name</label>
-                <input type="text" class="form-control" id="subjectName" required>
+                <input type="text" class="form-control" name="subjectName" id="subjectName" required>
               </div>
               <div class="col-md-6">
                 <label for="subjectCode" class="form-label modal-label">Subject Code</label>
-                <input type="text" class="form-control" name="subjectCode" id="subjectCode">
+                <input type="text" class="form-control" name="subjectCode" id="subjectCode" required>
               </div>
               <div class="col-md-6">
                 <label for="subjectPathway" class="form-label modal-label">Pathway</label>
-                <select name="subjectPathway" id="subjectPathway" class="form-select"></select>
+                <select name="subjectPathway" id="subjectPathway" name="subjectPathway" class="form-select"
+                  required></select>
               </div>
               <div class="col-md-6">
                 <label for="subjectStream" class="form-label modal-label">Stream</label>
-                <select id="subjectStream" name="subjectStream" class="form-select"></select>
+                <select id="subjectStream" name="subjectStream" class="form-select" required></select>
               </div>
               <div class="col-12">
                 <label for="subjectDescription" class="form-label modal-label">Description</label>
-                <textarea class="form-control" iname="subjectDescription" d="subjectDescription" rows="3"></textarea>
+                <textarea class="form-control" id="subjectDescription" name="subjectDescription" rows="3"></textarea>
               </div>
             </div>
           </div>

@@ -31,6 +31,13 @@ class UserActivity extends BaseModel
     }
   }
 
+  /** 🔹 Dashboard: total subscribers */
+  public static function countMessages(): int
+  {
+    return (int) self::query(
+      "SELECT COUNT(*) FROM messages"
+    )->fetchColumn();
+  }
   /** 🔹 Save Activity */
   public function save(): bool
   {
@@ -172,10 +179,13 @@ class UserActivity extends BaseModel
 
 
   //logging
-
-  function logActivity(string $userId, string $type, ?string $description = null)
-  {
-    $activity = new \Models\UserActivity([
+  /** 🔹 Centralized activity logger */
+  public static function log(
+    string $userId,
+    string $type,
+    ?string $description = null
+  ): bool {
+    $activity = new self([
       'user_id' => $userId,
       'activity_type' => $type,
       'activity_description' => $description,
@@ -184,5 +194,26 @@ class UserActivity extends BaseModel
     ]);
 
     return $activity->save();
+  }
+
+  /** 🔹 Recent activities for dashboard */
+  public static function recent(int $limit = 5): array
+  {
+    $offset = 0;
+    $limit = (int) $limit;
+    $offset = (int) $offset;
+
+    $sql = "SELECT 
+                HEX(activity_id) AS activity_id,
+                activity_type,
+                activity_description,
+                ip_address,
+                created_at
+            FROM " . self::$table . "
+            ORDER BY created_at DESC
+            LIMIT $limit";
+
+    return self::query($sql)
+      ->fetchAll(PDO::FETCH_ASSOC);
   }
 }

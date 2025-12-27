@@ -15,6 +15,7 @@ class Pathway extends BaseModel
   public string $pathway_id;
   public string $pathway_name;
   public ?string $description;
+  public ?string $created_at;
   public ?string $created_by;
 
   public function __construct(array $data)
@@ -22,14 +23,43 @@ class Pathway extends BaseModel
     $this->generateId('pathway_id');
     $this->pathway_name = $data['pathway_name'] ?? '';
     $this->description = $data['description'] ?? null;
+    $this->created_at = $data['created_at'] ?? null;
     $this->created_by = $data['created_by'] ?? null;
   }
 
+  /**
+   * Get pathway by ID
+   */
   public static function getById(string $idBinary): ?array
   {
     return self::findById($idBinary ?? '');
   }
 
+  /**
+   * Total pathways count
+   */
+  public static function countAll(): int
+  {
+    $sql = "SELECT COUNT(*) FROM pathways";
+    return (int) self::query($sql)->fetchColumn();
+  }
+
+  public static function countStreams(): int
+  {
+    $stmt = self::db()->query("SELECT COUNT(*) FROM pathways_streams");
+    return (int) $stmt->fetchColumn();
+  }
+
+  public static function countSubjects(): int
+  {
+    $stmt = self::db()->query("SELECT COUNT(*) FROM pathways_stream_subjects");
+    return (int) $stmt->fetchColumn();
+  }
+
+
+  /**
+   * Get all pathways
+   */
   public static function getAll(): array
   {
     return self::all();

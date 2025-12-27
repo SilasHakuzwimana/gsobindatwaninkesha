@@ -69,6 +69,9 @@ document.addEventListener('DOMContentLoaded', function () {
 
         // Initialize page-specific JS
         switch (page) {
+          case 'overview':
+            if (typeof initOverview === 'function') initOverview();
+            break;
           case 'users':
             if (typeof initUsersJs === 'function') initUsersJs();
             break;

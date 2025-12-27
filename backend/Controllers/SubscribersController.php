@@ -15,7 +15,7 @@ class SubscribersController
   public function __construct(PDO $conn)
   {
     $this->conn = $conn;
-    $this->subscriberModel = new SubscribersModel($conn);
+    $this->subscriberModel = new SubscribersModel();
     $this->emailService = new EmailService();
   }
 
@@ -53,7 +53,7 @@ class SubscribersController
       return;
     }
 
-    $subscribers = $this->subscriberModel->getAllSubscribers();
+    $subscribers = $this->subscriberModel->all();
     $results = [];
 
     foreach ($subscribers as $subscriber) {

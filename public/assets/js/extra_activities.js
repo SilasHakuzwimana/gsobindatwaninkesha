@@ -48,13 +48,14 @@ function initActivitiesGallery() {
     if (galleryListEl) galleryListEl.innerHTML = `<div class="col-12 text-center">Loading...</div>`;
     try {
       const res = await fetch('/api/gallery/extra_curricular_activities_gallery');
-      const data = await res.json();
-      if (data.status === 'success') {
-        galleryItems = data.data || [];
-      } else {
-        galleryItems = [];
-        console.error('Failed to load gallery');
-      }
+      //const data = await res.json();
+      galleryItems = res?.data || [];
+      // if (res.status === 'success') {
+      //   galleryItems = res?.data || [];
+      // } else {
+      //   galleryItems = [];
+      //   console.error('Failed to load gallery');
+      // }
       renderGallery();
     } catch (err) {
       galleryItems = [];
@@ -132,4 +133,4 @@ function initActivitiesGallery() {
 }
 
 // Initialize on DOM ready
-document.addEventListener("DOMContentLoaded", () => initActivitiesGallery());
+// document.addEventListener("DOMContentLoaded", () => initActivitiesGallery());

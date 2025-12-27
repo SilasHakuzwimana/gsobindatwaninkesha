@@ -16,9 +16,6 @@ if (($decoded->role ?? '') !== 'admin') {
   header('Location: /403');
   exit;
 }
-
-$adminName = htmlspecialchars($decoded->fullName ?? 'Admin User');
-$adminEmail = htmlspecialchars($decoded->email ?? 'admin@gsob.rw');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -38,104 +35,104 @@ $adminEmail = htmlspecialchars($decoded->email ?? 'admin@gsob.rw');
   <link rel="stylesheet" type="text/css" href="/assets/css/admin.css">
 
   <style>
-  body {
-    margin: 0;
-    height: 100vh;
-    overflow: hidden;
-    display: flex;
-    flex-direction: column;
-  }
-
-  /* ===== Dashboard Layout ===== */
-  .dashboard-container {
-    display: flex;
-    flex: 1;
-    min-height: 0;
-    overflow: hidden;
-    /* position: relative; */
-  }
-
-  /* ===== Sidebar ===== */
-  #sidebar {
-    width: 20%;
-    flex-shrink: 0;
-    display: flex;
-    flex-direction: column;
-    transition: transform 0.3s ease-in-out;
-    /* z-index: 1050; */
-    overflow-y: auto;
-  }
-
-  #sidebar.collapsed {
-    transform: translateX(-100%);
-  }
-
-  #sidebar .sidebar-header {
-    font-weight: bold;
-    padding: 16px;
-  }
-
-  .sidebar-menu {
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 0;
-  }
-
-  .menu-item {
-    padding: 12px 18px;
-    display: flex;
-    align-items: center;
-    color: #333;
-    text-decoration: none;
-    font-size: 15px;
-    transition: 0.3s;
-  }
-
-  .menu-item i {
-    margin-right: 10px;
-    font-size: 16px;
-  }
-
-  .menu-item:hover,
-  .menu-item.active {
-    color: #0d6efd;
-  }
-
-  .sidebar-footer {
-    padding: 12px 18px;
-  }
-
-  /* ===== Main Content ===== */
-  .main-content {
-    flex-grow: 1;
-    overflow-y: auto;
-    width: 80%;
-    padding: 20px;
-    transition: margin-left 0.3s ease-in-out;
-  }
-
-  /* ===== Sidebar Toggle Button ===== */
-  #sidebarToggle {
-    position: fixed;
-    top: 15px;
-    left: 15px;
-    z-index: 1100;
-  }
-
-  /* ===== Responsive ===== */
-  @media (min-width: 992px) {
-    #sidebarToggle {
-      display: none;
+    body {
+      margin: 0;
+      height: 100vh;
+      overflow: hidden;
+      display: flex;
+      flex-direction: column;
     }
 
+    /* ===== Dashboard Layout ===== */
+    .dashboard-container {
+      display: flex;
+      flex: 1;
+      min-height: 0;
+      overflow: hidden;
+      /* position: relative; */
+    }
+
+    /* ===== Sidebar ===== */
     #sidebar {
-      transform: none !important;
+      width: 20%;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      transition: transform 0.3s ease-in-out;
+      /* z-index: 1050; */
+      overflow-y: auto;
     }
-  }
 
-  /* ===== Spinner ===== */
-  /* #spinner {
+    #sidebar.collapsed {
+      transform: translateX(-100%);
+    }
+
+    #sidebar .sidebar-header {
+      font-weight: bold;
+      padding: 16px;
+    }
+
+    .sidebar-menu {
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      padding: 0;
+    }
+
+    .menu-item {
+      padding: 12px 18px;
+      display: flex;
+      align-items: center;
+      color: #333;
+      text-decoration: none;
+      font-size: 15px;
+      transition: 0.3s;
+    }
+
+    .menu-item i {
+      margin-right: 10px;
+      font-size: 16px;
+    }
+
+    .menu-item:hover,
+    .menu-item.active {
+      color: #0d6efd;
+    }
+
+    .sidebar-footer {
+      padding: 12px 18px;
+    }
+
+    /* ===== Main Content ===== */
+    .main-content {
+      flex-grow: 1;
+      overflow-y: auto;
+      width: 80%;
+      padding: 20px;
+      transition: margin-left 0.3s ease-in-out;
+    }
+
+    /* ===== Sidebar Toggle Button ===== */
+    #sidebarToggle {
+      position: fixed;
+      top: 15px;
+      left: 15px;
+      z-index: 1100;
+    }
+
+    /* ===== Responsive ===== */
+    @media (min-width: 992px) {
+      #sidebarToggle {
+        display: none;
+      }
+
+      #sidebar {
+        transform: none !important;
+      }
+    }
+
+    /* ===== Spinner ===== */
+    /* #spinner {
     position: fixed;
     top: 60px;
     left: 240px;
@@ -265,29 +262,30 @@ $adminEmail = htmlspecialchars($decoded->email ?? 'admin@gsob.rw');
   <script src="/assets/js/pathways.js"></script>
   <script src="/assets/js/streams.js"></script>
   <script src="/assets/js/subjects.js"></script>
+  <script src="/assets/js/overview.js"></script>
 
   <script>
-  const sidebar = document.getElementById('sidebar');
-  const toggleBtn = document.getElementById('sidebarToggle');
+    const sidebar = document.getElementById('sidebar');
+    const toggleBtn = document.getElementById('sidebarToggle');
 
-  // Toggle sidebar visibility
-  toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-  });
+    // Toggle sidebar visibility
+    toggleBtn.addEventListener('click', () => {
+      sidebar.classList.toggle('collapsed');
+    });
 
-  // Auto-hide sidebar when clicking outside (on small screens)
-  document.addEventListener('click', (e) => {
-    if (window.innerWidth < 992 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-      sidebar.classList.add('collapsed');
-    }
-  });
+    // Auto-hide sidebar when clicking outside (on small screens)
+    document.addEventListener('click', (e) => {
+      if (window.innerWidth < 992 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+        sidebar.classList.add('collapsed');
+      }
+    });
 
-  // Ensure sidebar resets correctly when resizing
-  window.addEventListener('resize', () => {
-    if (window.innerWidth >= 992) {
-      sidebar.classList.remove('collapsed');
-    }
-  });
+    // Ensure sidebar resets correctly when resizing
+    window.addEventListener('resize', () => {
+      if (window.innerWidth >= 992) {
+        sidebar.classList.remove('collapsed');
+      }
+    });
   </script>
 
 </body>

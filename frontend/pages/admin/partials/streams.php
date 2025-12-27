@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link href="/assets/css/pathway_subject.css" rel="stylesheet">
   <style>
-  /* Optional custom styling */
-  .table-wrapper {
-    overflow-x: auto;
-  }
+    /* Optional custom styling */
+    .table-wrapper {
+      overflow-x: auto;
+    }
 
-  .modal-label {
-    font-weight: bold;
-  }
+    .modal-label {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -30,7 +30,7 @@
 
   <div class="mb-3 row">
     <div class="col-md-6">
-      <select id="selectPathwayForStreams" class="form-select">
+      <select id="streamSelectPathway" class="form-select" required>
         <option value="">Select Pathway</option>
       </select>
     </div>
@@ -40,7 +40,7 @@
     <table class="table table-hover table-bordered">
       <thead class="table-light">
         <tr>
-          <th>Name</th>
+          <th>Stream Name</th>
           <th>Pathway</th>
           <th>Description</th>
           <th>Actions</th>
@@ -109,14 +109,14 @@
 </div>
 
 <script>
-const API_BASE = '/api'; // adjust according to your backend
+  const API_BASE = '/api'; // adjust according to your backend
 </script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 <script src="/assets/js/helpers.js"></script> <!-- makeRequest & showToast -->
 <script src="/assets/js/streams.js"></script>
-<script>
+<!-- <script>
 document.addEventListener("DOMContentLoaded", initStreamsJs);
-</script>
+</script> -->
 </body>
 
 </html>

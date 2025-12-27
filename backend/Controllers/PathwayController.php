@@ -34,29 +34,49 @@ class PathwayController extends BaseController
   // -------------------------
   public function store(): void
   {
-
-    //Get logged in user
-    $currentUser = AuthMiddleware::requireAuth();
-
+    // Step 1: Get logged-in user
     $currentUser = AuthMiddleware::requireAuth();
     $userId = $currentUser['user_id'] ?? $currentUser['sub'] ?? null;
 
     if (!$userId) {
-      $this->json(['status' => 'error', 'message' => 'Logged in user ID not found'], 500);
+      $this->json(['status' => 'error', 'message' => 'Logged in user not found'], 401);
       return;
     }
 
-    $data = $this->getRequestData();
+    // Step 2: Normalize user ID to binary
+    try {
+      if (strlen($userId) === 36) {
+        $userIdBinary = UUIDService::toBinary($userId); // UUID string
+      } elseif (strlen($userId) === 32 && ctype_xdigit($userId)) {
+        $userIdBinary = hex2bin($userId); // hex string
+      } elseif (strlen($userId) === 16) {
+        $userIdBinary = $userId; // already binary
+      } else {
+        $this->json(['status' => 'error', 'message' => 'Invalid user_id format'], 400);
+        return;
+      }
+    } catch (\Exception $e) {
+      $this->json(['status' => 'error', 'message' => 'Invalid user_id: ' . $e->getMessage()], 400);
+      return;
+    }
 
+    // Step 3: Ensure user exists in DB to satisfy FK
+    if (!\Models\User::findById($userIdBinary)) {
+      $this->json(['status' => 'error', 'message' => 'Logged in user does not exist in database'], 401);
+      return;
+    }
+
+    // Step 4: Get request data
+    $data = $this->getRequestData();
     if (empty($data['pathway_name'])) {
       $this->json(['status' => 'error', 'message' => 'Pathway name is required'], 400);
       return;
     }
 
-    // Assign logged-in user's binary UUID
-    $data['created_by'] = UUIDService::toBinary($currentUser['user_id']);
+    // Step 5: Assign FK created_by
+    $data['created_by'] = $userIdBinary;
 
-    //check if pathway already exists
+    // Step 6: Check for duplicate pathway
     $existingPathways = Pathway::getAll();
     foreach ($existingPathways as $existingPathway) {
       if ($existingPathway['pathway_name'] === $data['pathway_name']) {
@@ -65,16 +85,38 @@ class PathwayController extends BaseController
       }
     }
 
+    // Step 7: Generate pathway UUID if not provided
+    if (empty($data['pathway_id'])) {
+      $data['pathway_id'] = UUIDService::generateBinary();
+    }
+
+    // Step 8: Create pathway
     $pathway = new Pathway($data);
     $saved = $pathway->save();
 
-
-
     if ($saved) {
-      $this->json(['status' => 'success', 'message' => 'Pathway created successfully'], 201);
-    } else {
-      $this->json(['status' => 'error', 'message' => 'Failed to create pathway'], 500);
+      $createdPathway = Pathway::getById($pathway->pathway_id);
+      $source = $createdPathway ?? $pathway;
+
+      $this->json([
+        'status' => 'success',
+        'message' => 'Pathway created successfully',
+        'data' => [
+          'pathway_id'   => isset($source->pathway_id) && strlen($source->pathway_id) === 16
+            ? UUIDService::fromBinary($source->pathway_id)
+            : null,
+          'pathway_name' => $source->pathway_name ?? null,
+          'description'  => $source->description ?? null,
+          'created_at'   => $source->created_at ?? null,
+          'created_by'   => isset($source->created_by) && strlen($source->created_by) === 16
+            ? UUIDService::fromBinary($source->created_by)
+            : null,
+        ]
+      ], 201);
+      return;
     }
+
+    $this->json(['status' => 'error', 'message' => 'Failed to create pathway'], 500);
   }
 
   public function show(string $id): void
@@ -164,13 +206,15 @@ class PathwayController extends BaseController
 
     // Step 7: Send response
     if ($updated) {
+      $updatedPathway = Pathway::getById($binaryId);
       $this->json([
         'status' => 'success',
         'message' => 'Pathway updated successfully',
         'data' => [
           'pathway_id'   => $binaryId !== null ? UUIDService::fromBinary($binaryId) : null,
-          'pathway_name' => $mergedData['pathway_name'],
-          'description'  => $mergedData['description']
+          'pathway_name' => $updatedPathway['pathway_name'],
+          'description'  => $updatedPathway['description'],
+          'created_at' => $updatedPathway['created_at'],
         ]
       ], 200);
     } else {
@@ -193,7 +237,13 @@ class PathwayController extends BaseController
     $deleted = Pathway::deletePathway($binaryId);
 
     if ($deleted) {
-      $this->json(['status' => 'success', 'message' => 'Pathway deleted successfully'], 200);
+      $this->json([
+        'status' => 'success',
+        'message' => 'Pathway deleted successfully',
+        'data' => [
+          'pathway_id' => $id
+        ]
+      ], 200);
     } else {
       $this->json(['status' => 'error', 'message' => 'Failed to delete pathway'], 500);
     }

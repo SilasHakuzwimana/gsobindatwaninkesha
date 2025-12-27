@@ -151,9 +151,9 @@ function initPathwaysJs() {
     confirmDeleteBtn.addEventListener("click", async () => {
       if (!deleteTargetId) return;
       try {
-        await makeRequest(`${API_BASE}/pathways/${deleteTargetId}`, "DELETE");
+        const res = await makeRequest(`${API_BASE}/pathways/${deleteTargetId}`, "DELETE");
         showToast("Pathway deleted successfully", "success");
-        removeTableRow(deleteTargetId);
+        removeTableRow(res.data.pathway_id);
         deleteModal.hide();
       } catch (err) {
         showToast(`Error deleting pathway: ${err.message}`, "error");
@@ -199,15 +199,31 @@ function initPathwaysJs() {
   // Helpers: Update & Remove rows
   // -------------------------------
   const updateTableRow = (updatedPathway) => {
-    const row = document.querySelector(`.editBtn[data-id="${updatedPathway.pathway_id}"]`)?.closest('tr');
-    if (!row) return;
-    row.children[0].textContent = updatedPathway.pathway_name || '—';
-    row.children[1].textContent = updatedPathway.description || '—';
-    row.children[2].textContent = updatedPathway.created_at ? new Date(updatedPathway.created_at).toLocaleString() : '—';
+    const index = allPathways.findIndex(p => p.pathway_id === updatedPathway.pathway_id);
+    if (index === -1) return;
 
-    // Update local arrays
-    allPathways = allPathways.map(p => p.pathway_id === updatedPathway.pathway_id ? updatedPathway : p);
-    filteredPathways = filteredPathways.map(p => p.pathway_id === updatedPathway.pathway_id ? updatedPathway : p);
+    // Preserve created_at if backend didn’t return it
+    const merged = {
+      ...allPathways[index],
+      ...updatedPathway,
+      created_at: updatedPathway.created_at || allPathways[index].created_at
+    };
+
+    // Update DOM
+    const row = document.querySelector(`.editBtn[data-id="${merged.pathway_id}"]`)?.closest('tr');
+    if (row) {
+      row.children[0].textContent = merged.pathway_name || '—';
+      row.children[1].textContent = merged.description || '—';
+      row.children[2].textContent = merged.created_at
+        ? new Date(merged.created_at).toLocaleString()
+        : '—';
+    }
+
+    // Update local state
+    allPathways[index] = merged;
+    filteredPathways = filteredPathways.map(p =>
+      p.pathway_id === merged.pathway_id ? merged : p
+    );
   };
 
   const removeTableRow = (id) => {

@@ -4,10 +4,7 @@ require_once __DIR__ . '/../../../../backend/Services/AuthService.php';
 
 use Services\AuthService;
 
-// Get JWT token (assuming stored in cookie)
 $token = $_COOKIE['auth_token'] ?? '';
-
-// Verify token
 $decoded = AuthService::verify($token);
 
 if (!$decoded) {
@@ -15,16 +12,35 @@ if (!$decoded) {
   exit;
 }
 
-if ($decoded->role !== 'admin') {
-  header('HTTP/1.1 403 Forbidden');
-  echo "Access denied: Admins only.";
+$userIdHex = $decoded->sub ?? null;
+if (!$userIdHex) {
+  header('Location: /login');
+  exit;
+}
+$userId = hex2bin($userIdHex);
+
+// Fetch latest info from DB
+$pdo = \Config\Database::getConnection();
+$stmt = $pdo->prepare("SELECT fullName, email, role FROM users WHERE user_id = ?");
+$stmt->execute([$userId]);
+$user = $stmt->fetch(PDO::FETCH_ASSOC);
+
+// Role check
+$roleCheck = $user['role'] ?? $decoded->role ?? 'admin';
+if ($roleCheck !== 'admin') {
+  header('Location: /403');
   exit;
 }
 
-// Get admin user info
-$adminName = $decoded->fullName ?? 'Admin User';
-$adminEmail = $decoded->email ?? 'admin@gsob.rw';
+//Capitalize first character
+$role = ucfirst($roleCheck);
+
+// Safe display values
+$adminName  = htmlspecialchars($user['fullName'] ?? $decoded->fullName ?? 'Admin User');
+$adminEmail = htmlspecialchars($user['email'] ?? $decoded->email ?? 'admin@gsob.rw');
+$role       = htmlspecialchars($roleCheck);
 ?>
+
 <!-- Bootstrap CSS -->
 <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
 <!-- Font Awesome -->
@@ -52,9 +68,9 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
       <div class="stat-content">
         <div class="stat-info">
           <p>Total Users</p>
-          <h3 id="users">2,345</h3>
+          <h3 id="usersCount"></h3>
           <div class="stat-change text-success">
-            <i class="fas fa-arrow-up"></i> +12% from last month
+            <i class="fas fa-arrow-up"></i>
           </div>
         </div>
         <div class="stat-icon" style="background: #dbeafe; color: #2563eb;">
@@ -67,9 +83,9 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
       <div class="stat-content">
         <div class="stat-info">
           <p>Pathways</p>
-          <h3>8</h3>
+          <h3 id="pathways"></h3>
           <div class="stat-change text-success">
-            <i class="fas fa-arrow-up"></i> +2 new pathways
+            <i class="fas fa-arrow-up"></i>
           </div>
         </div>
         <div class="stat-icon" style="background: #dcfce7; color: #10b981;">
@@ -82,9 +98,9 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
       <div class="stat-content">
         <div class="stat-info">
           <p>Documents</p>
-          <h3>156</h3>
+          <h3 id="documents"></h3>
           <div class="stat-change text-success">
-            <i class="fas fa-arrow-up"></i> +18 this week
+            <i class="fas fa-arrow-up"></i>
           </div>
         </div>
         <div class="stat-icon" style="background: #f3e8ff; color: #7c3aed;">
@@ -97,9 +113,9 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
       <div class="stat-content">
         <div class="stat-info">
           <p>Gallery Items</p>
-          <h3>892</h3>
+          <h3 id="gallery"></h3>
           <div class="stat-change text-success">
-            <i class="fas fa-arrow-up"></i> +45 this month
+            <i class="fas fa-arrow-up"></i>
           </div>
         </div>
         <div class="stat-icon" style="background: #ffedd5; color: #f59e0b;">
@@ -117,71 +133,8 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
       </h3>
       <a href="#" class="text-decoration-none">View All</a>
     </div>
-    <div>
-      <div class="activity-item">
-        <div class="activity-icon" style="background: #dbeafe; color: #2563eb;">
-          <i class="fas fa-file-upload"></i>
-        </div>
-        <div class="activity-details">
-          <div>
-            <span class="activity-user">John Doe</span>
-            <span class="activity-action">uploaded a document</span>
-          </div>
-          <div class="activity-time">2 minutes ago</div>
-        </div>
-      </div>
-
-      <div class="activity-item">
-        <div class="activity-icon" style="background: #dcfce7; color: #10b981;">
-          <i class="fas fa-user-plus"></i>
-        </div>
-        <div class="activity-details">
-          <div>
-            <span class="activity-user">Jane Smith</span>
-            <span class="activity-action">registered as student</span>
-          </div>
-          <div class="activity-time">15 minutes ago</div>
-        </div>
-      </div>
-
-      <div class="activity-item">
-        <div class="activity-icon" style="background: #f3e8ff; color: #7c3aed;">
-          <i class="fas fa-route"></i>
-        </div>
-        <div class="activity-details">
-          <div>
-            <span class="activity-user">Admin</span>
-            <span class="activity-action">created new pathway</span>
-          </div>
-          <div class="activity-time">1 hour ago</div>
-        </div>
-      </div>
-
-      <div class="activity-item">
-        <div class="activity-icon" style="background: #ffedd5; color: #f59e0b;">
-          <i class="fas fa-images"></i>
-        </div>
-        <div class="activity-details">
-          <div>
-            <span class="activity-user">Mike Johnson</span>
-            <span class="activity-action">updated gallery</span>
-          </div>
-          <div class="activity-time">2 hours ago</div>
-        </div>
-      </div>
-
-      <div class="activity-item">
-        <div class="activity-icon" style="background: #fce7f3; color: #ec4899;">
-          <i class="fas fa-user-graduate"></i>
-        </div>
-        <div class="activity-details">
-          <div>
-            <span class="activity-user">Sarah Williams</span>
-            <span class="activity-action">joined as alumni</span>
-          </div>
-          <div class="activity-time">3 hours ago</div>
-        </div>
-      </div>
+    <div class="activity-items-container">
+      <!-- JS will populate activity items here -->
     </div>
   </div>
 
@@ -236,104 +189,97 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
     </div>
   </div>
 
-  <!-- System Stats -->
-  <div class="row mt-4">
-    <div class="col-lg-6 mb-4">
-      <div class="card-custom">
-        <div class="card-header-custom">
-          <h3 class="card-title-custom">
-            <i class="fas fa-users-cog me-2"></i> User Statistics
-          </h3>
-        </div>
-        <div class="p-4">
-          <div class="mb-3">
-            <div class="d-flex justify-content-between mb-2">
-              <span>Students</span>
-              <span class="fw-bold">1,856 (79%)</span>
-            </div>
-            <div class="progress" style="height: 10px;">
-              <div class="progress-bar" style="width: 79%; background: #2563eb;"></div>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <div class="d-flex justify-content-between mb-2">
-              <span>Teachers</span>
-              <span class="fw-bold">245 (10%)</span>
-            </div>
-            <div class="progress" style="height: 10px;">
-              <div class="progress-bar" style="width: 10%; background: #10b981;"></div>
-            </div>
-          </div>
-
-          <div class="mb-3">
-            <div class="d-flex justify-content-between mb-2">
-              <span>Alumni</span>
-              <span class="fw-bold">189 (8%)</span>
-            </div>
-            <div class="progress" style="height: 10px;">
-              <div class="progress-bar" style="width: 8%; background: #7c3aed;"></div>
-            </div>
-          </div>
-
-          <div>
-            <div class="d-flex justify-content-between mb-2">
-              <span>Guests</span>
-              <span class="fw-bold">55 (3%)</span>
-            </div>
-            <div class="progress" style="height: 10px;">
-              <div class="progress-bar" style="width: 3%; background: #f59e0b;"></div>
-            </div>
-          </div>
-        </div>
-      </div>
+  <!-- User Statistics -->
+  <div class="mb-3">
+    <div class="d-flex justify-content-between mb-2">
+      <span>Admins</span>
+      <span id="admins-count" class="fw-bold">0</span>
     </div>
-
-    <div class="col-lg-6 mb-4">
-      <div class="card-custom">
-        <div class="card-header-custom">
-          <h3 class="card-title-custom">
-            <i class="fas fa-chart-line me-2"></i> Content Overview
-          </h3>
-        </div>
-        <div class="p-4">
-          <div class="d-flex justify-content-between align-items-center mb-3 pb-3"
-            style="border-bottom: 1px solid #e2e8f0;">
-            <div>
-              <i class="fas fa-book me-2" style="color: #2563eb;"></i>
-              <span>Total Subjects</span>
-            </div>
-            <span class="fw-bold">45</span>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center mb-3 pb-3"
-            style="border-bottom: 1px solid #e2e8f0;">
-            <div>
-              <i class="fas fa-stream me-2" style="color: #10b981;"></i>
-              <span>Active Streams</span>
-            </div>
-            <span class="fw-bold">12</span>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center mb-3 pb-3"
-            style="border-bottom: 1px solid #e2e8f0;">
-            <div>
-              <i class="fas fa-file-pdf me-2" style="color: #7c3aed;"></i>
-              <span>Published Documents</span>
-            </div>
-            <span class="fw-bold">156</span>
-          </div>
-
-          <div class="d-flex justify-content-between align-items-center">
-            <div>
-              <i class="fas fa-envelope-open-text me-2" style="color: #f59e0b;"></i>
-              <span>Newsletter Subscribers</span>
-            </div>
-            <span class="fw-bold">1,234</span>
-          </div>
-        </div>
-      </div>
+    <div class="progress" style="height: 10px;">
+      <div id="admins-bar" class="progress-bar" style="width: 0%; background: #2563eb;"></div>
     </div>
+  </div>
+  <div class="mb-3">
+    <div class="d-flex justify-content-between mb-2">
+      <span>Students</span>
+      <span id="students-count" class="fw-bold">0</span>
+    </div>
+    <div class="progress" style="height: 10px;">
+      <div id="students-bar" class="progress-bar" style="width: 0%; background: #2563eb;"></div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="d-flex justify-content-between mb-2">
+      <span>Teachers</span>
+      <span id="teachers-count" class="fw-bold">0</span>
+    </div>
+    <div class="progress" style="height: 10px;">
+      <div id="teachers-bar" class="progress-bar" style="width: 0%; background: #10b981;"></div>
+    </div>
+  </div>
+
+  <div class="mb-3">
+    <div class="d-flex justify-content-between mb-2">
+      <span>Alumni</span>
+      <span id="alumni-count" class="fw-bold">0</span>
+    </div>
+    <div class="progress" style="height: 10px;">
+      <div id="alumni-bar" class="progress-bar" style="width: 0%; background: #7c3aed;"></div>
+    </div>
+  </div>
+
+  <div>
+    <div class="d-flex justify-content-between mb-2">
+      <span>Guests</span>
+      <span id="guests-count" class="fw-bold">0</span>
+    </div>
+    <div class="progress" style="height: 10px;">
+      <div id="guests-bar" class="progress-bar" style="width: 0%; background: #f59e0b;"></div>
+    </div>
+  </div>
+
+  <!-- Content Overview -->
+  <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+    <div>
+      <i class="fas fa-book me-2" style="color: #2563eb;"></i>
+      <span>Total Subjects</span>
+    </div>
+    <span id="total-subjects" class="fw-bold">0</span>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+    <div>
+      <i class="fas fa-stream me-2" style="color: #10b981;"></i>
+      <span>Active Streams</span>
+    </div>
+    <span id="active-streams" class="fw-bold">0</span>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+    <div>
+      <i class="fas fa-file-pdf me-2" style="color: #7c3aed;"></i>
+      <span>Published Documents</span>
+    </div>
+    <span id="published-docs" class="fw-bold">0</span>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-3 pb-3" style="border-bottom: 1px solid #e2e8f0;">
+    <div>
+      <i class="fas fa-envelope me-2" style="color: #7c3aed;"></i>
+      <span>Messages</span>
+    </div>
+    <span id="messages" class="fw-bold">0</span>
+  </div>
+
+  <div class="d-flex justify-content-between align-items-center mb-5"
+    style="border-bottom: 1px solid #e2e8f0; padding-bottom: 2px;">
+
+    <div>
+      <i class="fas fa-envelope-open-text me-2" style="color: #f59e0b;"></i>
+      <span>Newsletter Subscribers</span>
+    </div>
+    <span id="newsletter-subs" class="fw-bold">0</span>
   </div>
 </div>
 </div>
@@ -348,3 +294,7 @@ $adminEmail = $decoded->email ?? 'admin@gsob.rw';
 <script src="/assets/js/dash.js" type="text/javascript"></script>
 <script src="/assets/js/dashboard.js" type="text/javascript"></script>
 <script src="/assets/js/ajax-handler.js" type="text/javascript"></script>
+<!-- <script src="/assets/js/overview.js" type="text/javascript"></script> -->
+<!-- <script>
+document.addEventListener("DOMContentLoaded", initOverview);
+</script> -->

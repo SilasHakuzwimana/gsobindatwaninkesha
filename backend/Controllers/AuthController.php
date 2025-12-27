@@ -167,14 +167,17 @@ class AuthController extends BaseController
 
 
     // Set secure, HTTP-only cookie
-    setcookie('auth_token', $jwtToken, [
-      'expires' => time() + AuthService::getJwtExpirationTime(),
-      'path' => '/',
-      'domain' => '',
-      'secure' => true,
-      'httponly' => true,
-      'samesite' => 'Strict'
-    ]);
+    setcookie(
+      'auth_token',
+      $jwtToken,
+      [
+        'expires'  => time() + AuthService::getJwtExpirationTime(),
+        'path'     => '/',
+        'secure'   => !empty($_SERVER['HTTPS']),
+        'httponly' => true,
+        'samesite' => 'Lax',
+      ]
+    );
 
     return $this->json([
       'success' => true,
@@ -212,9 +215,9 @@ class AuthController extends BaseController
       'expires' => time() - 3600,
       'path' => '/',
       'domain' => '',
-      'secure' => true,
+      'secure' => !empty($_SERVER['HTTPS']),
       'httponly' => true,
-      'samesite' => 'Strict'
+      'samesite' => 'Lax'
     ]);
 
     // Return JSON response
@@ -319,9 +322,9 @@ class AuthController extends BaseController
       'expires' => time() - 3600,
       'path' => '/',
       'domain' => '',
-      'secure' => true,
+      'secure' => !empty($_SERVER['HTTPS']),
       'httponly' => true,
-      'samesite' => 'Strict'
+      'samesite' => 'Lax'
     ]);
 
     // Clear session safely

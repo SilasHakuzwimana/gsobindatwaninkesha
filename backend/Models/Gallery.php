@@ -123,6 +123,16 @@ class Gallery extends BaseModel
     return self::findById($this->id);
   }
 
+
+  /**
+   * Total gallery count
+   */
+  public static function countAll(): int
+  {
+    $sql = "SELECT COUNT(*) FROM school_gallery";
+    return (int) self::query($sql)->fetchColumn();
+  }
+
   public static function findById(string $binaryId): ?array
   {
     $columns = self::$tableColumns;

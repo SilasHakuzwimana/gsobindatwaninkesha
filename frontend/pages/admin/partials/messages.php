@@ -18,8 +18,9 @@
     <div id="messages-list">
       <p>Loading messages...</p>
     </div>
-    <nav aria-label="Messages Pagination">
-      <ul id="pagination" class="pagination justify-content-center mt-3 mb-5"></ul>
+    <nav aria-label="Messages Pagination" class="mb-5">
+      <ul id=" pagination" class="pagination justify-content-center mt-3">
+      </ul>
     </nav>
 
   </div>

@@ -8,14 +8,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
   <link href="/assets/css/pathway_subject.css" rel="stylesheet">
   <style>
-  /* Optional custom styling */
-  .table-wrapper {
-    overflow-x: auto;
-  }
+    /* Optional custom styling */
+    .table-wrapper {
+      overflow-x: auto;
+    }
 
-  .modal-label {
-    font-weight: bold;
-  }
+    .modal-label {
+      font-weight: bold;
+    }
   </style>
 </head>
 
@@ -32,7 +32,7 @@
       </div>
     </div>
 
-    <div class="table-wrapper">
+    <div class="table-wrapper mb-5">
       <table class="table table-hover table-bordered">
         <thead class="table-light">
           <tr>
@@ -99,13 +99,13 @@
   </div>
 
   <script>
-  const API_BASE = '/api'; // adjust according to your backend
+    const API_BASE = '/api'; // adjust according to your backend
   </script>
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script src="/assets/js/helpers.js"></script> <!-- makeRequest & showToast -->
   <script src="/assets/js/pathways.js"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", initPathwaysJs);
+    document.addEventListener("DOMContentLoaded", initPathwaysJs);
   </script>
 </body>
 

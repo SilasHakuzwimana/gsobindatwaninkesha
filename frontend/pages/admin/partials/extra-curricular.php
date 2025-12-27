@@ -34,7 +34,11 @@
   </div>
 
   <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="/assets/js/helpers.js"></script>
   <script src="/assets/js/extra_activities.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", initActivitiesGallery);
+  </script>
 </body>
 
 </html>

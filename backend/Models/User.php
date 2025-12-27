@@ -62,6 +62,24 @@ class User extends BaseModel
   }
 
   /**
+   * Total users count
+   */
+  public static function countAll(): int
+  {
+    $sql = "SELECT COUNT(*) FROM users";
+    return (int) self::query($sql)->fetchColumn();
+  }
+
+  /**
+   * Count users by role
+   */
+  public static function countByRole(string $role): int
+  {
+    $sql = "SELECT COUNT(*) FROM users WHERE role = ?";
+    return (int) self::query($sql, [$role])->fetchColumn();
+  }
+
+  /**
    * Create new user (POST)
    */
   public static function create(array $data): array

@@ -45,8 +45,8 @@ function initGalleryJs() {
     galleryBody.innerHTML = `<div class="col-12 text-center py-5">Loading...</div>`;
     try {
       const res = await fetch(`/api/gallery/${type}`);
-      const data = await res.json();
-      allItems = data.data || [];
+      //const data = await res.json();
+      allItems = res?.data || [];
       renderGallery();
     } catch (err) {
       console.error(err);
@@ -127,4 +127,4 @@ function initGalleryJs() {
   fetchGallery();
 }
 
-document.addEventListener("DOMContentLoaded", () => initGalleryJs());
+// document.addEventListener("DOMContentLoaded", () => initGalleryJs());

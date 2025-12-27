@@ -12,6 +12,29 @@ class GalleryController
   private int $maxFileSize = 10 * 1024 * 1024; // 10MB
   private array $imageExtensions = ['jpg', 'jpeg', 'png', 'gif'];
 
+
+  private function checkAdmin(): array
+  {
+    $user = AuthMiddleware::check(false);
+    if (($user['role'] ?? '') !== 'admin') {
+      $this->jsonResponse(false, 'Unauthorized', 401);
+    }
+    return $user;
+  }
+
+  private function validateTable(string $table): void
+  {
+    $allowed = [
+      'school_gallery',
+      'school_alumni_gallery',
+      'extra_curricular_activities_gallery',
+      'school_updates_gallery'
+    ];
+    if (!in_array($table, $allowed)) {
+      $this->jsonResponse(false, 'Invalid gallery type', 400);
+    }
+  }
+
   public function __construct()
   {
     $this->cloudinary = new CloudinaryService();
@@ -46,7 +69,8 @@ class GalleryController
    */
   public function create(string $table)
   {
-    $user = AuthMiddleware::check(true); // ensure logged in
+    $this->validateTable($table);
+    $user = $this->checkAdmin();
 
     $title = trim($_POST['title'] ?? '');
     $category = $_POST['category'] ?? null;
@@ -88,7 +112,7 @@ class GalleryController
    */
   public function update(string $table, string $id)
   {
-    $user = AuthMiddleware::check(false);
+    $user = $this->checkAdmin();
     $user['is_admin'] = ($user['role'] ?? '') === 'admin';
     if (!$user['is_admin']) return $this->jsonResponse(false, 'Unauthorized', 401);
 
@@ -137,7 +161,7 @@ class GalleryController
    */
   public function delete(string $table, string $id)
   {
-    $user = AuthMiddleware::check(false);
+    $user = $this->checkAdmin();
     $user['is_admin'] = ($user['role'] ?? '') === 'admin';
     if (!$user['is_admin']) return $this->jsonResponse(false, 'Unauthorized', 401);
 

@@ -91,6 +91,7 @@ class AuthService
       'iat' => $issuedAt,
       'exp' => $expire,
       'sub' => bin2hex($user['user_id']),
+      'fullName' => $user['fullName'],
       'email' => $user['email'],
       'role' => $user['role']
     ];

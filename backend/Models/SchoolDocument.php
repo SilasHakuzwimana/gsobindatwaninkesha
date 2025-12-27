@@ -28,19 +28,28 @@ class SchoolDocument extends BaseModel
   }
 
   /**
+   * Total school documents count
+   */
+  public static function countAll(): int
+  {
+    $sql = "SELECT COUNT(*) FROM school_documents";
+    return (int) self::query($sql)->fetchColumn();
+  }
+
+  /**
    * Save or update record
    */
   public function save(): ?array
   {
     $exists = self::findById($this->document_id);
     $data = [
-      'document_id' => $this->document_id, 
+      'document_id' => $this->document_id,
       'title'       => $this->title,
       'file_path'   => $this->file_path,
       'uploaded_by' => $this->uploaded_by,
       'category'    => $this->category,
       'description' => $this->description,
-      'uploaded_at' => date('Y-m-d H:i:s'), 
+      'uploaded_at' => date('Y-m-d H:i:s'),
       'updated_at'  => date('Y-m-d H:i:s')
     ];
 

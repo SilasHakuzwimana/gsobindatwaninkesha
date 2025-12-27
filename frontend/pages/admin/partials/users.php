@@ -45,7 +45,7 @@ if (($decoded->role ?? '') !== 'admin') {
     <input type="text" id="searchUser" class="form-control mb-3" placeholder="Search users..." />
 
     <!-- Table -->
-    <div class="table-responsive">
+    <div class="table-responsive mb-5">
       <table class="table table-bordered table-hover align-middle">
         <thead class="table-dark">
           <tr>
@@ -145,16 +145,16 @@ if (($decoded->role ?? '') !== 'admin') {
   <script src="/assets/js/ajax-handler.js"></script>
   <script src="/assets/js/users.js"></script>
   <script>
-  // Set API_BASE to match your backend
-  window.API_BASE = "http://localhost:8000/api";
+    // Set API_BASE to match your backend
+    window.API_BASE = "http://localhost:8000/api";
 
-  document.addEventListener("DOMContentLoaded", () => {
-    if (typeof initUsersJs === "function") {
-      initUsersJs();
-    } else {
-      console.error("❌ users.js not loaded");
-    }
-  });
+    document.addEventListener("DOMContentLoaded", () => {
+      if (typeof initUsersJs === "function") {
+        initUsersJs();
+      } else {
+        console.error("❌ users.js not loaded");
+      }
+    });
   </script>
 </body>
 

@@ -5,6 +5,7 @@ namespace Routes;
 use Controllers\AuthController;
 use Controllers\UserController;
 use Controllers\FileController;
+use Controllers\DashboardController;
 use Controllers\NewsletterController;
 use Controllers\ContactController;
 use Controllers\UserActivityController;
@@ -15,6 +16,7 @@ use Controllers\MessagesController;
 use Controllers\SchoolDocumentController;
 use Controllers\GalleryController;
 use Controllers\PathwayManagerController;
+use Controllers\SchoolUpdateController;
 use Middleware\AuthMiddleware;
 
 
@@ -24,6 +26,15 @@ class Api
 {
   private array $routes = [];
   private \PDO $conn;
+
+  /**
+   * Request helper function
+   */
+  private function getRequestBody(): array
+  {
+    $data = json_decode(file_get_contents('php://input'), true);
+    return is_array($data) ? $data : [];
+  }
 
   public function __construct()
   {
@@ -52,6 +63,10 @@ class Api
       'POST /api/support-request' => fn() => (new SupportController())->submit(),
 
       // Protected / Admin routes
+
+      'GET /api/dashboard/overview' => fn() => (new DashboardController())->overview(),
+
+
       'GET /api/users'            => fn() => (new UserController())->index(),
       'GET /api/users/:id'        => fn($id) => (new UserController())->getUserById($id),
       'POST /api/users'           => fn() => (new UserController())->createUser(),
@@ -143,36 +158,41 @@ class Api
       'PUT /api/pathways/:id'     => fn($id) => (new PathwayController())->update($id),
       'DELETE /api/pathways/:id' => fn($id) => (new PathwayController())->destroy($id),
 
-
-      // New Pathways Routes
-      // 'GET /api/pathways'           => fn() => (new PathwayManagerController())->getAllPathways(),
-      // 'GET /api/pathways/:id'       => fn($id) => (new PathwayManagerController())->getPathway($id),
-      // 'POST /api/pathways'          => fn() => (new PathwayManagerController())->createPathway($_POST),
-      // 'PUT /api/pathways/:id'       => fn($id) => (new PathwayManagerController())->updatePathway(array_merge($_POST, ['pathway_id' => $id])),
-      // 'DELETE /api/pathways/:id'    => fn($id) => (new PathwayManagerController())->deletePathway($id),
-
       // Streams
       'GET /api/streams' => fn() => (new PathwayManagerController())->getAllStreams(),
+      'GET /api/streams/:id' => fn($id) => (new PathwayManagerController())->getStreamsByPathway($id),
       'POST /api/streams' => fn() => (new PathwayManagerController())->createStream($_POST),
-      'PUT /api/streams/:id' => fn($id) => (new PathwayManagerController())->updateStream($request ?? []),
+
+      'PUT /api/streams/:id' => fn($id) => (new PathwayManagerController())->updateStream(
+        array_merge($this->getRequestBody(), ['stream_id' => $id])
+      ),
+
       'DELETE /api/streams/:id' => fn($id) => (new PathwayManagerController())->deleteStream($id),
 
       'GET /api/pathways/:pathwayId/streams' => fn($pathwayId) => (new PathwayManagerController())->getStreamsByPathway($pathwayId),
 
-      // Compulsory Subjects
-      'GET /api/pathways/:pathwayId/compulsory-subjects' => fn($pathwayId) => (new PathwayManagerController())->getCompulsorySubjectsByPathway($pathwayId),
-      'POST /api/compulsory-subjects'                    => fn() => (new PathwayManagerController())->createCompulsorySubject($_POST),
-      'PUT /api/compulsory-subjects/:id'                 => fn($id) => (new PathwayManagerController())->updateCompulsorySubject(array_merge($_POST, ['compulsory_subject_id' => $id])),
-      'DELETE /api/compulsory-subjects/:id'             => fn($id) => (new PathwayManagerController())->deleteCompulsorySubject($id),
 
       // Stream Subjects
-      'GET /api/streams/:streamId/subjects' => fn($streamId) => (new PathwayManagerController())->getSubjectsByStream($streamId),
-      'POST /api/stream-subjects'            => fn() => (new PathwayManagerController())->createStreamSubject($_POST),
-      'PUT /api/stream-subjects/:id'         => fn($id) => (new PathwayManagerController())->updateStreamSubject(array_merge($_POST, ['subject_id' => $id])),
+      'GET /api/subjects' => fn() => (new PathwayManagerController())->getSubjects(),
+      'GET /api/subjects/:id' => fn($id) => (new PathwayManagerController())->getSubjectsById($id),
+      'GET /api/streams/:streamId/subject' => fn($streamId) => (new PathwayManagerController())->getSubjectsByStream($streamId),
+      'POST /api/stream-subjects'            => fn() => (new PathwayManagerController())->createStreamSubject(),
+      'PUT /api/stream-subjects/:id'         => fn($id) => (new PathwayManagerController())->updateStreamSubject($id),
       'DELETE /api/stream-subjects/:id'      => fn($id) => (new PathwayManagerController())->deleteStreamSubject($id),
+
+      // =========================
+      // SCHOOL UPDATES API
+      // =========================
+      'GET /api/school-updates'        => fn() => (new SchoolUpdateController())->getAll(),
+      'GET /api/school-updates/:id'    => fn($id) => (new SchoolUpdateController())->getById($id),
+      'POST /api/school-updates' => fn() => (new SchoolUpdateController())->handlePost(),
+      'PUT /api/school-updates/:id'    => fn($id) => (new SchoolUpdateController())->update($id),
+      'DELETE /api/school-updates/:id' => fn($id) => (new SchoolUpdateController())->delete($id),
 
     ];
   }
+
+
 
   public function run()
   {
@@ -187,6 +207,7 @@ class Api
     }
 
     $method = $_SERVER['REQUEST_METHOD'];
+
     $path = rtrim(strtok($_SERVER['REQUEST_URI'], '?'), '/');
 
     if ($path === '') $path = '/';
@@ -195,13 +216,21 @@ class Api
       [$routeMethod, $routePath] = explode(' ', $routeKey, 2);
       if ($method !== $routeMethod) continue;
 
-      $pattern = "#^" . preg_replace('/:\w+/', '([a-zA-Z0-9\-]+)', $routePath) . "$#";
+      $pattern = "#^" . preg_replace('/:\w+/', '([^/]+)', $routePath) . "$#";
 
       if (preg_match($pattern, $path, $matches)) {
         array_shift($matches);
 
         // Admin route protection
-        $isAdmin = str_contains($routeKey, '/users') || str_contains($routeKey, '/file');
+        $isAdmin =
+          str_contains($routeKey, '/users') ||
+          str_contains($routeKey, '/gallery') ||
+          str_contains($routeKey, '/school-documents') ||
+          str_contains($routeKey, '/pathways') ||
+          str_contains($routeKey, '/streams') ||
+          str_contains($routeKey, '/compulsory-subjects') ||
+          str_contains($routeKey, '/stream-subjects');
+
         if ($isAdmin) {
           AuthMiddleware::requireAdmin();
         }

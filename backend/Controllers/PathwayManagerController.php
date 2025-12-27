@@ -3,6 +3,8 @@
 namespace Controllers;
 
 use Models\PathwayManager;
+use Middleware\AuthMiddleware;
+use Services\UUIDService;
 
 class PathwayManagerController
 {
@@ -55,7 +57,7 @@ class PathwayManagerController
   {
     echo json_encode([
       'status' => 'success',
-      'data' => $this->model->getAllStreams()
+      'data' => $this->model->getStreams()
     ]);
   }
 
@@ -70,24 +72,17 @@ class PathwayManagerController
 
   public function createStream(array $request = []): void
   {
-    // Decode JSON body if $request is empty
     if (empty($request)) {
       $request = json_decode(file_get_contents('php://input'), true);
     }
 
-    // Validate required fields
     if (empty($request['pathway_id']) || empty($request['stream_name'])) {
-      echo json_encode([
-        'status' => 'error',
-        'message' => 'pathway_id and stream_name are required'
-      ]);
+      echo json_encode(['status' => 'error', 'message' => 'pathway_id and stream_name are required']);
       return;
     }
 
-    // Set created_by if missing
-    $request['created_by'] = $request['created_by'] ?? '00000000-0000-0000-0000-000000000000';
-
-    echo json_encode($this->model->createStream($request));
+    $currentUser = AuthMiddleware::requireAuth();
+    echo json_encode($this->model->createStream($request, $currentUser));
   }
 
   public function updateStream(array $request = []): void
@@ -97,26 +92,18 @@ class PathwayManagerController
     }
 
     if (empty($request['stream_id']) || empty($request['stream_name'])) {
-      echo json_encode([
-        'status' => 'error',
-        'message' => 'stream_id and stream_name are required'
-      ]);
+      echo json_encode(['status' => 'error', 'message' => 'stream_id and stream_name are required']);
       return;
     }
 
-    // Set updated_by if missing
-    $request['updated_by'] = $request['updated_by'] ?? '00000000-0000-0000-0000-000000000000';
-
-    echo json_encode($this->model->updateStream($request));
+    $currentUser = AuthMiddleware::requireAuth();
+    echo json_encode($this->model->updateStream($request, $currentUser));
   }
 
   public function deleteStream(string $streamId): void
   {
     if (empty($streamId)) {
-      echo json_encode([
-        'status' => 'error',
-        'message' => 'stream_id is required'
-      ]);
+      echo json_encode(['status' => 'error', 'message' => 'stream_id is required']);
       return;
     }
 
@@ -124,43 +111,51 @@ class PathwayManagerController
   }
 
   // =========================
-  // COMPULSORY SUBJECTS
-  // =========================
-  public function getCompulsorySubjectsByPathway(string $pathwayId): void
-  {
-    echo json_encode(['status' => 'success', 'data' => $this->model->getCompulsorySubjectsByPathway($pathwayId)]);
-  }
-
-  public function createCompulsorySubject(array $request): void
-  {
-    echo json_encode($this->model->createCompulsorySubject($request));
-  }
-
-  public function updateCompulsorySubject(array $request): void
-  {
-    echo json_encode($this->model->updateCompulsorySubject($request));
-  }
-
-  public function deleteCompulsorySubject(string $subjectId): void
-  {
-    echo json_encode($this->model->deleteCompulsorySubject($subjectId));
-  }
-
-  // =========================
   // STREAM SUBJECTS
   // =========================
+  public function getSubjects(): void
+  {
+    echo json_encode(['status' => 'success', 'data' => $this->model->getAllSubjects()]);
+  }
+
   public function getSubjectsByStream(string $streamId): void
   {
-    echo json_encode(['status' => 'success', 'data' => $this->model->getSubjectsByStream($streamId)]);
+    $streamBinary = UUIDService::toBinary($streamId);
+    $subject = $this->model->getSubjectsByStream($streamBinary);
+    var_dump($subject);
+    // echo json_encode(['status' => 'success', 'data' => $this->model->getSubjectsByStream($streamId)]);
   }
 
-  public function createStreamSubject(array $request): void
+  public function getSubjectsById(string $subjectId): void
   {
-    echo json_encode($this->model->createStreamSubject($request));
+    $subject = $this->model->getSubjectById($subjectId);
+
+    echo json_encode(
+      $subject
+        ? ['status' => 'success', 'data' => $subject]
+        : ['status' => 'error', 'message' => 'Subject not found']
+    );
   }
 
-  public function updateStreamSubject(array $request): void
+
+  public function createStreamSubject(): void
   {
+    $raw = file_get_contents('php://input');
+    $data = json_decode($raw, true) ?? [];
+
+    echo json_encode(
+      $this->model->createStreamSubject($data)
+    );
+  }
+
+
+  public function updateStreamSubject(string $subjectId): void
+  {
+    $request = json_decode(file_get_contents('php://input'), true) ?? [];
+
+    //Inject subject_id from URL
+    $request['subject_id'] = $subjectId;
+
     echo json_encode($this->model->updateStreamSubject($request));
   }
 

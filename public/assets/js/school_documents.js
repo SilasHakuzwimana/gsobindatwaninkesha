@@ -9,7 +9,10 @@ function initDocumentsJs() {
   const searchInput = document.getElementById("searchDoc");
   const addDocBtn = document.getElementById("addDocBtn");
   const paginationEl = document.getElementById("pagination");
-  const docCountEl = document.getElementById("docCount");
+  const deleteModalEl = document.getElementById("deleteConfirmModal");
+  const deleteModal = deleteModalEl ? new bootstrap.Modal(deleteModalEl) : null;
+  let deleteTargetId = null;
+  //const docCountEl = document.getElementById("docCount");
 
   let allDocs = [];
   let filteredDocs = [];
@@ -59,7 +62,7 @@ function initDocumentsJs() {
 
     if (!paginated.length) {
       docsBody.innerHTML = `<tr><td colspan="5" class="text-center">No documents found</td></tr>`;
-      docCountEl.textContent = filteredDocs.length;
+      //docCountEl.textContent = filteredDocs.length;
       renderPagination();
       return;
     }
@@ -79,7 +82,7 @@ function initDocumentsJs() {
       `;
     }).join('');
 
-    docCountEl.textContent = filteredDocs.length;
+    //docCountEl.textContent = filteredDocs.length;
 
     // Attach events
     document.querySelectorAll(".editBtn").forEach(btn => btn.addEventListener("click", () => openEditModal(btn.dataset.id)));
@@ -176,15 +179,45 @@ function initDocumentsJs() {
   // Delete
   // --------------------------
   const deleteDoc = async (id) => {
-    if (!confirm("Delete this document?")) return;
-    try {
-      await makeRequest(`${API_BASE}/${id}`, "DELETE");
-      alert("Document deleted!");
-      fetchDocs();
-    } catch (err) {
-      console.error(err);
-      alert("Failed to delete document");
+    deleteTargetId = id;
+    if (deleteModal) deleteModal.show();
+    const confirmDeleteBtn = document.getElementById("confirmDeleteBtn");
+
+    if (confirmDeleteBtn) {
+      confirmDeleteBtn.addEventListener("click", async () => {
+        if (!deleteTargetId) return;
+        try {
+          await makeRequest(`${API_BASE}/${id}`, "DELETE");
+          showToast("Document deleted successfully!");
+          deleteModal.hide();
+          removeTableRow(deleteTargetId);
+        } catch (error) {
+          showToast(`Error deleting document: ${error.message}`, "error");
+          deleteModal.hide();
+        } finally {
+          deleteTargetId = null;
+        }
+      })
     }
+  };
+
+  // -------------------------------
+  // Animate row removal
+  // -------------------------------
+  const removeTableRow = (id) => {
+    const row = document.querySelector(`.deleteBtn[data-id="${id}"]`)?.closest('tr');
+    if (!row) return;
+
+    row.classList.add('fade-out');
+    row.addEventListener('transitionend', () => {
+      row.remove();
+      allDocs = allDocs.filter(d => d.document_id !== id);
+      filteredDocs = filteredDocs.filter(d => d.document_id !== id);
+      renderPagination();
+      if (!filteredDocs.length && docsBody) {
+        docsBody.innerHTML = '<tr><td colspan="5" class="text-center">No document found</td></tr>';
+      }
+    }, { once: true });
   };
 
   // --------------------------
