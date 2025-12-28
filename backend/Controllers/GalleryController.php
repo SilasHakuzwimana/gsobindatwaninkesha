@@ -40,6 +40,26 @@ class GalleryController
     $this->cloudinary = new CloudinaryService();
   }
 
+  public function list(string $table)
+  {
+    error_log("GalleryController::list() called with table: " . $table); // Debug log
+
+    $this->validateTable($table);
+
+    try {
+      new Gallery([], $table);
+      $items = Gallery::allSections();
+
+      // filter only this table
+      $items = array_values(array_filter($items, fn($i) => $i['table'] === $table));
+
+      return $this->jsonResponse(true, 'Fetched', 200, $items);
+    } catch (\Throwable $e) {
+      error_log("GalleryController::list() error: " . $e->getMessage()); // Debug log
+      return $this->jsonResponse(false, $e->getMessage(), 500);
+    }
+  }
+
   /**
    * Fetch all galleries grouped by table/section
    */
@@ -112,74 +132,54 @@ class GalleryController
    */
   public function update(string $table, string $id)
   {
+    $this->validateTable($table);
     $user = $this->checkAdmin();
-    $user['is_admin'] = ($user['role'] ?? '') === 'admin';
-    if (!$user['is_admin']) return $this->jsonResponse(false, 'Unauthorized', 401);
 
     new Gallery([], $table);
     $binaryId = hex2bin($id);
-    $galleryItem = Gallery::findById($binaryId);
-    if (!$galleryItem) return $this->jsonResponse(false, 'Item not found', 404);
 
-    $input = $_POST;
+    $galleryItem = Gallery::findById($binaryId);
+    if (!$galleryItem) {
+      return $this->jsonResponse(false, 'Item not found', 404);
+    }
+
+    // READ JSON BODY
+    $raw = file_get_contents("php://input");
+    $input = json_decode($raw, true) ?? [];
+
     $input['updated_by'] = isset($user['id']) ? hex2bin($user['id']) : null;
     $input['updated_at'] = date('Y-m-d H:i:s');
 
-    $filePath = $galleryItem['file_path'] ?? null;
-
-    // Handle file replacement
-    if (isset($_FILES['file']) && $_FILES['file']['error'] === UPLOAD_ERR_OK) {
-      $file = $_FILES['file'];
-      $ext = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
-      if (!in_array($ext, $this->imageExtensions)) {
-        return $this->jsonResponse(false, "Invalid file type: .$ext", 400);
-      }
-      if ($file['size'] > $this->maxFileSize) {
-        return $this->jsonResponse(false, "File too large", 400);
-      }
-
-      // Delete old file
-      if ($filePath) {
-        $publicId = $this->extractPublicId($filePath);
-        if ($publicId) $this->cloudinary->delete($publicId);
-      }
-
-      $folder = $table . '/' . date('Y/m/d');
-      $fileName = pathinfo($file['name'], PATHINFO_FILENAME);
-      $result = $this->cloudinary->upload($file['tmp_name'], $folder, $fileName);
-      $filePath = $result['secure_url'] ?? $filePath;
-    }
-
-    $gallery = new Gallery(array_merge($galleryItem, $input, ['file_path' => $filePath]), $table);
+    $gallery = new Gallery(array_merge($galleryItem, $input), $table);
     $updated = $gallery->save();
 
     return $this->jsonResponse(true, 'Updated successfully', 200, $updated);
   }
+
 
   /**
    * Delete a gallery item
    */
   public function delete(string $table, string $id)
   {
+    $this->validateTable($table);
     $user = $this->checkAdmin();
-    $user['is_admin'] = ($user['role'] ?? '') === 'admin';
-    if (!$user['is_admin']) return $this->jsonResponse(false, 'Unauthorized', 401);
 
     new Gallery([], $table);
     $binaryId = hex2bin($id);
+
     $item = Gallery::findById($binaryId);
-    if (!$item) return $this->jsonResponse(false, 'Item not found', 404);
+    if (!$item) {
+      return $this->jsonResponse(false, 'Item not found', 404);
+    }
 
     if ($item['file_path']) {
       $publicId = $this->extractPublicId($item['file_path']);
       if ($publicId) $this->cloudinary->delete($publicId);
     }
 
-    if (Gallery::delete($binaryId)) {
-      return $this->jsonResponse(true, 'Deleted successfully');
-    }
-
-    return $this->jsonResponse(false, 'Failed to delete', 500);
+    Gallery::delete($binaryId);
+    return $this->jsonResponse(true, 'Deleted successfully');
   }
 
   /**
@@ -200,7 +200,9 @@ class GalleryController
   {
     http_response_code($code);
     header('Content-Type: application/json');
-    if (ob_get_length()) ob_clean();
+    while (ob_get_level()) {
+      ob_end_clean();
+    }
     echo json_encode([
       'status' => $status,
       'message' => $message,

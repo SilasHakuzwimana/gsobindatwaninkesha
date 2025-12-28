@@ -41,9 +41,10 @@ class Api
     // Use global PDO connection
     $this->conn = Database::getConnection();
 
-    // =========================
+    // ====================
     // GALLERY CONTROLLERS
-    // =========================
+    // ====================
+
     $schoolGalleryController  = new GalleryController();
     $alumniGalleryController  = new GalleryController();
     $extraGalleryController   = new GalleryController();
@@ -51,7 +52,11 @@ class Api
 
 
     $this->routes = [
-      // Public routes
+
+      //===============
+      // PUBLIC ROUTES
+      //===============
+
       'POST /api/register'        => [AuthController::class, 'register'],
       'POST /api/login'           => [AuthController::class, 'login'],
       'POST /api/verify-otp'      => [AuthController::class, 'verifyOtp'],
@@ -62,10 +67,15 @@ class Api
       'POST /api/contact'         => fn() => (new ContactController())->submit(),
       'POST /api/support-request' => fn() => (new SupportController())->submit(),
 
-      // Protected / Admin routes
+      //========================
+      // PROTECTED ADMIN ROUTES
+      //========================
 
       'GET /api/dashboard/overview' => fn() => (new DashboardController())->overview(),
 
+      //==============
+      // USERS ROUTES
+      //==============
 
       'GET /api/users'            => fn() => (new UserController())->index(),
       'GET /api/users/:id'        => fn($id) => (new UserController())->getUserById($id),
@@ -73,19 +83,27 @@ class Api
       'PUT /api/users/:id'        => fn($id) => (new UserController())->updateUser($id),
       'DELETE /api/users/:id'     => fn($id) => (new UserController())->deleteUser($id),
 
-      // Subscribers routes
+      //===================
+      // SBSCRIBERS ROUTES
+      //===================
+
       'GET /api/subscribers'      => fn() => (new SubscribersController($this->conn))->getSubscribers(),
       'POST /api/send-emails'     => fn() => (new SubscribersController($this->conn))->sendToSubscribers(),
 
-      // Messages routes
+      //==================
+      // MESSAGES ROUTES
+      //=================
+
       'GET /api/messages'      => fn() => (new MessagesController())->index(),
       'GET /api/all-messages' => fn() => (new MessagesController())->findAll(),
       'GET /api/messages/:id'  => fn($id) => (new MessagesController())->show($id),
       'POST /api/messages'     => fn() => (new MessagesController())->store(),
       'DELETE /api/messages/:id' => fn($id) => (new MessagesController())->deleteMessage($id),
 
+      //========================
+      // USER ACTIVITIES ROUTES
+      //========================
 
-      // User activities routes
       'GET /api/user-activities/list' => function () {
         header('Content-Type: application/json');
         echo json_encode((new UserActivityController())->list());
@@ -101,64 +119,82 @@ class Api
         echo json_encode((new UserActivityController())->analytics());
       },
 
+      //==============
+      // FILES ROUTES
+      //==============
 
-      // File routes
       'POST /api/upload-file'     => fn() => (new FileController())->upload(),
       'GET /api/get-file-url'     => fn() => (new FileController())->getUrl(),
       'POST /api/delete-file'     => fn() => (new FileController())->delete(),
 
 
-      // School Documents routes
+      //=========================
+      // SCHOOL DOCUMENTS ROUTES
+      //=========================
+
       'GET /api/school-documents/all'      => fn() => (new SchoolDocumentController())->all(),
       'GET /api/school-documents/:id'    => fn($id) => (new SchoolDocumentController())->find($id),
       'POST /api/school-documents'        => fn() => (new SchoolDocumentController())->create(),
       'PUT /api/school-documents/:id'    => fn($id) => (new SchoolDocumentController())->update($id),
       'DELETE /api/school-documents/:id' => fn($id) => (new SchoolDocumentController())->delete($id),
 
-      // =========================
+      // ======================
       // SCHOOL GALLERY ROUTES
-      // =========================
-      'GET /api/gallery/school_gallery' => fn() => $schoolGalleryController->all(),
+      // ======================
+
+      // List all items from school_gallery table only
+      'GET /api/gallery/school_gallery' => fn() => $schoolGalleryController->list('school_gallery'),
+      // Get all items from ALL tables (for admin overview)
+      'GET /api/gallery/all' => fn() => $schoolGalleryController->all(),
       'POST /api/gallery/school_gallery' => fn() => $schoolGalleryController->create('school_gallery'),
+      'GET /api/gallery/school_gallery/:id' => fn($id) => $schoolGalleryController->find('school_gallery', $id),
       'PUT /api/gallery/school_gallery/:id' => fn($id) => $schoolGalleryController->update('school_gallery', $id),
       'DELETE /api/gallery/school_gallery/:id' => fn($id) => $schoolGalleryController->delete('school_gallery', $id),
 
-
-      // =========================
+      // ======================
       // ALUMNI GALLERY ROUTES
-      // =========================
-      'GET /api/gallery/school_alumni_gallery' => fn() =>  $alumniGalleryController->all(),
+      // ======================
+
+      'GET /api/gallery/school_alumni_gallery' => fn() =>  $alumniGalleryController->list('school_alumni_gallery'),
       'POST /api/gallery/school_alumni_gallery' => fn() => $alumniGalleryController->create('school_alumni_gallery'),
+      'GET /api/gallery/school_alumni_gallery/:id' => fn($id) => $alumniGalleryController->find('school_alumni_gallery', $id),
       'PUT /api/gallery/school_alumni_gallery/:id' => fn($id) => $alumniGalleryController->update('school_alumni_gallery', $id),
       'DELETE /api/gallery/school_alumni_gallery/:id' => fn($id) => $alumniGalleryController->delete('school_alumni_gallery', $id),
 
-
-      // =========================
+      // ================================
       // EXTRA ACTIVITIES GALLERY ROUTES
-      // =========================
-      'GET /api/gallery/extra_curricular_activities_gallery' => fn() => $extraGalleryController->all(),
+      // ================================
+
+      'GET /api/gallery/extra_curricular_activities_gallery' => fn() => $extraGalleryController->list('extra_curricular_activities_gallery'),
       'POST /api/gallery/extra_curricular_activities_gallery' => fn() => $extraGalleryController->create('extra_curricular_activities_gallery'),
+      'GET /api/gallery/extra_curricular_activities_gallery/:id' => fn($id) => $extraGalleryController->find('extra_curricular_activities_gallery', $id),
       'PUT /api/gallery/extra_curricular_activities_gallery/:id' => fn($id) => $extraGalleryController->update('extra_curricular_activities_gallery', $id),
       'DELETE /api/gallery/extra_curricular_activities_gallery/:id' => fn($id) => $extraGalleryController->delete('extra_curricular_activities_gallery', $id),
 
+      // ===============
+      // SCHOOL UPDATES GALLERY ROUTES
+      // ===============
 
-      // =========================
-      // UPDATES GALLERY ROUTES
-      // =========================
-      'GET /api/gallery/school_updates_gallery' => fn() => $updatesGalleryController->all(),
+      'GET /api/gallery/school_updates_gallery' => fn() => $updatesGalleryController->list('school_updates_gallery'),
       'POST /api/gallery/school_updates_gallery' => fn() => $updatesGalleryController->create('school_updates_gallery'),
+      'GET /api/gallery/school_updates_gallery/:id' => fn($id) => $updatesGalleryController->find('school_updates_gallery', $id),
       'PUT /api/gallery/school_updates_gallery/:id' => fn($id) => $updatesGalleryController->update('school_updates_gallery', $id),
       'DELETE /api/gallery/school_updates_gallery/:id' => fn($id) => $updatesGalleryController->delete('school_updates_gallery', $id),
 
+      //===================
+      //OLD PATHWAY ROUTES
+      //===================
 
-      //Old Pathway routes
       'GET /api/pathways'         => fn() => (new PathwayController())->index(),
       'GET /api/pathways/:id'     => fn($id) => (new PathwayController())->show($id),
       'POST /api/pathways'        => fn() => (new PathwayController())->store(),
       'PUT /api/pathways/:id'     => fn($id) => (new PathwayController())->update($id),
       'DELETE /api/pathways/:id' => fn($id) => (new PathwayController())->destroy($id),
 
-      // Streams
+      //================
+      // STREAMS ROUTES
+      //================
+
       'GET /api/streams' => fn() => (new PathwayManagerController())->getAllStreams(),
       'GET /api/streams/:id' => fn($id) => (new PathwayManagerController())->getStreamsByPathway($id),
       'POST /api/streams' => fn() => (new PathwayManagerController())->createStream($_POST),
@@ -171,8 +207,10 @@ class Api
 
       'GET /api/pathways/:pathwayId/streams' => fn($pathwayId) => (new PathwayManagerController())->getStreamsByPathway($pathwayId),
 
+      //========================
+      // STREAM SUBJECTS ROUTES
+      //========================
 
-      // Stream Subjects
       'GET /api/subjects' => fn() => (new PathwayManagerController())->getSubjects(),
       'GET /api/subjects/:id' => fn($id) => (new PathwayManagerController())->getSubjectsById($id),
       'GET /api/streams/:streamId/subject' => fn($streamId) => (new PathwayManagerController())->getSubjectsByStream($streamId),
@@ -180,9 +218,10 @@ class Api
       'PUT /api/stream-subjects/:id'         => fn($id) => (new PathwayManagerController())->updateStreamSubject($id),
       'DELETE /api/stream-subjects/:id'      => fn($id) => (new PathwayManagerController())->deleteStreamSubject($id),
 
-      // =========================
-      // SCHOOL UPDATES API
-      // =========================
+      // ======================
+      // SCHOOL UPDATES ROUTES
+      // ======================
+
       'GET /api/school-updates'        => fn() => (new SchoolUpdateController())->getAll(),
       'GET /api/school-updates/:id'    => fn($id) => (new SchoolUpdateController())->getById($id),
       'POST /api/school-updates' => fn() => (new SchoolUpdateController())->handlePost(),

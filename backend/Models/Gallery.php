@@ -184,10 +184,15 @@ class Gallery extends BaseModel
       $primaryKey = $columns['id'];
 
       // Fetch all rows
-      $stmt = self::db()->query(
-        "SELECT *, HEX($primaryKey) AS uuid FROM $table ORDER BY " .
-          ($columns['uploaded_at'] ?? 'uploaded_at') . " DESC"
-      );
+      $query = "SELECT *, HEX($primaryKey) AS uuid FROM $table ORDER BY " . ($columns['uploaded_at'] ?? 'uploaded_at') . " DESC";
+      error_log("Gallery query: $query");
+
+      $stmt = self::db()->query($query);
+      if (!$stmt) {
+        $error = self::db()->errorInfo();
+        error_log("Query failed: " . implode(", ", $error));
+      }
+
       $rows = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
 
       // Add section info
