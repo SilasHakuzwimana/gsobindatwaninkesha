@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", () => {
-  const galleryBody = document.getElementById("gallery-list");
+  const galleryBody = document.getElementById("galleryList");
   const uploadForm = document.getElementById("uploadForm");
   const editModalEl = document.getElementById("editGalleryModal");
   const editModal = new bootstrap.Modal(editModalEl);
@@ -10,7 +10,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const editDesc = document.getElementById("edit-description");
 
   const params = new URLSearchParams(window.location.search);
-  let type = params.get("type") || "school_gallery";
+  let type = params.get("type") || "school_updates_gallery";
   let allItems = [];
 
   // -------------------------------

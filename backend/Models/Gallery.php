@@ -60,7 +60,7 @@ class Gallery extends BaseModel
       'file_path' => 'image_path',
       'uploaded_by' => 'uploaded_by',
       'updated_by' => 'updated_by',
-      'uploaded_at' => 'created_at',
+      'created_at' => 'created_at',
       'updated_at' => 'updated_at'
     ],
   ];
@@ -142,12 +142,6 @@ class Gallery extends BaseModel
     return $stmt->fetch(PDO::FETCH_ASSOC) ?: null;
   }
 
-  public function findAll()
-  {
-    $data = Gallery::allSections();
-    return $this->jsonResponse(true, 'Fetched', 200, $data);
-  }
-
 
   public static function delete(string $binaryId): bool
   {
@@ -158,8 +152,41 @@ class Gallery extends BaseModel
   }
 
 
+  public static function allByTable(string $table): array
+  {
+    if (!isset(self::$tableSchemas[$table])) {
+      return [];
+    }
+
+    $schema = self::$tableSchemas[$table];
+
+    $primaryKey = $schema['id'];
+
+    // Correct timestamp column resolution
+    if (isset($schema['uploaded_at'])) {
+      $orderCol = $schema['uploaded_at'];
+    } elseif (isset($schema['created_at'])) {
+      $orderCol = $schema['created_at'];
+    } else {
+      $orderCol = $primaryKey; // safe fallback
+    }
+
+    $sql = "SELECT *, HEX($primaryKey) AS uuid
+            FROM $table
+            ORDER BY $orderCol DESC";
+
+    try {
+      $stmt = self::db()->query($sql);
+      return $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+    } catch (\PDOException $e) {
+      error_log("Gallery SQL error [$table]: " . $e->getMessage());
+      return [];
+    }
+  }
+
 
   //All table
+  // All tables (merged sections)
   public static function allSections(): array
   {
     $sections = [
@@ -172,33 +199,44 @@ class Gallery extends BaseModel
     $result = [];
 
     foreach ($sections as $table => $sectionTitle) {
+
       // Skip if schema not defined
-      if (!isset(self::$tableSchemas[$table])) continue;
-
-      // Initialize table columns and primary key
-      self::$table = $table;
-      self::$tableColumns = self::$tableSchemas[$table];
-      self::$primaryKey = self::$tableColumns['id'];
-
-      $columns = self::$tableColumns;
-      $primaryKey = $columns['id'];
-
-      // Fetch all rows
-      $query = "SELECT *, HEX($primaryKey) AS uuid FROM $table ORDER BY " . ($columns['uploaded_at'] ?? 'uploaded_at') . " DESC";
-      error_log("Gallery query: $query");
-
-      $stmt = self::db()->query($query);
-      if (!$stmt) {
-        $error = self::db()->errorInfo();
-        error_log("Query failed: " . implode(", ", $error));
+      if (!isset(self::$tableSchemas[$table])) {
+        continue;
       }
 
-      $rows = $stmt->fetchAll(PDO::FETCH_ASSOC) ?: [];
+      $columns = self::$tableSchemas[$table];
+      $primaryKey = $columns['id'];
+
+      // ✅ Resolve correct ordering column per table
+      if (isset($columns['uploaded_at'])) {
+        $orderCol = $columns['uploaded_at'];
+      } elseif (isset($columns['created_at'])) {
+        $orderCol = $columns['created_at'];
+      } else {
+        $orderCol = $primaryKey; // safe fallback
+      }
+
+      $query = "
+            SELECT *, HEX($primaryKey) AS uuid
+            FROM $table
+            ORDER BY $orderCol DESC
+        ";
+
+      error_log("Gallery query [$table]: $query");
+
+      try {
+        $stmt = self::db()->query($query);
+        $rows = $stmt ? $stmt->fetchAll(PDO::FETCH_ASSOC) : [];
+      } catch (\PDOException $e) {
+        error_log("Gallery allSections SQL error [$table]: " . $e->getMessage());
+        $rows = [];
+      }
 
       // Add section info
       foreach ($rows as &$row) {
         $row['section'] = $sectionTitle;
-        $row['table'] = $table;
+        $row['table']   = $table;
       }
 
       $result = array_merge($result, $rows);

@@ -11,111 +11,161 @@
   <!-- <script async src="https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=ca-pub-3738844276852721"
     crossorigin="anonymous"></script> -->
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
-  <!-- <script src="/assets/js/script.js" defer></script> -->
 
   <link rel="stylesheet" href="/assets/css/style.css" />
-  <!-- <link rel="stylesheet" href="/assets/css/homepage.css" />
-  <link rel="stylesheet" href="/assets/css/style_Accademics.css" />
-  <link rel="stylesheet" href="/assets/css/screens.css" />
-  <link rel="stylesheet" href="/assets/css/styles.css" /> -->
   <link rel="stylesheet" href="/assets/css/screens.css" />
   <link rel="stylesheet" href="/assets/css/style_Accademics.css" />
 
   <style>
-    body {
-      background-color: #f4f6f8;
-      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-      padding-top: 0;
-      margin: 0;
-      /* Reduced padding-top to give more room */
+  body {
+    background-color: #f4f6f8;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    padding-top: 0;
+    margin: 0;
+    /* Reduced padding-top to give more room */
+  }
+
+  .contact-container {
+    max-width: 800px;
+    margin: auto;
+    background: #fff;
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  }
+
+  h1 {
+    color: #007BFF;
+    margin-bottom: 20px;
+  }
+
+  /* Message alert styles */
+  .alert-slide-up {
+    animation: slideUp 0.5s forwards;
+  }
+
+  @keyframes slideUp {
+    0% {
+      opacity: 1;
+      transform: translateY(0);
     }
 
-    .contact-container {
-      max-width: 800px;
-      margin: auto;
-      background: #fff;
-      padding: 30px;
-      border-radius: 12px;
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    100% {
+      opacity: 0;
+      transform: translateY(-20px);
+    }
+  }
+
+  .contact-info a {
+    color: #007BFF;
+    text-decoration: none;
+  }
+
+  .contact-info a:hover {
+    text-decoration: underline;
+  }
+
+  .dropdown-item {
+    color: steelblue;
+  }
+
+  /* Make dropdown menus visible and operable on large screens (>= 992px) */
+  @media (min-width: 992px) {
+
+    /* Keep dropdown open on hover */
+    .dropdown:hover>.dropdown-menu {
+      display: block !important;
+      opacity: 1;
+      visibility: visible;
+      position: absolute;
+      top: 100%;
+      left: 0;
+      margin-top: 0.5rem;
+      z-index: 1050;
+      /* Ensure on top */
     }
 
-    h1 {
-      color: #007BFF;
-      margin-bottom: 20px;
+    /* Remove any conflicting display rule */
+    .dropdown-menu {
+      display: none;
     }
 
-    /* Message alert styles */
-    .alert-slide-up {
-      animation: slideUp 0.5s forwards;
+    /* Show on hover */
+    .dropdown:hover>.dropdown-menu {
+      display: block !important;
     }
+  }
 
-    @keyframes slideUp {
-      0% {
-        opacity: 1;
-        transform: translateY(0);
-      }
+  /* Style your links with a pale blue for a professional look */
+  .navbar-nav .nav-link,
+  .dropdown-toggle {
+    color: steelblue;
+    /* Pale blue */
+    transition: color 0.3s ease;
+  }
 
-      100% {
-        opacity: 0;
-        transform: translateY(-20px);
-      }
-    }
+  .navbar-nav .nav-link:hover,
+  .dropdown-toggle:hover,
+  .navbar-nav .nav-link:focus,
+  .dropdown-toggle:focus {
+    color: steelblue;
+    /* Lighter blue on hover/focus */
+  }
 
-    .contact-info a {
-      color: #007BFF;
-      text-decoration: none;
-    }
+  /* STREAMS SECTION */
+  .streams {
+    padding: 60px 20px;
+    background: #f9f9f9;
+    text-align: center;
+  }
 
-    .contact-info a:hover {
-      text-decoration: underline;
-    }
+  .streams h2 {
+    font-size: 2.5rem;
+    margin-bottom: 10px;
+    color: #1f2c56;
+    font-weight: 700;
+  }
 
-    .dropdown-item {
-      color: steelblue;
-    }
+  .streams .top {
+    font-size: 1.1rem;
+    color: #555;
+    max-width: 800px;
+    margin: 0 auto 40px auto;
+  }
 
-    /* Make dropdown menus visible and operable on large screens (>= 992px) */
-    @media (min-width: 992px) {
+  .streams-wrapper {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 25px;
+  }
 
-      /* Keep dropdown open on hover */
-      .dropdown:hover>.dropdown-menu {
-        display: block !important;
-        opacity: 1;
-        visibility: visible;
-        position: absolute;
-        top: 100%;
-        left: 0;
-        margin-top: 0.5rem;
-        z-index: 1050;
-        /* Ensure on top */
-      }
+  .stream-card {
+    background: #fff;
+    padding: 25px 20px;
+    border-radius: 12px;
+    box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+    max-width: 250px;
+    text-align: center;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  }
 
-      /* Remove any conflicting display rule */
-      .dropdown-menu {
-        display: none;
-      }
+  .stream-card h3 {
+    font-size: 1.3rem;
+    margin-bottom: 10px;
+    color: #1f2c56;
+    font-weight: 600;
+  }
 
-      /* Show on hover */
-      .dropdown:hover>.dropdown-menu {
-        display: block !important;
-      }
-    }
+  .stream-card p {
+    font-size: 1rem;
+    color: #666;
+  }
 
-    /* Style your links with a pale blue for a professional look */
-    .navbar-nav .nav-link,
-    .dropdown-toggle {
-      color: steelblue;
-      /* Pale blue */
-      transition: color 0.3s ease;
-    }
-
-    .navbar-nav .nav-link:hover,
-    .dropdown-toggle:hover,
-    .navbar-nav .nav-link:focus,
-    .dropdown-toggle:focus {
-      color: steelblue;
-      /* Lighter blue on hover/focus */
-    }
+  .stream-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+  }
   </style>
 </head>
 
@@ -286,39 +336,60 @@
     </div>
   </section>
 
+  <section class="streams">
+    <div>
+      <h2>Learning Pathways</h2>
+      <p class="top">
+        GSO Butare offers tailored learning pathways to match students' academic combinations, ensuring specialized
+        guidance and career-focused knowledge.
+      </p>
+    </div>
+    <div class="streams-wrapper">
+      <div class="stream-card">
+        <h3>Math & Science Stream 1</h3>
+        <p>Combinations: MCB, PCB, PCM</p>
+      </div>
+      <div class="stream-card">
+        <h3>Math & Science Stream 2</h3>
+        <p>Combinations: MEG, MCE, MPC, MPG</p>
+      </div>
+    </div>
+  </section>
+
   <!-- Facilities Section -->
-  <section class="facilities reveal">
-    <p class="text-center">
-    <h2>Our Amenities</h2>
-    <p class="top">Our School stands among the top for its superior facilities, enhancing both learning and
-      enjoyment.
-    </p>
-    </p>
+  <section class="facilities m-2" style="border-radius: 10px;">
+    <div class="text-justify m-3">
+      <h2 class="text-center">Our Amenities</h2>
+      <p class="top">Our School stands among the top for its superior facilities, enhancing both learning and
+        enjoyment.
+      </p>
+    </div>
 
     <div class="facilwrap">
-      <article class="facil">
+      <article class="facil text-white">
         <h3>Computer Labs</h3>
         <p>Promoting tech literacy, offering tools for research, creativity, and innovation.</p>
       </article>
 
-      <article class="facil">
+      <article class="facil text-white">
         <h3>Science Labs</h3>
         <p>Hands-on learning and discovery empower students to explore scientific concepts.</p>
       </article>
 
-      <article class="facil">
+      <article class="facil text-white">
         <h3>Library</h3>
         <p>Fuels academic excellence and fosters a culture of learning.</p>
       </article>
 
-      <article class="facil">
+      <article class="facil text-white">
         <h3>Smart Classes</h3>
         <p>Interactive technology empowers educators for dynamic teaching.</p>
       </article>
 
-      <article class="facil">
+      <article class="facil text-white">
         <h3>Clinical Environment</h3>
-        <p>Provides healthcare students with essential tools and experience for patient care.</p>
+        <p style="color: whitesmoke;">Provides healthcare students with essential tools and experience for patient care.
+        </p>
       </article>
     </div>
   </section>
@@ -365,8 +436,8 @@
 
       <div class="column" id="column-sub">
         <h3>Subscribe for our newsletter:</h3>
-        <input type="text" placeholder="Enter your email here..." />
-        <input type="submit" value="Submit" />
+        <input type="text" class="form-control" placeholder="Enter your email here..." />
+        <input type="submit" class="mt-2" value="Submit" />
         <h4 style="color:#6495ED; margin-bottom:10%;">You’ll receive all updates via email!</h4>
 
         <div class="tooltip-container">
@@ -395,12 +466,12 @@
   <!-- Scripts -->
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
   <script>
-    const container = document.querySelector('.container')
-    const babyeyiBtn = document.querySelector('.babyeyi-btn')
-    const quit = document.querySelector('.quit')
+  const container = document.querySelector('.container')
+  const babyeyiBtn = document.querySelector('.babyeyi-btn')
+  const quit = document.querySelector('.quit')
 
-    babyeyiBtn.onclick = () => (container.style.display = 'block')
-    quit.onclick = () => (container.style.display = 'none')
+  babyeyiBtn.onclick = () => (container.style.display = 'block')
+  quit.onclick = () => (container.style.display = 'none')
   </script>
 
 </body>

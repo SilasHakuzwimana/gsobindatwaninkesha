@@ -1,0 +1,149 @@
+body {
+  background-color: #f4f6f8;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  padding-top: 0;
+  margin: 0;
+  /* Reduced padding-top to give more room */
+}
+
+.contact-container {
+  max-width: 800px;
+  margin: auto;
+  background: #fff;
+  padding: 30px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  color: #007BFF;
+  margin-bottom: 20px;
+}
+
+/* Message alert styles */
+.alert-slide-up {
+  animation: slideUp 0.5s forwards;
+}
+
+@keyframes slideUp {
+  0% {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: translateY(-20px);
+  }
+}
+
+.contact-info a {
+  color: #007BFF;
+  text-decoration: none;
+}
+
+.contact-info a:hover {
+  text-decoration: underline;
+}
+
+.dropdown-item {
+  color: steelblue;
+}
+
+/* Make dropdown menus visible and operable on large screens (>= 992px) */
+@media (min-width: 992px) {
+
+  /* Keep dropdown open on hover */
+  .dropdown:hover>.dropdown-menu {
+    display: block !important;
+    opacity: 1;
+    visibility: visible;
+    position: absolute;
+    top: 100%;
+    left: 0;
+    margin-top: 0.5rem;
+    z-index: 1050;
+    /* Ensure on top */
+  }
+
+  /* Remove any conflicting display rule */
+  .dropdown-menu {
+    display: none;
+  }
+
+  /* Show on hover */
+  .dropdown:hover>.dropdown-menu {
+    display: block !important;
+  }
+}
+
+/* Style your links with a pale blue for a professional look */
+.navbar-nav .nav-link,
+.dropdown-toggle {
+  color: steelblue;
+  /* Pale blue */
+  transition: color 0.3s ease;
+}
+
+.navbar-nav .nav-link:hover,
+.dropdown-toggle:hover,
+.navbar-nav .nav-link:focus,
+.dropdown-toggle:focus {
+  color: steelblue;
+  /* Lighter blue on hover/focus */
+}
+
+/* STREAMS SECTION */
+.streams {
+  padding: 60px 20px;
+  background: #f9f9f9;
+  text-align: center;
+}
+
+.streams h2 {
+  font-size: 2.5rem;
+  margin-bottom: 10px;
+  color: #1f2c56;
+  font-weight: 700;
+}
+
+.streams .top {
+  font-size: 1.1rem;
+  color: #555;
+  max-width: 800px;
+  margin: 0 auto 40px auto;
+}
+
+.streams-wrapper {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 25px;
+}
+
+.stream-card {
+  background: #fff;
+  padding: 25px 20px;
+  border-radius: 12px;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  max-width: 250px;
+  text-align: center;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.stream-card h3 {
+  font-size: 1.3rem;
+  margin-bottom: 10px;
+  color: #1f2c56;
+  font-weight: 600;
+}
+
+.stream-card p {
+  font-size: 1rem;
+  color: #666;
+}
+
+.stream-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 12px 25px rgba(0, 0, 0, 0.12);
+}

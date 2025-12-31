@@ -89,6 +89,7 @@ function initOverview() {
   };
 
   fetchOverview();
+
 }
 
 // document.addEventListener('DOMContentLoaded', () => initOverview());

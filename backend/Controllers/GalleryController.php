@@ -5,6 +5,8 @@ namespace Controllers;
 use Models\Gallery;
 use Middleware\AuthMiddleware;
 use Services\CloudinaryService;
+use Config\Database;
+use PDO;
 
 class GalleryController
 {
@@ -30,8 +32,9 @@ class GalleryController
       'extra_curricular_activities_gallery',
       'school_updates_gallery'
     ];
+
     if (!in_array($table, $allowed)) {
-      $this->jsonResponse(false, 'Invalid gallery type', 400);
+      throw new \InvalidArgumentException("Invalid gallery type: $table");
     }
   }
 
@@ -42,23 +45,20 @@ class GalleryController
 
   public function list(string $table)
   {
-    error_log("GalleryController::list() called with table: " . $table); // Debug log
+    $stmt = Database::getConnection()->prepare("SELECT * FROM `$table`");
+    $stmt->execute();
+    $data = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
-    $this->validateTable($table);
-
-    try {
-      new Gallery([], $table);
-      $items = Gallery::allSections();
-
-      // filter only this table
-      $items = array_values(array_filter($items, fn($i) => $i['table'] === $table));
-
-      return $this->jsonResponse(true, 'Fetched', 200, $items);
-    } catch (\Throwable $e) {
-      error_log("GalleryController::list() error: " . $e->getMessage()); // Debug log
-      return $this->jsonResponse(false, $e->getMessage(), 500);
-    }
+    header('Content-Type: application/json');
+    echo json_encode([
+      'status' => true,
+      'message' => 'Gallery fetched',
+      'data' => $data
+    ]);
+    exit; // ⚠️ must exit after echo to prevent 200 + null
   }
+
+
 
   /**
    * Fetch all galleries grouped by table/section
@@ -116,10 +116,16 @@ class GalleryController
       'file_path' => $filePath,
       'category' => $category,
       'uploaded_by' => isset($user['id']) ? hex2bin($user['id']) : null,
-      'uploaded_at' => date('Y-m-d H:i:s'),
       'updated_by' => null,
-      'updated_at' => null
+      'updated_at' => date('Y-m-d H:i:s'),
     ];
+
+    // Handle timestamps correctly per table
+    if ($table === 'school_updates_gallery') {
+      $data['created_at'] = date('Y-m-d H:i:s');
+    } else {
+      $data['uploaded_at'] = date('Y-m-d H:i:s');
+    }
 
     $gallery = new Gallery($data, $table);
     $saved = $gallery->save();

@@ -41,7 +41,7 @@
 
 
     <!-- Gallery Grid -->
-    <div class="row gallery-grid" id="gallery-list"></div>
+    <div class="row gallery-grid" id="galleryList"></div>
   </div>
 
 

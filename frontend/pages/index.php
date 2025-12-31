@@ -29,52 +29,52 @@ if ($path === '' || $path === '/index.php' || $path === '/index') $path = '/inde
   <link rel="stylesheet" type="text/css" href="/assets/css/style_Home.css" />
 
   <style>
-  .dropdown-item {
-    color: steelblue;
-  }
-
-  /* Make dropdown menus visible and operable on large screens (>= 992px) */
-  @media (min-width: 992px) {
-
-    /* Keep dropdown open on hover */
-    .dropdown:hover>.dropdown-menu {
-      display: block !important;
-      opacity: 1;
-      visibility: visible;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      margin-top: 0.5rem;
-      z-index: 1050;
-      /* Ensure on top */
+    .dropdown-item {
+      color: steelblue;
     }
 
-    /* Remove any conflicting display rule */
-    .dropdown-menu {
-      display: none;
+    /* Make dropdown menus visible and operable on large screens (>= 992px) */
+    @media (min-width: 992px) {
+
+      /* Keep dropdown open on hover */
+      .dropdown:hover>.dropdown-menu {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 0.5rem;
+        z-index: 1050;
+        /* Ensure on top */
+      }
+
+      /* Remove any conflicting display rule */
+      .dropdown-menu {
+        display: none;
+      }
+
+      /* Show on hover */
+      .dropdown:hover>.dropdown-menu {
+        display: block !important;
+      }
     }
 
-    /* Show on hover */
-    .dropdown:hover>.dropdown-menu {
-      display: block !important;
+    /* Style your links with a pale blue for a professional look */
+    .navbar-nav .nav-link,
+    .dropdown-toggle {
+      color: steelblue;
+      /* Pale blue */
+      transition: color 0.3s ease;
     }
-  }
 
-  /* Style your links with a pale blue for a professional look */
-  .navbar-nav .nav-link,
-  .dropdown-toggle {
-    color: steelblue;
-    /* Pale blue */
-    transition: color 0.3s ease;
-  }
-
-  .navbar-nav .nav-link:hover,
-  .dropdown-toggle:hover,
-  .navbar-nav .nav-link:focus,
-  .dropdown-toggle:focus {
-    color: steelblue;
-    /* Lighter blue on hover/focus */
-  }
+    .navbar-nav .nav-link:hover,
+    .dropdown-toggle:hover,
+    .navbar-nav .nav-link:focus,
+    .dropdown-toggle:focus {
+      color: steelblue;
+      /* Lighter blue on hover/focus */
+    }
   </style>
 </head>
 
@@ -258,59 +258,71 @@ if ($path === '' || $path === '/index.php' || $path === '/index') $path = '/inde
   </section>
 
   <!-- Learnmo reveal Section-->
-  <section class="learnmo reveal">
+  <!--1. learnmo reveal, 2.msg reveal, 3. imgwrapp -->
+  <section class="m-5">
     <p style="text-align:center;">
     <h2>
-      Holistic learning environment.
+      Holistic learning enviro-nment.
     </h2>
-    <p>
-      Craving a great education? GSOB goes beyond lectures. Explore engaging academics that spark curiosity. Develop
-      new
+    <p class="">
+      Craving a great education?
+      GSOB goes beyond lectures. Explore engaging academics that spark curiosity. <br />Develop new
       skills and knowledge in our diverse clubs. Connect with passionate peers who share your drive. At GSOB, your
       academic journey is just the beginning!
     </p>
     </p>
   </section>
 
-  <!-- msg reveal Section-->
-  <section class="msg reveal">
-    <div class="imgwrapp">
-      <img src="/assets/images/father.jpg" height="450" width="500" />
-    </div>
-    <aside>
-      <h3 class="hd" style="color: black;">
-        Principal's Message
-      </h3>
+  <!-- Principal Message Section -->
+  <section class="container mb-5 mt-5 p-4" style="background:#161037; color:#fff; border-radius:5px;">
+    <div class="row align-items-center">
 
-      <p style="color: black;">
-        I'm thrilled to begin another enriching year with our dedicated students, supportive parents, and talented
-        staff. At our school, we prioritize not only academic excellence but also the holistic development of each
-        student through a variety of extracurricular activities and opportunities for personal growth. Our passionate
-        educators are committed to nurturing critical thinking and creativity, while our staff ensures a safe and
-        supportive environment for all. Together, we celebrate diversity, foster integrity, and encourage every
-        student
-        to embrace challenges and discover their unique talents. I look forward to a year of achievement,
-        collaboration,
-        and memorable experiences as we continue to uphold our commitment to excellence.
-      </p>
-      <h4>
-        Fr. HAKIZIMANA Charles<br /><span class="cap">Head of School</span>
-      </h4>
-    </aside>
+      <!-- Image Column -->
+      <div class="col-lg-5 col-md-12 mb-4 mb-lg-0 text-center">
+        <img src="/assets/images/father.jpg" class="img-fluid" alt="Head of School"
+          style="border-radius:10px; max-height:450px;" />
+      </div>
+
+      <!-- Content Column -->
+      <div class="col-lg-7 col-md-12">
+        <h3 style="color:white;">Principal's Message</h3>
+
+        <p style="color:whitesmoke; text-align:justify;">
+          I'm thrilled to begin another enriching year with our dedicated students, supportive parents, and talented
+          staff. At our school, we prioritize not only academic excellence but also the holistic development of each
+          student through a variety of extracurricular activities and opportunities for personal growth. Our passionate
+          educators are committed to nurturing critical thinking and creativity, while our staff ensures a safe and
+          supportive environment for all. Together, we celebrate diversity, foster integrity, and encourage every
+          student to embrace challenges and discover their unique talents. I look forward to a year of achievement,
+          collaboration, and memorable experiences as we continue to uphold our commitment to excellence.
+        </p>
+
+        <h4 style="margin-top:20px;">
+          Fr. HAKIZIMANA Charles<br>
+          <span style="font-size:15px; color:#ccc;">Head of School</span>
+        </h4>
+      </div>
+
+    </div>
   </section>
 
+
   <!-- Testm reveal Section-->
-  <section class="testm reveal text-center">
-    <div class="qtwrapp">
+  <section class="text-center mt-5">
+    <div class="">
       <p style="text-align:center;">
-      <figure>
-        <img src="/assets/images/dos1.JPG" height="100" width="100" />
-        <figcaption>
+      <div>
+        <img src="/assets/images/dos1.JPG" height="100" width="100" style="border-radius:50% ;" />
+
+        <!-- <p class="mt-5 text-center mb-2">
           HABIMANA John doe <br />
-        </figcaption>
-      </figure>
-      <p>
-        " Dear Students, Parents, and Faculty, It is with great pleasure and anticipation that I welcome you to
+        </p> -->
+      </div>
+      <p class="mt-1 text-center mb-2">
+        HABIMANA John doe <br />
+      </p>
+      <p class="mt-4" mb-2>
+        "Dear Students, Parents, and Faculty, It is with great pleasure and anticipation that I welcome you to
         another
         exciting academic year at GSOB Indatwa n'inkesha. Together, let us continue our journey of learning, growth,
         and
@@ -321,31 +333,36 @@ if ($path === '' || $path === '/index.php' || $path === '/index') $path = '/inde
   </section>
 
   <!-- Counter Section -->
-  <section class="countsection">
-    <p style="text-align:center;">
-    <div class="counters">
-      <div class="counter" id="counter1">
-        <div id="counter1Value">
-          <br /> 0
-        </div>
-        <div class="counter-name">
-          All students
-        </div>
+  <section class="m-2" style="background:#0e0356;border-radius:8px;padding:20px;">
+    <div class="counters" style="
+      display:flex;
+      justify-content:space-between;
+      align-items:center;
+      flex-wrap:wrap;
+      gap:20px;
+      color:#fff;
+      text-align:center;
+  ">
+      <div class="counter" style="flex:1;min-width:180px;">
+        <div id="counter1Value" style="font-size:36px;font-weight:bold;">0</div>
+        <div class="counter-name" style="font-size:14px;">All students</div>
       </div>
-      <div class="counter" id="counter2">
-        <div id="counter2Value">0</div>
-        <div class="counter-name">Total staff</div>
+
+      <div class="counter" style="flex:1;min-width:180px;">
+        <div id="counter2Value" style="font-size:36px;font-weight:bold;">0</div>
+        <div class="counter-name" style="font-size:14px;">Total staff</div>
       </div>
-      <div class="counter" id="counter3">
-        <div id="counter3Value">0</div>
-        <div class="counter-name">Mean class size</div>
+
+      <div class="counter" style="flex:1;min-width:180px;">
+        <div id="counter3Value" style="font-size:36px;font-weight:bold;">0</div>
+        <div class="counter-name" style="font-size:14px;">Mean class size</div>
       </div>
-      <div class="counter" id="counter4">
-        <div id="counter4Value">0</div>
-        <div class="counter-name">Legacy in time</div>
+
+      <div class="counter" style="flex:1;min-width:180px;">
+        <div id="counter4Value" style="font-size:36px;font-weight:bold;">0</div>
+        <div class="counter-name" style="font-size:14px;">Legacy in time</div>
       </div>
     </div>
-    </p>
   </section>
 
   <!-- Snapshot Section -->
@@ -468,6 +485,7 @@ if ($path === '' || $path === '/index.php' || $path === '/index') $path = '/inde
   <script src="/assets/js/navigator.js" defer></script>
   <script src="/assets/js/index.js" defer></script>
   <script src="/assets/js/script.js" defer></script>
+  <script src="/assets/js/counters.js" defer></script>
 </body>
 
 </html>

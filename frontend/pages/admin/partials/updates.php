@@ -22,7 +22,7 @@
         <div id="formMessage" class="mb-3"></div>
 
         <div class="mb-3">
-          <input type="text" name="title" id="title" class="form-control" placeholder="Title">
+          <input type="text" name="title" id="title" class="form-control" placeholder="Update name">
         </div>
 
         <div class="mb-3">
@@ -54,7 +54,7 @@
   <script src="/assets/js/helpers.js"></script>
   <script src="/assets/js/updates.js"></script>
   <script>
-  document.addEventListener("DOMContentLoaded", initUpdatesGallery);
+    document.addEventListener("DOMContentLoaded", initUpdatesGallery);
   </script>
 </body>
 

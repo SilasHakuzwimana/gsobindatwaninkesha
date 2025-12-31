@@ -143,7 +143,36 @@ class Api
       // ======================
 
       // List all items from school_gallery table only
-      'GET /api/gallery/school_gallery' => fn() => $schoolGalleryController->list('school_gallery'),
+      'GET /api/gallery/:table' => function ($table) use ($schoolGalleryController) {
+        try {
+          $validTables = [
+            'school_gallery',
+            'school_alumni_gallery',
+            'extra_curricular_activities_gallery',
+            'school_updates_gallery'
+          ];
+
+          if (!in_array($table, $validTables)) {
+            http_response_code(404);
+            echo json_encode([
+              'status' => false,
+              'message' => "Gallery table '$table' not found",
+              'data' => []
+            ]);
+            exit;
+          }
+
+          $schoolGalleryController->list($table); // make sure this sends json + exit
+        } catch (\Throwable $e) {
+          http_response_code(500);
+          echo json_encode([
+            'status' => false,
+            'message' => $e->getMessage(),
+            'data' => []
+          ]);
+          exit;
+        }
+      },
       // Get all items from ALL tables (for admin overview)
       'GET /api/gallery/all' => fn() => $schoolGalleryController->all(),
       'POST /api/gallery/school_gallery' => fn() => $schoolGalleryController->create('school_gallery'),
@@ -171,15 +200,17 @@ class Api
       'PUT /api/gallery/extra_curricular_activities_gallery/:id' => fn($id) => $extraGalleryController->update('extra_curricular_activities_gallery', $id),
       'DELETE /api/gallery/extra_curricular_activities_gallery/:id' => fn($id) => $extraGalleryController->delete('extra_curricular_activities_gallery', $id),
 
-      // ===============
+      // ==============================
       // SCHOOL UPDATES GALLERY ROUTES
-      // ===============
+      // ==============================
 
       'GET /api/gallery/school_updates_gallery' => fn() => $updatesGalleryController->list('school_updates_gallery'),
       'POST /api/gallery/school_updates_gallery' => fn() => $updatesGalleryController->create('school_updates_gallery'),
       'GET /api/gallery/school_updates_gallery/:id' => fn($id) => $updatesGalleryController->find('school_updates_gallery', $id),
       'PUT /api/gallery/school_updates_gallery/:id' => fn($id) => $updatesGalleryController->update('school_updates_gallery', $id),
-      'DELETE /api/gallery/school_updates_gallery/:id' => fn($id) => $updatesGalleryController->delete('school_updates_gallery', $id),
+      'DELETE /api/gallery/school_updates_gallery/:id'
+      => fn($id) => $updatesGalleryController->delete('school_updates_gallery', $id),
+
 
       //===================
       //OLD PATHWAY ROUTES

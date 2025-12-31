@@ -24,7 +24,7 @@ if (($decoded->role ?? '') !== 'admin') {
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>GSOB Admin System</title>
-
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
   <!-- Bootstrap & Icons -->
   <link href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/css/bootstrap.min.css" rel="stylesheet">
   <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css" rel="stylesheet">
@@ -54,17 +54,47 @@ if (($decoded->role ?? '') !== 'admin') {
 
   /* ===== Sidebar ===== */
   #sidebar {
-    width: 20%;
+    width: 250px;
+    /* fixed width for consistency */
     flex-shrink: 0;
     display: flex;
     flex-direction: column;
     transition: transform 0.3s ease-in-out;
-    /* z-index: 1050; */
     overflow-y: auto;
+    position: fixed;
+    /* make it fixed for small screens */
+    top: 0;
+    left: 0;
+    height: 100%;
+    z-index: 1050;
+    background-color: #fff;
+    /* ensure it overlays correctly */
   }
 
+  /* Collapsed state for mobile */
   #sidebar.collapsed {
     transform: translateX(-100%);
+  }
+
+  .main-content {
+    margin-left: 250px;
+    /* leave space for sidebar */
+    transition: margin-left 0.3s ease-in-out;
+  }
+
+  @media (max-width: 991px) {
+    #sidebar {
+      transform: translateX(-100%);
+      /* hide sidebar on mobile */
+    }
+
+    #sidebar.show {
+      transform: translateX(0);
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
   }
 
   #sidebar .sidebar-header {
@@ -131,6 +161,28 @@ if (($decoded->role ?? '') !== 'admin') {
     }
   }
 
+  @media (max-width: 991px) {
+    #sidebar {
+      transform: translateX(-100%);
+      /* hide sidebar on mobile */
+    }
+
+    #sidebar.show {
+      transform: translateX(0);
+    }
+
+    .main-content {
+      margin-left: 0;
+    }
+  }
+
+  .navbar {
+    z-index: 1100;
+    /* higher than sidebar toggle if needed */
+    position: relative;
+  }
+
+
   /* ===== Spinner ===== */
   /* #spinner {
     position: fixed;
@@ -191,9 +243,9 @@ if (($decoded->role ?? '') !== 'admin') {
   <?php include __DIR__ . '/partials/topnav.php'; ?>
 
   <!-- Sidebar Toggle (small screens) -->
-  <button id="sidebarToggle" class="btn btn-primary d-lg-none">
-    <i class="fas fa-bars"></i>
-  </button>
+  <!--<button id="sidebarToggle" class="btn btn-primary d-lg-none">-->
+  <!--  <i class="fas fa-bars"></i>-->
+  <!--</button>-->
 
   <!-- Dashboard Container -->
   <div class="dashboard-container">
@@ -211,9 +263,12 @@ if (($decoded->role ?? '') !== 'admin') {
         <a href="#" class="menu-item" data-page="streams"><i class="fas fa-project-diagram"></i> Streams</a>
         <a href="#" class="menu-item" data-page="subjects"><i class="fas fa-book"></i> Subjects</a>
         <a href="#" class="menu-item" data-page="documents"><i class="fas fa-file-alt"></i> Documents</a>
-        <a href="#" class="menu-item" data-page="gallery"><i class="fas fa-images"></i> Gallery</a>
-        <a href="#" class="menu-item" data-page="alumni"><i class="fas fa-user-graduate"></i> Alumni</a>
-        <a href="#" class="menu-item" data-page="extra-curricular"><i class="fas fa-running"></i> Extra Curricular</a>
+
+        <!--Coming soon-->
+        <!--<a href="#" class="menu-item" data-page="gallery"><i class="fas fa-images"></i> Gallery</a>-->
+        <!--<a href="#" class="menu-item" data-page="alumni"><i class="fas fa-user-graduate"></i> Alumni</a>-->
+        <!--<a href="#" class="menu-item" data-page="extra-curricular"><i class="fas fa-running"></i> Extra Curricular</a>-->
+
         <a href="#" class="menu-item" data-page="updates"><i class="fas fa-newspaper"></i> School Updates</a>
         <a href="#" class="menu-item" data-page="subscribers"><i class="fas fa-envelope"></i> Subscribers</a>
         <a href="#" class="menu-item" data-page="messages"><i class="fas fa-message"></i> Messages</a>
@@ -245,24 +300,28 @@ if (($decoded->role ?? '') !== 'admin') {
 
   <!-- JS -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.2/js/bootstrap.bundle.min.js"></script>
-  <script src="/assets/js/ajax-handler.js"></script>
-  <script src="/assets/js/dashboard.js"></script>
-  <script src="/assets/js/users.js"></script>
-  <script src="/assets/js/subscribers.js"></script>
-  <script src="/assets/js/all_messages.js"></script>
+  <script src="/assets/js/ajax-handler.js?v=2"></script>
+  <script src="/assets/js/dashboard.js?v=2"></script>
+  <script src="/assets/js/users.js?v=2"></script>
+  <script src="/assets/js/subscribers.js?v=2"></script>
+  <script src="/assets/js/all_messages.js?v=2"></script>
   <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-  <script src="/assets/js/app.js"></script>
-  <script src="/assets/js/charts.js"></script>
-  <script src="/assets/js/school_documents.js"></script>
-  <script src="/assets/js/gallery.js"></script>
-  <script src="/assets/js/alumni.js"></script>
-  <script src="/assets/js/extra_activities.js"></script>
-  <script src="/assets/js/updates.js"></script>
-  <script src="/assets/js/helpers.js"></script>
-  <script src="/assets/js/pathways.js"></script>
-  <script src="/assets/js/streams.js"></script>
-  <script src="/assets/js/subjects.js"></script>
-  <script src="/assets/js/overview.js"></script>
+  <script src="/assets/js/app.js?v=2"></script>
+  <script src="/assets/js/charts.js?v=2"></script>
+  <script src="/assets/js/school_documents.js?v=2"></script>
+
+  <!--Removed-->
+  <script src="/assets/js/gallery.js?v=2"></script>
+  <script src="/assets/js/alumni.js?v=2"></script>
+  <script src="/assets/js/extra_activities.js?v=2"></script>
+  <!--Removed-->
+
+  <script src="/assets/js/updates.js?v=2"></script>
+  <script src="/assets/js/helpers.js?v=2"></script>
+  <script src="/assets/js/pathways.js?v=2"></script>
+  <script src="/assets/js/streams.js?v=2"></script>
+  <script src="/assets/js/subjects.js?v=2"></script>
+  <script src="/assets/js/overview.js?v=2"></script>
 
   <script>
   const sidebar = document.getElementById('sidebar');
@@ -270,20 +329,25 @@ if (($decoded->role ?? '') !== 'admin') {
 
   // Toggle sidebar visibility
   toggleBtn.addEventListener('click', () => {
-    sidebar.classList.toggle('collapsed');
-  });
-
-  // Auto-hide sidebar when clicking outside (on small screens)
-  document.addEventListener('click', (e) => {
-    if (window.innerWidth < 992 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
-      sidebar.classList.add('collapsed');
+    if (window.innerWidth < 992) {
+      sidebar.classList.toggle('show'); // show/hide sidebar on mobile
+    } else {
+      sidebar.classList.toggle('collapsed'); // collapse for desktop if needed
     }
   });
 
-  // Ensure sidebar resets correctly when resizing
+  // Auto-hide sidebar when clicking outside (mobile only)
+  document.addEventListener('click', (e) => {
+    if (window.innerWidth < 992 && !sidebar.contains(e.target) && !toggleBtn.contains(e.target)) {
+      sidebar.classList.remove('show');
+    }
+  });
+
+  // Reset sidebar when resizing
   window.addEventListener('resize', () => {
     if (window.innerWidth >= 992) {
-      sidebar.classList.remove('collapsed');
+      sidebar.classList.remove('show'); // make sure mobile class is removed
+      sidebar.classList.remove('collapsed'); // optional: remove collapsed for desktop
     }
   });
   </script>

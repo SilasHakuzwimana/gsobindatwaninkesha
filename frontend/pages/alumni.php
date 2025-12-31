@@ -39,6 +39,12 @@
         )
     })
   </script>
+
+  <style>
+    * {
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+  </style>
 </head>
 
 <body>
@@ -113,12 +119,12 @@
     <div id="contacts" class="modal">
       <div class="modal-content">
         <span class="close">x</span>
-        <center>
+        <div>
           <h2 style=" font-family: Impact, fantasy;">Get in touch with us</h2>
-        </center>
+        </div>
         <div class="row">
           <div class="column">
-            <center>
+            <div>
               <form id="contact-form">
                 <h3>Tell us your suggestion here</h3>
                 <div class="form-field">
@@ -133,17 +139,17 @@
                   <p>Your suggestion:</p>
                   <textarea id="suggestion" name="suggestion"></textarea>
                 </div>
-                <center>
+                <div>
                   <input type="submit" value="submit" />
-                </center>
+                </div>
               </form>
-            </center>
+            </div>
           </div>
           <div id="dialog" style="height:fit-content" class="column">
             <div class="column-last">
-              <center>
+              <div>
                 <h4>Visit us on:</h4>
-              </center>
+              </div>
               <div class="column-last-one">
                 <div class="img">
                   <a href="https://x.com/gsobindatwa?" target="_blank"><img src="/assets/images/icons/twitter.ico"
@@ -174,6 +180,8 @@
 
     <br />
   </section>
+
+  <!-- Alumni wrapper section -->
   <section class="alumniwrapper">
     <section class="alumni">
       <div class="alumni-home">
@@ -182,7 +190,9 @@
       </div>
     </section>
   </section>
-  <section class="alumin-text reveal">
+
+  <!-- Alumni text section -->
+  <section class="alumin-text m-2">
     <h1>What about GSO Butare alumni?</h1>
     <br />
     <div id="row" class="textpar">
@@ -192,9 +202,12 @@
         back to our roots and propelling us forward into the boundless opportunities of tomorrow. Together, let's
         reminisce, inspire, and pave the way for generations to come.</p>
     </div>
-    <div id="row">
+    <br />
+    <br />
+    <div id="row" style="margin-top: 10px;">
       <div id="column" class="column1">
-        <img src="/assets/images/assembly1.jpg" width="97%" alt="" />
+        <img src="/assets/images/assembly1.jpg" width="97%" alt="" style="margin:2px; border-radius: 15px;
+        " />
       </div>
       <div id="column" class="column2">
         <div>
@@ -214,10 +227,12 @@
       </div>
     </div>
   </section>
-  <section class="alumni-last reveal">
-    <center>
-      <h1 style="padding:15px 0;">Alumni in part of politicians</h1>
-    </center>
+
+  <!-- Alumni last reveal -->
+  <section class="alumni-last text-center">
+    <div>
+      <h1 style="text-align:center; color:#01014a;" class="m-2">Alumni in part of politicians</h1>
+    </div>
     <br />
     <div class="row">
       <div class="column">
@@ -244,10 +259,10 @@
       </div>
     </div>
 
-    <div class="reveal">
-      <center>
-        <h1 style="padding:15px 0;">Alumni in part of Intertainment</h1>
-      </center>
+    <div class="text-center">
+      <div>
+        <h1 style="text-align:center; color:#01014a;" class=" text-center m-2">Alumni in part of Intertainment</h1>
+      </div>
       <br />
       <div class="row">
         <div class="column">
@@ -332,10 +347,10 @@
         </div>
       </div>
       <div class="copyright">
-        <center>
+        <div>
           &copy; All copyright reserved @2025
           <a href="#">By Indatwa</a>
-        </center>
+        </div>
       </div>
     </div>
   </footer>

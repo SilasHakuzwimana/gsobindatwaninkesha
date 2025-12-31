@@ -13,100 +13,100 @@
   <link rel="stylesheet" type="text/css" href="/assets/css/styles.css" />
 
   <style>
-  body {
-    background-color: #f4f6f8;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    padding-top: 0;
-    margin: 0;
-    /* Reduced padding-top to give more room */
-  }
-
-  .contact-container {
-    max-width: 800px;
-    margin: auto;
-    background: #fff;
-    padding: 30px;
-    border-radius: 12px;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-  }
-
-  h1 {
-    color: #007BFF;
-    margin-bottom: 20px;
-  }
-
-  /* Message alert styles */
-  .alert-slide-up {
-    animation: slideUp 0.5s forwards;
-  }
-
-  @keyframes slideUp {
-    0% {
-      opacity: 1;
-      transform: translateY(0);
+    body {
+      background-color: #f4f6f8;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+      padding-top: 0;
+      margin: 0;
+      /* Reduced padding-top to give more room */
     }
 
-    100% {
-      opacity: 0;
-      transform: translateY(-20px);
-    }
-  }
-
-  .contact-info a {
-    color: #007BFF;
-    text-decoration: none;
-  }
-
-  .contact-info a:hover {
-    text-decoration: underline;
-  }
-
-  .dropdown-item {
-    color: steelblue;
-  }
-
-  /* Make dropdown menus visible and operable on large screens (>= 992px) */
-  @media (min-width: 992px) {
-
-    /* Keep dropdown open on hover */
-    .dropdown:hover>.dropdown-menu {
-      display: block !important;
-      opacity: 1;
-      visibility: visible;
-      position: absolute;
-      top: 100%;
-      left: 0;
-      margin-top: 0.5rem;
-      z-index: 1050;
-      /* Ensure on top */
+    .contact-container {
+      max-width: 800px;
+      margin: auto;
+      background: #fff;
+      padding: 30px;
+      border-radius: 12px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     }
 
-    /* Remove any conflicting display rule */
-    .dropdown-menu {
-      display: none;
+    h1 {
+      color: #007BFF;
+      margin-bottom: 20px;
     }
 
-    /* Show on hover */
-    .dropdown:hover>.dropdown-menu {
-      display: block !important;
+    /* Message alert styles */
+    .alert-slide-up {
+      animation: slideUp 0.5s forwards;
     }
-  }
 
-  /* Style your links with a pale blue for a professional look */
-  .navbar-nav .nav-link,
-  .dropdown-toggle {
-    color: steelblue;
-    /* Pale blue */
-    transition: color 0.3s ease;
-  }
+    @keyframes slideUp {
+      0% {
+        opacity: 1;
+        transform: translateY(0);
+      }
 
-  .navbar-nav .nav-link:hover,
-  .dropdown-toggle:hover,
-  .navbar-nav .nav-link:focus,
-  .dropdown-toggle:focus {
-    color: steelblue;
-    /* Lighter blue on hover/focus */
-  }
+      100% {
+        opacity: 0;
+        transform: translateY(-20px);
+      }
+    }
+
+    .contact-info a {
+      color: #007BFF;
+      text-decoration: none;
+    }
+
+    .contact-info a:hover {
+      text-decoration: underline;
+    }
+
+    .dropdown-item {
+      color: steelblue;
+    }
+
+    /* Make dropdown menus visible and operable on large screens (>= 992px) */
+    @media (min-width: 992px) {
+
+      /* Keep dropdown open on hover */
+      .dropdown:hover>.dropdown-menu {
+        display: block !important;
+        opacity: 1;
+        visibility: visible;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        margin-top: 0.5rem;
+        z-index: 1050;
+        /* Ensure on top */
+      }
+
+      /* Remove any conflicting display rule */
+      .dropdown-menu {
+        display: none;
+      }
+
+      /* Show on hover */
+      .dropdown:hover>.dropdown-menu {
+        display: block !important;
+      }
+    }
+
+    /* Style your links with a pale blue for a professional look */
+    .navbar-nav .nav-link,
+    .dropdown-toggle {
+      color: steelblue;
+      /* Pale blue */
+      transition: color 0.3s ease;
+    }
+
+    .navbar-nav .nav-link:hover,
+    .dropdown-toggle:hover,
+    .navbar-nav .nav-link:focus,
+    .dropdown-toggle:focus {
+      color: steelblue;
+      /* Lighter blue on hover/focus */
+    }
   </style>
 </head>
 
@@ -185,91 +185,92 @@
 
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
 
+  <script src="/assets/js/helpers.js"></script>
   <script>
-  document.getElementById('contactForm').addEventListener('submit', async function(e) {
-    e.preventDefault();
-    e.stopPropagation();
+    document.getElementById('contactForm').addEventListener('submit', async function(e) {
+      e.preventDefault();
+      e.stopPropagation();
 
-    const form = this;
-    if (!form.checkValidity()) {
-      form.classList.add('was-validated');
-      return;
-    }
-    form.classList.add('was-validated'); // Ensure validation styling is shown
-
-    const name = document.getElementById('contactName').value.trim();
-    const email = document.getElementById('contactEmail').value.trim();
-    const subject = document.getElementById('contactSubject').value.trim();
-    const messageInput = document.getElementById('contactMessageInput').value.trim();
-    const checkbox = document.getElementById('contactCheckbox').checked;
-    const messageDiv = document.getElementById('contactMessage');
-    const submitButton = document.getElementById('contactButton');
-
-    messageDiv.innerHTML = '';
-    messageDiv.className = 'd-none'; // Start hidden
-
-    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    if (!emailRegex.test(email)) {
-      document.getElementById('contactEmail').classList.add('is-invalid');
-      return showMessage('Please enter a valid email address.', 'warning');
-    }
-
-    submitButton.disabled = true;
-    const originalText = submitButton.innerHTML;
-    submitButton.innerHTML =
-      `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...`;
-
-    try {
-      const formData = new FormData();
-      formData.append('name', name);
-      formData.append('email', email);
-      formData.append('subject', subject);
-      formData.append('message', messageInput);
-      formData.append('checkbox', checkbox ? '1' : '');
-      const attachment = document.getElementById('contactAttachment').files[0];
-      if (attachment) formData.append('attachment', attachment);
-
-      const response = await fetch('http://localhost:8000/api/contact', {
-        method: 'POST',
-        body: formData
-      });
-
-      const data = await response.json();
-
-      if (response.ok) {
-        showMessage(data.message || 'Your message has been sent successfully!', 'success');
-        form.reset();
-        form.classList.remove('was-validated'); // Clear validation styling on success
-      } else {
-        showMessage(data.message || 'Submission failed. Please check the form and try again.', 'danger');
+      const form = this;
+      if (!form.checkValidity()) {
+        form.classList.add('was-validated');
+        return;
       }
-    } catch (err) {
-      console.error('Fetch Error:', err);
-      showMessage('An unexpected error occurred. Please check your network connection.', 'danger');
-    } finally {
-      submitButton.disabled = false;
-      submitButton.innerHTML = originalText;
-    }
+      form.classList.add('was-validated'); // Ensure validation styling is shown
 
-    function showMessage(text, type) {
-      messageDiv.innerHTML = text;
-      messageDiv.className = `alert alert-${type} mt-2`; // Use Bootstrap alert classes
+      const name = document.getElementById('contactName').value.trim();
+      const email = document.getElementById('contactEmail').value.trim();
+      const subject = document.getElementById('contactSubject').value.trim();
+      const messageInput = document.getElementById('contactMessageInput').value.trim();
+      const checkbox = document.getElementById('contactCheckbox').checked;
+      const messageDiv = document.getElementById('contactMessage');
+      const submitButton = document.getElementById('contactButton');
 
-      setTimeout(() => {
-        messageDiv.classList.add('alert-slide-up');
-        messageDiv.addEventListener(
-          'animationend',
-          () => {
-            messageDiv.innerHTML = '';
-            messageDiv.className = 'd-none';
-            messageDiv.classList.remove('alert-slide-up');
-          }, {
-            once: true
-          }
-        );
-      }, 5000); // 5 seconds display time
-    }
-  });
+      messageDiv.innerHTML = '';
+      messageDiv.className = 'd-none'; // Start hidden
+
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!emailRegex.test(email)) {
+        document.getElementById('contactEmail').classList.add('is-invalid');
+        return showMessage('Please enter a valid email address.', 'warning');
+      }
+
+      submitButton.disabled = true;
+      const originalText = submitButton.innerHTML;
+      submitButton.innerHTML =
+        `<span class="spinner-border spinner-border-sm" role="status" aria-hidden="true"></span> Sending...`;
+
+      try {
+        const formData = new FormData();
+        formData.append('name', name);
+        formData.append('email', email);
+        formData.append('subject', subject);
+        formData.append('message', messageInput);
+        formData.append('checkbox', checkbox ? '1' : '');
+        const attachment = document.getElementById('contactAttachment').files[0];
+        if (attachment) formData.append('attachment', attachment);
+
+        const response = await fetch('http://localhost:8000/api/contact', {
+          method: 'POST',
+          body: formData
+        });
+
+        const data = await response.json();
+
+        if (response.ok) {
+          showToast(data.message || 'Your message has been sent successfully!', 'success');
+          form.reset();
+          form.classList.remove('was-validated'); // Clear validation styling on success
+        } else {
+          showToast(data.message || 'Submission failed. Please check the form and try again.', 'danger');
+        }
+      } catch (err) {
+        console.error('Fetch Error:', err);
+        showToast('An unexpected error occurred. Please check your network connection.', 'danger');
+      } finally {
+        submitButton.disabled = false;
+        submitButton.innerHTML = originalText;
+      }
+
+      function showMessage(text, type) {
+        messageDiv.innerHTML = text;
+        messageDiv.className = `alert alert-${type} mt-2`; // Use Bootstrap alert classes
+
+        setTimeout(() => {
+          messageDiv.classList.add('alert-slide-up');
+          messageDiv.addEventListener(
+            'animationend',
+            () => {
+              messageDiv.innerHTML = '';
+              messageDiv.className = 'd-none';
+              messageDiv.classList.remove('alert-slide-up');
+            }, {
+              once: true
+            }
+          );
+        }, 5000); // 5 seconds display time
+      }
+    });
   </script>
 
 </body>
